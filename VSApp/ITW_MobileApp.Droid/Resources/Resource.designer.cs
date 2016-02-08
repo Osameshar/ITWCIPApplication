@@ -11,7 +11,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("ITW_MobileApp.Resource", IsApplication=true)]
 
-namespace ITW_MobileApp.Droid
+namespace ITW_MobileApp
 {
 	
 	
@@ -26,7 +26,7 @@ namespace ITW_MobileApp.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::ModernHttpClient.Resource.String.library_name = global::ITW_MobileApp.Droid.Resource.String.library_name;
+			global::ModernHttpClient.Resource.String.library_name = global::ITW_MobileApp.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
