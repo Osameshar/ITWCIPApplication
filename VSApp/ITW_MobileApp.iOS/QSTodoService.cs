@@ -6,7 +6,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 
-namespace ITW_MobileApp
+namespace ITW_MobileApp.iOS
 {
     public class QSTodoService 
     {

@@ -22,10 +22,15 @@ namespace ITW_MobileApp.Droid
         private MobileServiceClient client;
 
         //Mobile Service sync table used to access data
-        private IMobileServiceSyncTable<ToDoItem> toDoTable;
-
+//        private IMobileServiceSyncTable<ToDoItem> toDoTable;
+        private IMobileServiceSyncTable<EmployeeItem> employeeSyncTable;
+        private IMobileServiceSyncTable<EventItem> eventSyncTable;
+        private IMobileServiceSyncTable<RecipientListItem> recipientListSyncTable;
         //Adapter to map the items list to the view
-        private ToDoItemAdapter adapter;
+        //private ToDoItemAdapter adapter;
+        private EmployeeItemAdapter employeeItemAdapter;
+        private EventItemAdapter eventItemAdapter;
+        private RecipientListItemAdapter recipientListItemAdapter;
 
         //EditText containing the "New ToDo" text
         private EditText textNewToDo;
@@ -49,14 +54,17 @@ namespace ITW_MobileApp.Droid
             await InitLocalStoreAsync();
 
             // Get the Mobile Service sync table instance to use
-            toDoTable = client.GetSyncTable<ToDoItem>();
+  //          toDoTable = client.GetSyncTable<ToDoItem>();
+            employeeSyncTable = client.GetSyncTable<EmployeeItem>();
+            eventSyncTable = client.GetSyncTable<EventItem>();
+            recipientListSyncTable = client.GetSyncTable<RecipientListItem>();
 
             textNewToDo = FindViewById<EditText>(Resource.Id.textNewToDo);
 
             // Create an adapter to bind the items with the view
-            adapter = new ToDoItemAdapter(this, Resource.Layout.Row_List_To_Do);
+       /*     adapter = new ToDoItemAdapter(this, Resource.Layout.Row_List_To_Do);
             var listViewToDo = FindViewById<ListView>(Resource.Id.listViewToDo);
-            listViewToDo.Adapter = adapter;
+           listViewToDo.Adapter = adapter;*/
 
             // Load the items from the Mobile Service
             OnRefreshItemsSelected();
@@ -72,8 +80,10 @@ namespace ITW_MobileApp.Droid
             }
 
             var store = new MobileServiceSQLiteStore(path);
-            store.DefineTable<ToDoItem>();
-
+//store.DefineTable<ToDoItem>();
+            store.DefineTable<EmployeeItem>();
+            store.DefineTable<EventItem>();
+            store.DefineTable<RecipientListItem>();
             // Uses the default conflict handler, which fails on conflict
             // To use a different conflict handler, pass a parameter to InitializeAsync. For more details, see http://go.microsoft.com/fwlink/?LinkId=521416
             await client.SyncContext.InitializeAsync(store);
@@ -104,7 +114,10 @@ namespace ITW_MobileApp.Droid
             try
             {
                 await client.SyncContext.PushAsync();
-                await toDoTable.PullAsync("allTodoItems", toDoTable.CreateQuery()); // query ID is used for incremental sync
+    //           await toDoTable.PullAsync("allTodoItems", toDoTable.CreateQuery()); // query ID is used for incremental sync
+                await employeeSyncTable.PullAsync("allEmployeeItems", employeeSyncTable.CreateQuery());
+                await eventSyncTable.PullAsync("allEventItems", eventSyncTable.CreateQuery());
+                await recipientListSyncTable.PullAsync("allRecipientListItems", recipientListSyncTable.CreateQuery());
             }
             catch (Java.Net.MalformedURLException)
             {
@@ -136,19 +149,28 @@ namespace ITW_MobileApp.Droid
         {
             try {
                 // Get the items that weren't marked as completed and add them in the adapter
-                var list = await toDoTable.Where(item => item.Complete == false).ToListAsync();
+                //var list = await toDoTable.Where(item => item.Complete == false).ToListAsync();
+                var employeeList = await employeeSyncTable.ToListAsync();
+                var eventList = await eventSyncTable.ToListAsync();
+                var recipientList = await recipientListSyncTable.ToListAsync();
 
-                adapter.Clear();
+                employeeItemAdapter.Clear();
+                eventItemAdapter.Clear();
+                recipientListItemAdapter.Clear();
 
-                foreach (ToDoItem current in list)
-                    adapter.Add(current);
+                foreach (EmployeeItem currentEmployee in employeeList)
+                    employeeItemAdapter.Add(currentEmployee);
+                foreach (EventItem currentEvent in eventList)
+                    eventItemAdapter.Add(currentEvent);
+                foreach (RecipientListItem currentRecipientList in recipientList)
+                    recipientListItemAdapter.Add(currentRecipientList);
 
             }
             catch (Exception e) {
                 CreateAndShowDialog(e, "Error");
             }
         }
-
+/*
         public async Task CheckItem(ToDoItem item)
         {
             if (client == null) {
@@ -197,7 +219,7 @@ namespace ITW_MobileApp.Droid
 
             textNewToDo.Text = "";
         }
-
+*/
         private void CreateAndShowDialog(Exception exception, String title)
         {
             CreateAndShowDialog(exception.Message, title);

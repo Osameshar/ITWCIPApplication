@@ -4,7 +4,7 @@ using UIKit;
 using Foundation;
 using System.Threading.Tasks;
 
-namespace ITW_MobileApp
+namespace ITW_MobileApp.iOS
 {
 	public partial class QSTodoListViewController : UITableViewController
 	{
