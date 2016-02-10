@@ -23,9 +23,9 @@ namespace ITW_MobileApp.Droid
 
         //Mobile Service sync table used to access data
 //        private IMobileServiceSyncTable<ToDoItem> toDoTable;
-        private IMobileServiceSyncTable<EmployeeItem> employeeTable;
-        private IMobileServiceSyncTable<EventItem> eventTable;
-        private IMobileServiceSyncTable<RecipientListItem> recipientListTable;
+        private IMobileServiceSyncTable<EmployeeItem> employeeSyncTable;
+        private IMobileServiceSyncTable<EventItem> eventSyncTable;
+        private IMobileServiceSyncTable<RecipientListItem> recipientListSyncTable;
         //Adapter to map the items list to the view
         private ToDoItemAdapter adapter;
         private EmployeeItemAdapter employeeItemAdapter;
@@ -55,9 +55,9 @@ namespace ITW_MobileApp.Droid
 
             // Get the Mobile Service sync table instance to use
   //          toDoTable = client.GetSyncTable<ToDoItem>();
-            employeeTable = client.GetSyncTable<EmployeeItem>();
-            eventTable = client.GetSyncTable<EventItem>();
-            recipientListTable = client.GetSyncTable<RecipientListItem>();
+            employeeSyncTable = client.GetSyncTable<EmployeeItem>();
+            eventSyncTable = client.GetSyncTable<EventItem>();
+            recipientListSyncTable = client.GetSyncTable<RecipientListItem>();
 
             textNewToDo = FindViewById<EditText>(Resource.Id.textNewToDo);
 
@@ -115,9 +115,9 @@ namespace ITW_MobileApp.Droid
             {
                 await client.SyncContext.PushAsync();
     //           await toDoTable.PullAsync("allTodoItems", toDoTable.CreateQuery()); // query ID is used for incremental sync
-                await employeeTable.PullAsync("allEmployeeItems", employeeTable.CreateQuery());
-                await eventTable.PullAsync("allEventItems", eventTable.CreateQuery());
-                await recipientListTable.PullAsync("allRecipientListItems", recipientListTable.CreateQuery());
+                await employeeSyncTable.PullAsync("allEmployeeItems", employeeSyncTable.CreateQuery());
+                await eventSyncTable.PullAsync("allEventItems", eventSyncTable.CreateQuery());
+                await recipientListSyncTable.PullAsync("allRecipientListItems", recipientListSyncTable.CreateQuery());
             }
             catch (Java.Net.MalformedURLException)
             {
@@ -150,9 +150,9 @@ namespace ITW_MobileApp.Droid
             try {
                 // Get the items that weren't marked as completed and add them in the adapter
                 //var list = await toDoTable.Where(item => item.Complete == false).ToListAsync();
-                var employeeList = await employeeTable.ToListAsync();
-                var eventList = await eventTable.ToListAsync();
-                var recipientList = await recipientListTable.ToListAsync();
+                var employeeList = await employeeSyncTable.ToListAsync();
+                var eventList = await eventSyncTable.ToListAsync();
+                var recipientList = await recipientListSyncTable.ToListAsync();
 
                 employeeItemAdapter.Clear();
                 eventItemAdapter.Clear();
