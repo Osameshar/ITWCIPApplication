@@ -27,7 +27,7 @@ namespace ITW_MobileApp.Droid
         private IMobileServiceSyncTable<EventItem> eventSyncTable;
         private IMobileServiceSyncTable<RecipientListItem> recipientListSyncTable;
         //Adapter to map the items list to the view
-        private ToDoItemAdapter adapter;
+        //private ToDoItemAdapter adapter;
         private EmployeeItemAdapter employeeItemAdapter;
         private EventItemAdapter eventItemAdapter;
         private RecipientListItemAdapter recipientListItemAdapter;
@@ -62,9 +62,9 @@ namespace ITW_MobileApp.Droid
             textNewToDo = FindViewById<EditText>(Resource.Id.textNewToDo);
 
             // Create an adapter to bind the items with the view
-            adapter = new ToDoItemAdapter(this, Resource.Layout.Row_List_To_Do);
+       /*     adapter = new ToDoItemAdapter(this, Resource.Layout.Row_List_To_Do);
             var listViewToDo = FindViewById<ListView>(Resource.Id.listViewToDo);
-            listViewToDo.Adapter = adapter;
+           listViewToDo.Adapter = adapter;*/
 
             // Load the items from the Mobile Service
             OnRefreshItemsSelected();
@@ -170,7 +170,7 @@ namespace ITW_MobileApp.Droid
                 CreateAndShowDialog(e, "Error");
             }
         }
-
+/*
         public async Task CheckItem(ToDoItem item)
         {
             if (client == null) {
@@ -219,7 +219,7 @@ namespace ITW_MobileApp.Droid
 
             textNewToDo.Text = "";
         }
-
+*/
         private void CreateAndShowDialog(Exception exception, String title)
         {
             CreateAndShowDialog(exception.Message, title);
