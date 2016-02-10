@@ -22,10 +22,15 @@ namespace ITW_MobileApp.Droid
         private MobileServiceClient client;
 
         //Mobile Service sync table used to access data
-        private IMobileServiceSyncTable<ToDoItem> toDoTable;
-
+//        private IMobileServiceSyncTable<ToDoItem> toDoTable;
+        private IMobileServiceSyncTable<EmployeeItem> employeeTable;
+        private IMobileServiceSyncTable<EventItem> eventTable;
+        private IMobileServiceSyncTable<RecipientListItem> recipientListTable;
         //Adapter to map the items list to the view
         private ToDoItemAdapter adapter;
+        private EmployeeItemAdapter employeeItemAdapter;
+        private EventItemAdapter eventItemAdapter;
+        private RecipientListItemAdapter recipientListItemAdapter;
 
         //EditText containing the "New ToDo" text
         private EditText textNewToDo;
@@ -49,7 +54,10 @@ namespace ITW_MobileApp.Droid
             await InitLocalStoreAsync();
 
             // Get the Mobile Service sync table instance to use
-            toDoTable = client.GetSyncTable<ToDoItem>();
+  //          toDoTable = client.GetSyncTable<ToDoItem>();
+            employeeTable = client.GetSyncTable<EmployeeItem>();
+            eventTable = client.GetSyncTable<EventItem>();
+            recipientListTable = client.GetSyncTable<RecipientListItem>();
 
             textNewToDo = FindViewById<EditText>(Resource.Id.textNewToDo);
 
@@ -72,8 +80,10 @@ namespace ITW_MobileApp.Droid
             }
 
             var store = new MobileServiceSQLiteStore(path);
-            store.DefineTable<ToDoItem>();
-
+//store.DefineTable<ToDoItem>();
+            store.DefineTable<EmployeeItem>();
+            store.DefineTable<EventItem>();
+            store.DefineTable<RecipientListItem>();
             // Uses the default conflict handler, which fails on conflict
             // To use a different conflict handler, pass a parameter to InitializeAsync. For more details, see http://go.microsoft.com/fwlink/?LinkId=521416
             await client.SyncContext.InitializeAsync(store);
@@ -104,7 +114,10 @@ namespace ITW_MobileApp.Droid
             try
             {
                 await client.SyncContext.PushAsync();
-                await toDoTable.PullAsync("allTodoItems", toDoTable.CreateQuery()); // query ID is used for incremental sync
+    //           await toDoTable.PullAsync("allTodoItems", toDoTable.CreateQuery()); // query ID is used for incremental sync
+                await employeeTable.PullAsync("allEmployeeItems", employeeTable.CreateQuery());
+                await eventTable.PullAsync("allEventItems", eventTable.CreateQuery());
+                await recipientListTable.PullAsync("allRecipientListItems", recipientListTable.CreateQuery());
             }
             catch (Java.Net.MalformedURLException)
             {
@@ -136,12 +149,21 @@ namespace ITW_MobileApp.Droid
         {
             try {
                 // Get the items that weren't marked as completed and add them in the adapter
-                var list = await toDoTable.Where(item => item.Complete == false).ToListAsync();
+                //var list = await toDoTable.Where(item => item.Complete == false).ToListAsync();
+                var employeeList = await employeeTable.ToListAsync();
+                var eventList = await eventTable.ToListAsync();
+                var recipientList = await recipientListTable.ToListAsync();
 
-                adapter.Clear();
+                employeeItemAdapter.Clear();
+                eventItemAdapter.Clear();
+                recipientListItemAdapter.Clear();
 
-                foreach (ToDoItem current in list)
-                    adapter.Add(current);
+                foreach (EmployeeItem currentEmployee in employeeList)
+                    employeeItemAdapter.Add(currentEmployee);
+                foreach (EventItem currentEvent in eventList)
+                    eventItemAdapter.Add(currentEvent);
+                foreach (RecipientListItem currentRecipientList in recipientList)
+                    recipientListItemAdapter.Add(currentRecipientList);
 
             }
             catch (Exception e) {

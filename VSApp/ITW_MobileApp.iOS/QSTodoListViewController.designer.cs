@@ -9,7 +9,7 @@ using Foundation;
 using UIKit;
 using System.CodeDom.Compiler;
 
-namespace ITW_MobileApp
+namespace ITW_MobileApp.iOS
 {
 	[Register ("QSTodoListViewController")]
 	partial class QSTodoListViewController
