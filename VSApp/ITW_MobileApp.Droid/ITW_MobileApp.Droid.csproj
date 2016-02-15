@@ -93,6 +93,8 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseItemAdapters.cs" />
+    <Compile Include="DatabaseItemTypes.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToDoActivity.cs" />

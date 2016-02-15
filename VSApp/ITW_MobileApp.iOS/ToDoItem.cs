@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace ITW_MobileApp
+namespace ITW_MobileApp.iOS
 {
 	public class ToDoItem
 	{
