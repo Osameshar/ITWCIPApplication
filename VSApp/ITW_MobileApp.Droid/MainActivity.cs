@@ -54,9 +54,12 @@ namespace ITW_MobileApp.Droid
             recipientListSyncTable = client.GetSyncTable<RecipientListItem>();
 
             // Create an adapter to bind the items with the view
-           /* employeeItemAdapter = new EmployeeItemAdapter(this, Resource.Layout.Row_List_To_Do);
-            var listViewToDo = FindViewById<ListView>(Resource.Id.listViewToDo);
-            listViewToDo.Adapter = adapter;*/
+            employeeItemAdapter = new EmployeeItemAdapter(this, Resource.Layout.Row_List_To_Do);
+            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
+            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
+     
+            //var listViewToDo = FindViewById<ListView>(Resource.Id.listViewToDo);
+            //listViewToDo.Adapter = adapter;
 
             // Load the items from the Mobile Service
             OnRefreshItemsSelected();
@@ -147,7 +150,7 @@ namespace ITW_MobileApp.Droid
                 employeeItemAdapter.Clear();
                 eventItemAdapter.Clear();
                 recipientListItemAdapter.Clear();
-
+                
                 foreach (EmployeeItem currentEmployee in employeeList)
                     employeeItemAdapter.Add(currentEmployee);
                 foreach (EventItem currentEvent in eventList)

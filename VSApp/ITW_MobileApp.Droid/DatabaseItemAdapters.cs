@@ -46,6 +46,10 @@ namespace ITW_MobileApp.Droid
             NotifyDataSetChanged();
         }
 
+        public int getCount()
+        {
+            return items.Count;
+        }
         #region implemented abstract members of BaseAdapter
 
         public override long GetItemId(int position)
