@@ -13,27 +13,22 @@ using System.IO;
 
 namespace ITW_MobileApp.Droid
 {
-    [Activity(MainLauncher = true,
-               Icon = "@drawable/ic_launcher", Label = "@string/app_name",
-               Theme = "@style/AppTheme")]
-    public class ToDoActivity : Activity
+    [Activity(MainLauncher = true, Theme = "@android:style/Theme.Black.NoTitleBar")]
+    public class MainActivity : Activity
     {
         //Mobile Service Client reference
         private MobileServiceClient client;
 
         //Mobile Service sync table used to access data
-//        private IMobileServiceSyncTable<ToDoItem> toDoTable;
         private IMobileServiceSyncTable<EmployeeItem> employeeSyncTable;
         private IMobileServiceSyncTable<EventItem> eventSyncTable;
         private IMobileServiceSyncTable<RecipientListItem> recipientListSyncTable;
+
         //Adapter to map the items list to the view
-        //private ToDoItemAdapter adapter;
         private EmployeeItemAdapter employeeItemAdapter;
         private EventItemAdapter eventItemAdapter;
         private RecipientListItemAdapter recipientListItemAdapter;
 
-        //EditText containing the "New ToDo" text
-        private EditText textNewToDo;
 
         const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";        
 
@@ -44,7 +39,7 @@ namespace ITW_MobileApp.Droid
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Activity_To_Do);
+            SetContentView(Resource.Layout.Login);
 
             CurrentPlatform.Init();
 
@@ -54,17 +49,14 @@ namespace ITW_MobileApp.Droid
             await InitLocalStoreAsync();
 
             // Get the Mobile Service sync table instance to use
-  //          toDoTable = client.GetSyncTable<ToDoItem>();
             employeeSyncTable = client.GetSyncTable<EmployeeItem>();
             eventSyncTable = client.GetSyncTable<EventItem>();
             recipientListSyncTable = client.GetSyncTable<RecipientListItem>();
 
-            textNewToDo = FindViewById<EditText>(Resource.Id.textNewToDo);
-
             // Create an adapter to bind the items with the view
-       /*     adapter = new ToDoItemAdapter(this, Resource.Layout.Row_List_To_Do);
+           /* employeeItemAdapter = new EmployeeItemAdapter(this, Resource.Layout.Row_List_To_Do);
             var listViewToDo = FindViewById<ListView>(Resource.Id.listViewToDo);
-           listViewToDo.Adapter = adapter;*/
+            listViewToDo.Adapter = adapter;*/
 
             // Load the items from the Mobile Service
             OnRefreshItemsSelected();
@@ -80,15 +72,14 @@ namespace ITW_MobileApp.Droid
             }
 
             var store = new MobileServiceSQLiteStore(path);
-//store.DefineTable<ToDoItem>();
             store.DefineTable<EmployeeItem>();
             store.DefineTable<EventItem>();
             store.DefineTable<RecipientListItem>();
+
             // Uses the default conflict handler, which fails on conflict
-            // To use a different conflict handler, pass a parameter to InitializeAsync. For more details, see http://go.microsoft.com/fwlink/?LinkId=521416
             await client.SyncContext.InitializeAsync(store);
         }
-
+/*
         //Initializes the activity menu
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -107,14 +98,13 @@ namespace ITW_MobileApp.Droid
                 item.SetEnabled(true);
             }
             return true;
-        }
+        }*/
 
         private async Task SyncAsync()
         {
             try
             {
                 await client.SyncContext.PushAsync();
-    //           await toDoTable.PullAsync("allTodoItems", toDoTable.CreateQuery()); // query ID is used for incremental sync
                 await employeeSyncTable.PullAsync("allEmployeeItems", employeeSyncTable.CreateQuery());
                 await eventSyncTable.PullAsync("allEventItems", eventSyncTable.CreateQuery());
                 await recipientListSyncTable.PullAsync("allRecipientListItems", recipientListSyncTable.CreateQuery());
