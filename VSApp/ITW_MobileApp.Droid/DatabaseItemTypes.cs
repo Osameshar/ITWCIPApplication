@@ -17,7 +17,7 @@ namespace ITW_MobileApp.Droid
         public DateTime EventDate { get; set; }
 
         [JsonProperty(PropertyName = "EventTime")]
-        public DateTime EventTime { get; set; }
+        public string EventTime { get; set; }
 
         [JsonProperty(PropertyName = "Location")]
         public string Location { get; set; }
@@ -26,7 +26,7 @@ namespace ITW_MobileApp.Droid
         public string Category { get; set; }
 
         [JsonProperty(PropertyName = "EventPriority")]
-        public int EventPriority { get; set; }
+        public string EventPriority { get; set; }
 
         [JsonProperty(PropertyName = "EventDescription")]
         public string EventDescription { get; set; }

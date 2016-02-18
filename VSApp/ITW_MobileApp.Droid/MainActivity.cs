@@ -13,62 +13,71 @@ using System.IO;
 
 namespace ITW_MobileApp.Droid
 {
-    [Activity(MainLauncher = true,
-               Icon = "@drawable/ic_launcher", Label = "@string/app_name",
-               Theme = "@style/AppTheme")]
-    public class ToDoActivity : Activity
+    [Activity(MainLauncher = true, Theme = "@android:style/Theme.Black.NoTitleBar")]
+    public class MainActivity : Activity
     {
         //Mobile Service Client reference
         private MobileServiceClient client;
 
         //Mobile Service sync table used to access data
-//        private IMobileServiceSyncTable<ToDoItem> toDoTable;
         private IMobileServiceSyncTable<EmployeeItem> employeeSyncTable;
         private IMobileServiceSyncTable<EventItem> eventSyncTable;
         private IMobileServiceSyncTable<RecipientListItem> recipientListSyncTable;
+
         //Adapter to map the items list to the view
-        //private ToDoItemAdapter adapter;
         private EmployeeItemAdapter employeeItemAdapter;
         private EventItemAdapter eventItemAdapter;
         private RecipientListItemAdapter recipientListItemAdapter;
 
-        //EditText containing the "New ToDo" text
-        private EditText textNewToDo;
 
-        const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";        
-
-        const string localDbFilename = "localstore.db";
+        const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";
+        const string localDbFilename = "test2.db";
 
         protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Activity_To_Do);
+            SetContentView(Resource.Layout.Login);
 
             CurrentPlatform.Init();
 
             // Create the Mobile Service Client instance, using the provided
-            // Mobile Service URL
+            // Mobile Service URL 
             client = new MobileServiceClient(applicationURL, new NativeMessageHandler());
             await InitLocalStoreAsync();
 
             // Get the Mobile Service sync table instance to use
-  //          toDoTable = client.GetSyncTable<ToDoItem>();
             employeeSyncTable = client.GetSyncTable<EmployeeItem>();
             eventSyncTable = client.GetSyncTable<EventItem>();
             recipientListSyncTable = client.GetSyncTable<RecipientListItem>();
 
-            textNewToDo = FindViewById<EditText>(Resource.Id.textNewToDo);
-
             // Create an adapter to bind the items with the view
-       /*     adapter = new ToDoItemAdapter(this, Resource.Layout.Row_List_To_Do);
-            var listViewToDo = FindViewById<ListView>(Resource.Id.listViewToDo);
-           listViewToDo.Adapter = adapter;*/
-
+            employeeItemAdapter = new EmployeeItemAdapter(this, Resource.Layout.Row_List_To_Do);
+            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
+            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
+            
+            //testing 
+            //await employeeSyncTable.InsertAsync(makeSampleEmployeeItem());
+            
             // Load the items from the Mobile Service
             OnRefreshItemsSelected();
+            //await RefreshItemsFromTableAsync();
+
         }
+
+        private static EmployeeItem makeSampleEmployeeItem()
+        {
+            return new EmployeeItem
+            {
+                Name = "Emp 5",
+                Email = "Test Email",
+                EmployeeID = 321321,
+                Department = "IT",
+                PrivledgeLevel = "User"
+            };
+        }
+
 
         private async Task InitLocalStoreAsync()
         {
@@ -80,15 +89,16 @@ namespace ITW_MobileApp.Droid
             }
 
             var store = new MobileServiceSQLiteStore(path);
-//store.DefineTable<ToDoItem>();
+
             store.DefineTable<EmployeeItem>();
             store.DefineTable<EventItem>();
             store.DefineTable<RecipientListItem>();
+
             // Uses the default conflict handler, which fails on conflict
-            // To use a different conflict handler, pass a parameter to InitializeAsync. For more details, see http://go.microsoft.com/fwlink/?LinkId=521416
             await client.SyncContext.InitializeAsync(store);
         }
 
+/*
         //Initializes the activity menu
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -107,17 +117,21 @@ namespace ITW_MobileApp.Droid
                 item.SetEnabled(true);
             }
             return true;
-        }
+        }*/
 
-        private async Task SyncAsync()
+        private async Task SyncAsync(bool pullData = false)
         {
             try
             {
                 await client.SyncContext.PushAsync();
-    //           await toDoTable.PullAsync("allTodoItems", toDoTable.CreateQuery()); // query ID is used for incremental sync
-                await employeeSyncTable.PullAsync("allEmployeeItems", employeeSyncTable.CreateQuery());
-                await eventSyncTable.PullAsync("allEventItems", eventSyncTable.CreateQuery());
-                await recipientListSyncTable.PullAsync("allRecipientListItems", recipientListSyncTable.CreateQuery());
+
+                if (pullData)
+                {
+                    await employeeSyncTable.PullAsync("allEmployeeItems", employeeSyncTable.CreateQuery());
+                    await eventSyncTable.PullAsync("allEventItems", eventSyncTable.CreateQuery());
+                    await recipientListSyncTable.PullAsync("allRecipientListItems", recipientListSyncTable.CreateQuery());
+                }
+
             }
             catch (Java.Net.MalformedURLException)
             {
@@ -140,7 +154,7 @@ namespace ITW_MobileApp.Droid
         // Called when the refresh menu option is selected
         private async void OnRefreshItemsSelected()
         {
-            await SyncAsync(); // get changes from the mobile service
+            await SyncAsync(pullData: true); // get changes from the mobile service
             await RefreshItemsFromTableAsync(); // refresh view using local database
         }
 
@@ -157,7 +171,7 @@ namespace ITW_MobileApp.Droid
                 employeeItemAdapter.Clear();
                 eventItemAdapter.Clear();
                 recipientListItemAdapter.Clear();
-
+                
                 foreach (EmployeeItem currentEmployee in employeeList)
                     employeeItemAdapter.Add(currentEmployee);
                 foreach (EventItem currentEvent in eventList)
