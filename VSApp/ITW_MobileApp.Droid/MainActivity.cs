@@ -56,8 +56,10 @@ namespace ITW_MobileApp.Droid
             employeeItemAdapter = new EmployeeItemAdapter(this, Resource.Layout.Row_List_To_Do);
             eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
             recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
-
-            await employeeSyncTable.InsertAsync(makeSampleEmployeeItem());
+            
+            //testing 
+            //await employeeSyncTable.InsertAsync(makeSampleEmployeeItem());
+            
             // Load the items from the Mobile Service
             OnRefreshItemsSelected();
             //await RefreshItemsFromTableAsync();
@@ -135,10 +137,8 @@ namespace ITW_MobileApp.Droid
             {
                 CreateAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
             }
-            catch (MobileServicePushFailedException a)
+            catch (MobileServicePushFailedException)
             {
-               // System.Diagnostics.Debug.Write("test");
-                //System.Diagnostics.Debug.Write(a.PushResult);
                 // Not reporting this exception. Assuming the app is offline for now
             }
             catch (Java.Net.UnknownHostException)
