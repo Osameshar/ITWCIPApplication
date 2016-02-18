@@ -30,9 +30,8 @@ namespace ITW_MobileApp.Droid
         private RecipientListItemAdapter recipientListItemAdapter;
 
 
-        const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";        
-
-        const string localDbFilename = "localstore.db";
+        const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";
+        const string localDbFilename = "test2.db";
 
         protected override async void OnCreate(Bundle bundle)
         {
@@ -44,7 +43,7 @@ namespace ITW_MobileApp.Droid
             CurrentPlatform.Init();
 
             // Create the Mobile Service Client instance, using the provided
-            // Mobile Service URL
+            // Mobile Service URL 
             client = new MobileServiceClient(applicationURL, new NativeMessageHandler());
             await InitLocalStoreAsync();
 
@@ -57,13 +56,26 @@ namespace ITW_MobileApp.Droid
             employeeItemAdapter = new EmployeeItemAdapter(this, Resource.Layout.Row_List_To_Do);
             eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
             recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
-     
-            //var listViewToDo = FindViewById<ListView>(Resource.Id.listViewToDo);
-            //listViewToDo.Adapter = adapter;
 
+            await employeeSyncTable.InsertAsync(makeSampleEmployeeItem());
             // Load the items from the Mobile Service
             OnRefreshItemsSelected();
+            //await RefreshItemsFromTableAsync();
+
         }
+
+        private static EmployeeItem makeSampleEmployeeItem()
+        {
+            return new EmployeeItem
+            {
+                Name = "Emp 5",
+                Email = "Test Email",
+                EmployeeID = 321321,
+                Department = "IT",
+                PrivledgeLevel = "User"
+            };
+        }
+
 
         private async Task InitLocalStoreAsync()
         {
@@ -75,6 +87,7 @@ namespace ITW_MobileApp.Droid
             }
 
             var store = new MobileServiceSQLiteStore(path);
+
             store.DefineTable<EmployeeItem>();
             store.DefineTable<EventItem>();
             store.DefineTable<RecipientListItem>();
@@ -82,6 +95,7 @@ namespace ITW_MobileApp.Droid
             // Uses the default conflict handler, which fails on conflict
             await client.SyncContext.InitializeAsync(store);
         }
+
 /*
         //Initializes the activity menu
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -103,21 +117,28 @@ namespace ITW_MobileApp.Droid
             return true;
         }*/
 
-        private async Task SyncAsync()
+        private async Task SyncAsync(bool pullData = false)
         {
             try
             {
                 await client.SyncContext.PushAsync();
-                await employeeSyncTable.PullAsync("allEmployeeItems", employeeSyncTable.CreateQuery());
-                await eventSyncTable.PullAsync("allEventItems", eventSyncTable.CreateQuery());
-                await recipientListSyncTable.PullAsync("allRecipientListItems", recipientListSyncTable.CreateQuery());
+
+                if (pullData)
+                {
+                    await employeeSyncTable.PullAsync("allEmployeeItems", employeeSyncTable.CreateQuery());
+                    await eventSyncTable.PullAsync("allEventItems", eventSyncTable.CreateQuery());
+                    await recipientListSyncTable.PullAsync("allRecipientListItems", recipientListSyncTable.CreateQuery());
+                }
+
             }
             catch (Java.Net.MalformedURLException)
             {
                 CreateAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
             }
-            catch (MobileServicePushFailedException)
+            catch (MobileServicePushFailedException a)
             {
+               // System.Diagnostics.Debug.Write("test");
+                //System.Diagnostics.Debug.Write(a.PushResult);
                 // Not reporting this exception. Assuming the app is offline for now
             }
             catch (Java.Net.UnknownHostException)
@@ -133,7 +154,7 @@ namespace ITW_MobileApp.Droid
         // Called when the refresh menu option is selected
         private async void OnRefreshItemsSelected()
         {
-            await SyncAsync(); // get changes from the mobile service
+            await SyncAsync(pullData: true); // get changes from the mobile service
             await RefreshItemsFromTableAsync(); // refresh view using local database
         }
 
