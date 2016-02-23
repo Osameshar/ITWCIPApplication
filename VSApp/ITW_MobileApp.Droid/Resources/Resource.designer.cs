@@ -49,7 +49,10 @@ namespace ITW_MobileApp
 			public const int ic_launcher = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int ITWCIPLogo = 2130837505;
+			public const int Icon = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int ITWCIPLogo = 2130837506;
 			
 			static Drawable()
 			{
@@ -73,8 +76,11 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f070003
 			public const int buttonAddToDo = 2131165187;
 			
+			// aapt resource value: 0x7f07000c
+			public const int checkToDoItem = 2131165196;
+			
 			// aapt resource value: 0x7f07000b
-			public const int checkToDoItem = 2131165195;
+			public const int fragmentContainer = 2131165195;
 			
 			// aapt resource value: 0x7f070005
 			public const int imageITWLogo = 2131165189;
@@ -85,8 +91,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f07000a
 			public const int loginBtn = 2131165194;
 			
-			// aapt resource value: 0x7f07000c
-			public const int menu_refresh = 2131165196;
+			// aapt resource value: 0x7f07000e
+			public const int menu_refresh = 2131165198;
 			
 			// aapt resource value: 0x7f070009
 			public const int password = 2131165193;
@@ -96,6 +102,9 @@ namespace ITW_MobileApp
 			
 			// aapt resource value: 0x7f070002
 			public const int textNewToDo = 2131165186;
+			
+			// aapt resource value: 0x7f07000d
+			public const int textView = 2131165197;
 			
 			// aapt resource value: 0x7f070001
 			public const int textViewTitle = 2131165185;
@@ -123,7 +132,13 @@ namespace ITW_MobileApp
 			public const int Login = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Row_List_To_Do = 2130903042;
+			public const int MainView = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int Row_List_To_Do = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int Tab = 2130903044;
 			
 			static Layout()
 			{
