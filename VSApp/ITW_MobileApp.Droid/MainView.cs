@@ -9,7 +9,7 @@ using Android.OS;
 
 namespace ITW_MobileApp
 {
-    [Activity(Label = "CIPConnect", MainLauncher = false)]
+    [Activity(Label = "CIPConnect", MainLauncher = false, Theme = "@android:style/Theme.Material")]
     public class MainView : Activity
     {
         protected override void OnCreate(Bundle bundle)
