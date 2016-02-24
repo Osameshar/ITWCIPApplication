@@ -2,6 +2,7 @@ using System;
 using Android.OS;
 using Android.App;
 using Android.Views;
+using Android.Content;
 using Android.Widget;
 using System.Net.Http;
 using ModernHttpClient;
@@ -14,7 +15,7 @@ using System.IO;
 namespace ITW_MobileApp.Droid
 {
     [Activity(MainLauncher = true, Theme = "@android:style/Theme.Black.NoTitleBar")]
-    public class MainActivity : Activity
+    public class Login : Activity
     {
         //Mobile Service Client reference
         private MobileServiceClient client;
@@ -63,6 +64,16 @@ namespace ITW_MobileApp.Droid
             // Load the items from the Mobile Service
             OnRefreshItemsSelected();
             //await RefreshItemsFromTableAsync();
+
+            //Get a reference to the login button
+            Button loginButton = FindViewById<Button>(Resource.Id.loginBtn);
+
+            //Login Button sends us to the Main View. THIS WILL NEED TO BE CHANGED FOR AUTHENTICATION.
+            loginButton.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(MainView));
+                StartActivity(intent);
+            };
 
         }
 
