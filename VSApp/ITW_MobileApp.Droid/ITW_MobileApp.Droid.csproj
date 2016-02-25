@@ -93,16 +93,20 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseConnection.cs" />
     <Compile Include="DataObjectAdapters\EmployeeItemAdapter.cs" />
     <Compile Include="DataObjectAdapters\EventItemAdapter.cs" />
     <Compile Include="DataObjectAdapters\RecipientListItemAdapter.cs" />
+    <Compile Include="DataObjects\DataObject.cs" />
     <Compile Include="DataObjects\EmployeeItem.cs" />
     <Compile Include="DataObjects\EventItem.cs" />
     <Compile Include="DataObjects\RecipientListItem.cs" />
+    <Compile Include="ErrorHandler.cs" />
     <Compile Include="ObjectFactorys\EventFactory.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="LoginActivity.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
