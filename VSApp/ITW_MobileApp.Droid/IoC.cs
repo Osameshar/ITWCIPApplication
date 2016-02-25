@@ -12,10 +12,10 @@ using Android.Widget;
 
 namespace ITW_MobileApp.Droid
 {
-    
-    public class DataObject
+    public static class IoC
     {
-        public string Id { get; set; }
+        public static DatabaseConnection Dbconnect { get; set; }
+        
 
     }
 }

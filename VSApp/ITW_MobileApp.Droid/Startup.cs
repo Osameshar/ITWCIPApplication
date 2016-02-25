@@ -15,16 +15,15 @@ namespace ITW_MobileApp.Droid
     [Activity(Label = "Startup", MainLauncher = true)]
     public class Startup : Activity
     {
-        public DatabaseConnection dbconnect;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             
-            if (dbconnect == null)
+            if (IoC.Dbconnect == null)
             {
-                dbconnect = new DatabaseConnection();
-                await dbconnect.InitLocalDBSyncTables();
+                IoC.Dbconnect = new DatabaseConnection();
+                await IoC.Dbconnect.InitLocalDBSyncTables();
             }           
 
             StartActivity(new Intent(this, typeof(LoginActivity)));

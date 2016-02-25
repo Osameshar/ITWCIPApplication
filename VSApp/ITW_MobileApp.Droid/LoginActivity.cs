@@ -26,7 +26,7 @@ namespace ITW_MobileApp.Droid
             eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
             recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
 
-            //Startup.dbconnect.OnRefreshItemsSelected<EmployeeItemAdapter>(employeeItemAdapter);
+            IoC.Dbconnect.OnRefreshItemsSelected(employeeItemAdapter);
 
             Button loginButton = FindViewById<Button>(Resource.Id.loginBtn);
 

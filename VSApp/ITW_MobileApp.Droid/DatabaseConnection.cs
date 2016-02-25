@@ -102,48 +102,67 @@ namespace ITW_MobileApp.Droid
         }
 
         // Called when the refresh menu option is selected
-        public async void OnRefreshItemsSelected(BaseAdapter adapter)
+        public async void OnRefreshItemsSelected(EmployeeItemAdapter adapter)
+        {
+            await SyncAsync(pullData: true); // get changes from the mobile service
+            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
+        }
+        public async void OnRefreshItemsSelected(EventItemAdapter adapter)
+        {
+            await SyncAsync(pullData: true); // get changes from the mobile service
+            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
+        }
+        public async void OnRefreshItemsSelected(RecipientListItemAdapter adapter)
         {
             await SyncAsync(pullData: true); // get changes from the mobile service
             await RefreshItemsFromTableAsync(adapter); // refresh view using local database
         }
 
         //Refresh the list with the items in the local database
-        private async Task RefreshItemsFromTableAsync(BaseAdapter adapter)
+        private async Task RefreshItemsFromTableAsync(EmployeeItemAdapter adapter)
         {
             try
             {
                 // Get the items that weren't marked as completed and add them in the adapter
                 //var list = await toDoTable.Where(item => item.Complete == false).ToListAsync();
-
-                if (dataObj.GetType() == typeof(EmployeeItem) )
-                {
-                    var employeeList = await employeeSyncTable.ToListAsync();
-                    ((EmployeeItemAdapter)adapter).Clear();
-                    foreach (EmployeeItem currentEmployee in employeeList)
-                       ((EmployeeItemAdapter)adapter).Add(currentEmployee);
-                }
-                else if (dataObj.GetType() == typeof(EventItem))
-                {
-                    var eventList = await eventSyncTable.ToListAsync();
-                    ((EventItemAdapter)adapter).Clear();
-                    foreach (EventItem currentEvent in eventList)
-                        ((EventItemAdapter)adapter).Add(currentEvent);
-                }
-                else if (dataObj.GetType() == typeof(EventItem))
-                {
-                    var recipientList = await recipientListSyncTable.ToListAsync();
-                    ((RecipientListItemAdapter)adapter).Clear();
-                    foreach (RecipientListItem currentRecipientList in recipientList)
-                       ((RecipientListItemAdapter)adapter).Add(currentRecipientList);
-                }
+                var employeeList = await employeeSyncTable.ToListAsync();
+                ((EmployeeItemAdapter)adapter).Clear();
+                foreach (EmployeeItem currentEmployee in employeeList)
+                    ((EmployeeItemAdapter)adapter).Add(currentEmployee);
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
+        private async Task RefreshItemsFromTableAsync(EventItemAdapter adapter)
+        {
+            try
+            {
+                var eventList = await eventSyncTable.ToListAsync();
+                ((EventItemAdapter)adapter).Clear();
+                foreach (EventItem currentEvent in eventList)
+                    ((EventItemAdapter)adapter).Add(currentEvent);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+        private async Task RefreshItemsFromTableAsync(RecipientListItemAdapter adapter)
+        {
 
-
+            try
+            {
+                var recipientList = await recipientListSyncTable.ToListAsync();
+                ((RecipientListItemAdapter)adapter).Clear();
+                foreach (RecipientListItem currentRecipientList in recipientList)
+                ((RecipientListItemAdapter)adapter).Add(currentRecipientList);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+}
     }
 }

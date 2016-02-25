@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ITW_MobileApp.Droid
 {
-    public class EmployeeItem : DataObject
+    public class EmployeeItem
     {
         public string Id { get; set; }
 
