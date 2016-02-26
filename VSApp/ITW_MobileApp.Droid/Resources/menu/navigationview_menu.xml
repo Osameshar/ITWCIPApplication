@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <group android:checkableBehavior="single">
+   <item
+      android:id="@+id/nav_haveRead"
+      android:icon="@drawable/Icon"
+      android:title="Have Read" />
+   <item
+      android:id="@+id/nav_readingNow"
+      android:icon="@drawable/Icon"
+      android:title="Reading Now" />
+    <item
+      android:id="@+id/nav_toRead"
+      android:icon="@drawable/Icon"
+      android:title="To Read" />
+  <item
+      android:id="@+id/nav_favorites"
+      android:icon="@drawable/Icon"
+      android:title="Favorites" />
+  </group>
+  <item android:title="Additional Options">
+    <menu>
+      <item   
+        android:id="@+id/exititem"
+        android:icon="@drawable/Icon"
+        android:title="Exit" />
+     </menu>
+  </item>
+</menu>

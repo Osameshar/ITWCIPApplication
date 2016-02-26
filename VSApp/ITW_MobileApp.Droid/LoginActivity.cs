@@ -26,6 +26,7 @@ namespace ITW_MobileApp.Droid
             eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
             recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
 
+            //remove later
             IoC.Dbconnect.OnRefreshItemsSelected(employeeItemAdapter);
 
             Button loginButton = FindViewById<Button>(Resource.Id.loginBtn);
@@ -33,7 +34,7 @@ namespace ITW_MobileApp.Droid
             //Login Button sends us to the Main View. THIS WILL NEED TO BE CHANGED FOR AUTHENTICATION.
             loginButton.Click += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(LoginActivity));
+                var intent = new Intent(this, typeof(RecentEventsActivity));
                 StartActivity(intent);
             };
 
