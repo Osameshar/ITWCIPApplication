@@ -1,7 +1,4 @@
 using System;
-using Android.App;
-using Android.Views;
-using Android.Widget;
 using ModernHttpClient;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
@@ -126,9 +123,9 @@ namespace ITW_MobileApp.Droid
                 // Get the items that weren't marked as completed and add them in the adapter
                 //var list = await toDoTable.Where(item => item.Complete == false).ToListAsync();
                 var employeeList = await employeeSyncTable.ToListAsync();
-                ((EmployeeItemAdapter)adapter).Clear();
+                adapter.Clear();
                 foreach (EmployeeItem currentEmployee in employeeList)
-                    ((EmployeeItemAdapter)adapter).Add(currentEmployee);
+                    adapter.Add(currentEmployee);
             }
             catch (Exception e)
             {
@@ -140,9 +137,9 @@ namespace ITW_MobileApp.Droid
             try
             {
                 var eventList = await eventSyncTable.ToListAsync();
-                ((EventItemAdapter)adapter).Clear();
+               adapter.Clear();
                 foreach (EventItem currentEvent in eventList)
-                    ((EventItemAdapter)adapter).Add(currentEvent);
+                  adapter.Add(currentEvent);
             }
             catch (Exception e)
             {
