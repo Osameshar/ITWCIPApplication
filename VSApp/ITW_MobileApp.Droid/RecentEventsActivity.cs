@@ -73,14 +73,20 @@ namespace ITW_MobileApp.Droid
             //Adding strings to mystringlist, which is an example use for the recycler view
             mystringlist = new List<string>();
             mystringlist.Add("Another One");
-            mystringlist.Add("And Another Other");
-            mystringlist.Add("And Another Other");
-            mystringlist.Add("And Another Other");
-            mystringlist.Add("And Another Other");
-            mystringlist.Add("And Another Other");
-            mystringlist.Add("And Another Other");
-            mystringlist.Add("And Another Other");
-            mystringlist.Add("And Another Other");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("How About Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
+            mystringlist.Add("And Another One");
 
             //Plug in the linear layout manager
             mLayoutManager = new LinearLayoutManager(this);
