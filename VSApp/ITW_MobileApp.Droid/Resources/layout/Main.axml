@@ -19,6 +19,11 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:minHeight="?attr/actionBarSize"
             android:background="?attr/colorPrimary" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:scrollbars="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
     </LinearLayout>
     <android.support.design.widget.NavigationView
         android:fitsSystemWindows="true"

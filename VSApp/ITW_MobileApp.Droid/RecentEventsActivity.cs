@@ -6,6 +6,9 @@ using Android.Views;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using System;
+using System.Collections.Generic;
+using Android.Support.V7.Widget;
+using System.Linq;
 
 namespace ITW_MobileApp.Droid
 {
@@ -16,6 +19,13 @@ namespace ITW_MobileApp.Droid
         Android.Support.V7.Widget.Toolbar _supporttoolbar;
         DrawerLayout _drawer;
         NavigationView _navigationview;
+
+        //this section starts off objects for the recycler view
+        RecyclerView mRecyclerView;
+        RecyclerView.LayoutManager mLayoutManager;
+        //This section here is just an example use for the Recycler View to get it working. Overtime, we will switch this out for events.
+        List<string> mystringlist;
+        StringListAdapter mystringlistadapter;
 
         private EmployeeItemAdapter employeeItemAdapter;
         private EventItemAdapter eventItemAdapter;
@@ -56,6 +66,30 @@ namespace ITW_MobileApp.Droid
                 }
             };
 
+            //Here is where we do the Recyler View
+            //Starting it off
+            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
+
+            //Adding strings to mystringlist, which is an example use for the recycler view
+            mystringlist = new List<string>();
+            mystringlist.Add("Another One");
+            mystringlist.Add("And Another Other");
+            mystringlist.Add("And Another Other");
+            mystringlist.Add("And Another Other");
+            mystringlist.Add("And Another Other");
+            mystringlist.Add("And Another Other");
+            mystringlist.Add("And Another Other");
+            mystringlist.Add("And Another Other");
+            mystringlist.Add("And Another Other");
+
+            //Plug in the linear layout manager
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.SetLayoutManager(mLayoutManager);
+
+            //Plug in my adapter
+            mystringlistadapter = new StringListAdapter(mystringlist);
+            mRecyclerView.SetAdapter(mystringlistadapter);
+
         }
 
         //creates an options menu
@@ -74,6 +108,52 @@ namespace ITW_MobileApp.Droid
                     return true;
             }
             return base.OnOptionsItemSelected(item);
+        }
+    }
+
+    public class StringViewHolder : RecyclerView.ViewHolder
+    {
+        public TextView Caption { get; private set; }
+
+        public StringViewHolder(View itemView) : base(itemView)
+        {
+            // Locate and cache view references:
+            Caption = itemView.FindViewById<TextView>(Resource.Id.textView);
+        }
+    }
+
+    public class StringListAdapter : RecyclerView.Adapter
+    {
+        public List<string> adapterstringlist;
+
+        public StringListAdapter(List<string> mystringlist)
+        {
+           adapterstringlist = mystringlist;
+        }
+
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            // Inflate the CardView for the photo:
+            View itemView = LayoutInflater.From(parent.Context).
+                        Inflate(Resource.Layout.StringCardView, parent, false);
+
+            // Create a ViewHolder to hold view references inside the CardView:
+            StringViewHolder vh = new StringViewHolder(itemView);
+            return vh;
+        }
+
+        public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
+        {
+            StringViewHolder vh = holder as StringViewHolder;
+
+            // Load the photo caption from the photo album:
+            vh.Caption.Text = adapterstringlist.ElementAt(position);
+
+        }
+
+        public override int ItemCount
+        {
+            get { return adapterstringlist.Count; }
         }
     }
 }
