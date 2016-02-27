@@ -7,7 +7,7 @@
     android:background="?attr/colorPrimary"
     android:fitsSystemWindows="true">
     <LinearLayout
-        android:background="#ffffff"
+        android:background="#716969"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
