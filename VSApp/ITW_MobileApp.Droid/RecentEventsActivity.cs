@@ -23,9 +23,10 @@ namespace ITW_MobileApp.Droid
         //this section starts off objects for the recycler view
         RecyclerView mRecyclerView;
         RecyclerView.LayoutManager mLayoutManager;
-        //This section here is just an example use for the Recycler View to get it working. Overtime, we will switch this out for events.
-        List<string> mystringlist;
-        StringListAdapter mystringlistadapter;
+        //This should eventually be the list inside of the EventItemAdapter
+        List<EventItem> myEventList;
+        //This is different from the EventItemAdapter, as this how to deal with the RecyclerView
+        EventListAdapter myEventListAdapter;
 
         private EmployeeItemAdapter employeeItemAdapter;
         private EventItemAdapter eventItemAdapter;
@@ -70,41 +71,35 @@ namespace ITW_MobileApp.Droid
             //Starting it off
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
 
-            //Adding strings to mystringlist, which is an example use for the recycler view
-            mystringlist = new List<string>();
-            mystringlist.Add("Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("How About Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
-            mystringlist.Add("And Another One");
+            //Initialize the list of events
+            myEventList = new List<EventItem>();
+
+            EventItem myevent = new EventItem();
+            myevent.Name = "My Event";
+            myevent.EventRecipients = "Bob, Same, and Marley";
+            myevent.EventDate = new DateTime(2016, 3, 3);
+            myevent.EventTime = "Noon";
+            myevent.Location = "Nashville";
+            myevent.Category = "Company Event";
+            myevent.EventPriority = "Now";
+            myevent.EventDescription = "PARTY AT MARLEY'S";
+            myevent.EventID = 1;
+            myevent.EmployeeID = 0078982;
+            myevent.deleted = false;
+
+            myEventList.Add(myevent);
 
             //Plug in the linear layout manager
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.SetLayoutManager(mLayoutManager);
 
             //Plug in my adapter
-            mystringlistadapter = new StringListAdapter(mystringlist);
-            mRecyclerView.SetAdapter(mystringlistadapter);
+            myEventListAdapter = new EventListAdapter(myEventList);
+            mRecyclerView.SetAdapter(myEventListAdapter);
 
         }
 
-        //creates an options menu
-        //public override bool OnCreateOptionsMenu(IMenu menu)
-        //{
-        //    MenuInflater.Inflate(Resource.Menu.navigationview_menu, menu);
-        //    return true;
-        //}
-
+        //This has nothing to do with this Recycler View. Instead, this deals with the seletion of the Navigation Drawer button
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -117,49 +112,55 @@ namespace ITW_MobileApp.Droid
         }
     }
 
-    public class StringViewHolder : RecyclerView.ViewHolder
+    public class EventViewHolder: RecyclerView.ViewHolder
     {
-        public TextView Caption { get; private set; }
+        public TextView Name { get; private set; }
+        public TextView Date { get; private set; }
+        public TextView Time { get; private set; }
 
-        public StringViewHolder(View itemView) : base(itemView)
+        public EventViewHolder(View itemView) : base(itemView)
         {
             // Locate and cache view references:
-            Caption = itemView.FindViewById<TextView>(Resource.Id.textView);
+            Name = itemView.FindViewById<TextView>(Resource.Id.Name);
+            Date = itemView.FindViewById<TextView>(Resource.Id.Date);
+            Time = itemView.FindViewById<TextView>(Resource.Id.Time);
         }
     }
 
-    public class StringListAdapter : RecyclerView.Adapter
+    public class EventListAdapter : RecyclerView.Adapter
     {
-        public List<string> adapterstringlist;
+        public List<EventItem> adaptereventlist;
 
-        public StringListAdapter(List<string> mystringlist)
+        public EventListAdapter(List<EventItem> myEventList)
         {
-           adapterstringlist = mystringlist;
+            adaptereventlist = myEventList;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             // Inflate the CardView for the photo:
             View itemView = LayoutInflater.From(parent.Context).
-                        Inflate(Resource.Layout.StringCardView, parent, false);
+                           //TODO: Use if statements to figure out a different EventCardView to inflate for each Category
+                        Inflate(Resource.Layout.EventCardView, parent, false);
 
             // Create a ViewHolder to hold view references inside the CardView:
-            StringViewHolder vh = new StringViewHolder(itemView);
+            EventViewHolder vh = new EventViewHolder(itemView);
             return vh;
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            StringViewHolder vh = holder as StringViewHolder;
+            EventViewHolder vh = holder as EventViewHolder;
 
             // Load the photo caption from the photo album:
-            vh.Caption.Text = adapterstringlist.ElementAt(position);
-
+            vh.Name.Text = adaptereventlist.ElementAt(position).Name;
+            vh.Date.Text = adaptereventlist.ElementAt(position).EventDate.ToString("MMMM dd, yyyy");
+            vh.Time.Text = adaptereventlist.ElementAt(position).EventTime;
         }
 
         public override int ItemCount
         {
-            get { return adapterstringlist.Count; }
+            get { return adaptereventlist.Count; }
         }
     }
 }

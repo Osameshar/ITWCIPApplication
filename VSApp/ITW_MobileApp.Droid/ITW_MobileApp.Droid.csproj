@@ -140,12 +140,17 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\headerlayout.axml" />
     <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\EventCardView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\layout\Activity_To_Do.axml" />
     <AndroidResource Include="Resources\layout\Row_List_To_Do.axml" />
-    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\styles.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable-ldpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
@@ -166,9 +171,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\StringCardView.xml" />
   </ItemGroup>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
