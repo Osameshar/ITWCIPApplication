@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Android.Support.V7.Widget;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ITW_MobileApp.Droid
 {
@@ -28,9 +29,8 @@ namespace ITW_MobileApp.Droid
         //This is different from the EventItemAdapter, as this how to deal with the RecyclerView
         EventListAdapter myEventListAdapter;
 
-        private EmployeeItemAdapter employeeItemAdapter;
-        private EventItemAdapter eventItemAdapter;
-        private RecipientListItemAdapter recipientListItemAdapter;
+        EventItemAdapter eventItemAdapter;
+        RecipientListItemAdapter recipientListItemAdapter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,9 +39,10 @@ namespace ITW_MobileApp.Droid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            employeeItemAdapter = new EmployeeItemAdapter(this, Resource.Layout.Row_List_To_Do);
-            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
-            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
+            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Main);
+            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Main);
+
+            RefreshView();
 
             _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
             _supporttoolbar.SetTitle(Resource.String.recent_events);
@@ -67,27 +68,39 @@ namespace ITW_MobileApp.Droid
                 }
             };
 
+            //var recipientList = await IoC.Dbconnect.getRecipientListSyncTable().ToListAsync();
+            //recipientListItemAdapter.Clear();
+            //foreach (RecipientListItem currentRecipientList in recipientList)
+            //    recipientListItemAdapter.Add(currentRecipientList);
+
+            //var eventList = await IoC.Dbconnect.getEventSyncTable().ToListAsync();
+            //eventItemAdapter.Clear();
+            //foreach (EventItem currentEvent in eventList)
+            //    eventItemAdapter.Add(currentEvent);
+
             //Here is where we do the Recyler View
             //Starting it off
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
 
             //Initialize the list of events
-            myEventList = new List<EventItem>();
+            IoC.EventFactory.createEvent("MyEvent", "Emp 1,Employee One", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 22, 2);
+            RefreshView();
+            myEventList = recipientListItemAdapter.getEventsByEmployeeID(3, eventItemAdapter);
 
-            EventItem myevent = new EventItem();
-            myevent.Name = "My Event";
-            myevent.EventRecipients = "Bob, Same, and Marley";
-            myevent.EventDate = new DateTime(2016, 3, 3);
-            myevent.EventTime = "Noon";
-            myevent.Location = "Nashville";
-            myevent.Category = "Company Event";
-            myevent.EventPriority = "Now";
-            myevent.EventDescription = "PARTY AT MARLEY'S";
-            myevent.EventID = 1;
-            myevent.EmployeeID = 0078982;
-            myevent.deleted = false;
+            //EventItem myevent = new EventItem();
+            //myevent.Name = "My Event";
+            //myevent.EventRecipients = "Bob, Same, and Marley";
+            //myevent.EventDate = new DateTime(2016, 3, 3);
+            //myevent.EventTime = "Noon";
+            //myevent.Location = "Nashville";
+            //myevent.Category = "Company Event";
+            //myevent.EventPriority = "Now";
+            //myevent.EventDescription = "PARTY AT MARLEY'S";
+            //myevent.EventID = 1;
+            //myevent.EmployeeID = 0078982;
+            //myevent.deleted = false;
 
-            myEventList.Add(myevent);
+            //myEventList.Add(myevent);
 
             //Plug in the linear layout manager
             mLayoutManager = new LinearLayoutManager(this);
@@ -109,6 +122,12 @@ namespace ITW_MobileApp.Droid
                     return true;
             }
             return base.OnOptionsItemSelected(item);
+        }
+
+        public async void RefreshView()
+        {
+             await IoC.Dbconnect.RefreshItemsFromTableAsync(eventItemAdapter);
+             await IoC.Dbconnect.RefreshItemsFromTableAsync(recipientListItemAdapter);
         }
     }
 

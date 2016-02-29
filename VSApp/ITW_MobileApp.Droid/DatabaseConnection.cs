@@ -22,7 +22,7 @@ namespace ITW_MobileApp.Droid
 
 
         const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";
-        const string localDbFilename = "test2.db";
+        const string localDbFilename = "test3.db";
 
         public DatabaseConnection()
         {
@@ -66,7 +66,7 @@ namespace ITW_MobileApp.Droid
             await client.SyncContext.InitializeAsync(store);
         }
 
-        private async Task SyncAsync(bool pullData = false)
+        public async Task SyncAsync(bool pullData = false)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace ITW_MobileApp.Droid
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
-        private async Task RefreshItemsFromTableAsync(EventItemAdapter adapter)
+        public async Task RefreshItemsFromTableAsync(EventItemAdapter adapter)
         {
             try
             {
@@ -146,20 +146,31 @@ namespace ITW_MobileApp.Droid
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
-        private async Task RefreshItemsFromTableAsync(RecipientListItemAdapter adapter)
+        public async Task RefreshItemsFromTableAsync(RecipientListItemAdapter adapter)
         {
-
             try
             {
                 var recipientList = await recipientListSyncTable.ToListAsync();
-                ((RecipientListItemAdapter)adapter).Clear();
+                adapter.Clear();
                 foreach (RecipientListItem currentRecipientList in recipientList)
-                ((RecipientListItemAdapter)adapter).Add(currentRecipientList);
+                adapter.Add(currentRecipientList);
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-}
+        }
+        public IMobileServiceSyncTable<EmployeeItem> getEmployeeSyncTable()
+        {
+            return employeeSyncTable;
+        }
+        public IMobileServiceSyncTable<EventItem> getEventSyncTable()
+        {
+            return eventSyncTable;
+        }
+        public IMobileServiceSyncTable<RecipientListItem> getRecipientListSyncTable()
+        {
+            return recipientListSyncTable;
+        }
     }
 }
