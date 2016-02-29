@@ -27,7 +27,11 @@ namespace ITW_MobileApp.Droid
             if (IoC.EventFactory == null)
             {
                 IoC.EventFactory = new EventFactory();
-            } 
+            }
+            if (IoC.ViewRefresher == null)
+            {
+                IoC.ViewRefresher = new ViewRefresher();
+            }
             StartActivity(new Intent(this, typeof(LoginActivity)));
 
         }

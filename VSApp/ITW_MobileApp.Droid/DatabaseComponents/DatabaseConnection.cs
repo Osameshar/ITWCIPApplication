@@ -98,68 +98,6 @@ namespace ITW_MobileApp.Droid
             }
         }
 
-        // Called when the refresh menu option is selected
-        public async void OnRefreshItemsSelected(EmployeeItemAdapter adapter)
-        {
-            await SyncAsync(pullData: true); // get changes from the mobile service
-            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
-        }
-        public async void OnRefreshItemsSelected(EventItemAdapter adapter)
-        {
-            await SyncAsync(pullData: true); // get changes from the mobile service
-            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
-        }
-        public async void OnRefreshItemsSelected(RecipientListItemAdapter adapter)
-        {
-            await SyncAsync(pullData: true); // get changes from the mobile service
-            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
-        }
-
-        //Refresh the list with the items in the local database
-        private async Task RefreshItemsFromTableAsync(EmployeeItemAdapter adapter)
-        {
-            try
-            {
-                // Get the items that weren't marked as completed and add them in the adapter
-                //var list = await toDoTable.Where(item => item.Complete == false).ToListAsync();
-                var employeeList = await employeeSyncTable.ToListAsync();
-                adapter.Clear();
-                foreach (EmployeeItem currentEmployee in employeeList)
-                    adapter.Add(currentEmployee);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-        }
-        public async Task RefreshItemsFromTableAsync(EventItemAdapter adapter)
-        {
-            try
-            {
-                var eventList = await eventSyncTable.ToListAsync();
-               adapter.Clear();
-                foreach (EventItem currentEvent in eventList)
-                  adapter.Add(currentEvent);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-        }
-        public async Task RefreshItemsFromTableAsync(RecipientListItemAdapter adapter)
-        {
-            try
-            {
-                var recipientList = await recipientListSyncTable.ToListAsync();
-                adapter.Clear();
-                foreach (RecipientListItem currentRecipientList in recipientList)
-                adapter.Add(currentRecipientList);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-        }
         public IMobileServiceSyncTable<EmployeeItem> getEmployeeSyncTable()
         {
             return employeeSyncTable;

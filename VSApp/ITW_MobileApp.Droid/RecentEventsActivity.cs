@@ -32,7 +32,7 @@ namespace ITW_MobileApp.Droid
         EventItemAdapter eventItemAdapter;
         RecipientListItemAdapter recipientListItemAdapter;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -42,7 +42,7 @@ namespace ITW_MobileApp.Droid
             eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Main);
             recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Main);
 
-            RefreshView();
+            await RefreshView();
 
             _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
             _supporttoolbar.SetTitle(Resource.String.recent_events);
@@ -68,24 +68,17 @@ namespace ITW_MobileApp.Droid
                 }
             };
 
-            //var recipientList = await IoC.Dbconnect.getRecipientListSyncTable().ToListAsync();
-            //recipientListItemAdapter.Clear();
-            //foreach (RecipientListItem currentRecipientList in recipientList)
-            //    recipientListItemAdapter.Add(currentRecipientList);
 
-            //var eventList = await IoC.Dbconnect.getEventSyncTable().ToListAsync();
-            //eventItemAdapter.Clear();
-            //foreach (EventItem currentEvent in eventList)
-            //    eventItemAdapter.Add(currentEvent);
 
             //Here is where we do the Recyler View
             //Starting it off
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
-
+            await RefreshView();
+            myEventList = recipientListItemAdapter.getEventsByEmployeeID(321321, eventItemAdapter);
             //Initialize the list of events
-            IoC.EventFactory.createEvent("MyEvent", "Emp 1,Employee One", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 22, 2);
-            RefreshView();
-            myEventList = recipientListItemAdapter.getEventsByEmployeeID(3, eventItemAdapter);
+            //IoC.EventFactory.createEvent("MyEvent", "Emp 1,Employee One", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 22, 2);
+            
+            
 
             //EventItem myevent = new EventItem();
             //myevent.Name = "My Event";
@@ -124,10 +117,10 @@ namespace ITW_MobileApp.Droid
             return base.OnOptionsItemSelected(item);
         }
 
-        public async void RefreshView()
+        public async Task RefreshView()
         {
-             await IoC.Dbconnect.RefreshItemsFromTableAsync(eventItemAdapter);
-             await IoC.Dbconnect.RefreshItemsFromTableAsync(recipientListItemAdapter);
+             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
+             await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
         }
     }
 
