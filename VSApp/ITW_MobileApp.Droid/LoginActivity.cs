@@ -3,6 +3,7 @@ using Android.OS;
 using Android.App;
 using Android.Widget;
 using Android.Content;
+using System.Collections.Generic;
 
 namespace ITW_MobileApp.Droid
 {
@@ -26,14 +27,13 @@ namespace ITW_MobileApp.Droid
             eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
             recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
 
-            IoC.Dbconnect.OnRefreshItemsSelected(employeeItemAdapter);
 
             Button loginButton = FindViewById<Button>(Resource.Id.loginBtn);
 
             //Login Button sends us to the Main View. THIS WILL NEED TO BE CHANGED FOR AUTHENTICATION.
             loginButton.Click += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(LoginActivity));
+                var intent = new Intent(this, typeof(RecentEventsActivity));
                 StartActivity(intent);
             };
 

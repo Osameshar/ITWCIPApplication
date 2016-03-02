@@ -18,6 +18,23 @@ namespace ITW_MobileApp.Droid
             this.layoutResourceId = layoutResourceId;
         }
 
+        public List<EventItem> getEventsByEmployeeID(int employeeID, EventItemAdapter eventAdapter)
+        {
+            List<EventItem> filteredItems = new List<EventItem>();
+            foreach (RecipientListItem currentEvent in items)
+            {
+                if (currentEvent.EmployeeID == employeeID)
+                {
+                    EventItem selectedEvent = eventAdapter.getEventByID(currentEvent.EventID);
+                    if (selectedEvent != null)
+                    {
+                        filteredItems.Add(selectedEvent);
+                    }
+                }
+            }
+            return filteredItems;
+        }
+
         //Returns the view for a specific item on the list
         //TODO: fix view
         public override View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)

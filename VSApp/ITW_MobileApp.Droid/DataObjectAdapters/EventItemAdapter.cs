@@ -18,6 +18,17 @@ namespace ITW_MobileApp.Droid
             this.layoutResourceId = layoutResourceId;
         }
 
+        public EventItem getEventByID(int eventID)
+        {
+            foreach (EventItem eventItem in items)
+            {
+                if (eventItem.EventID == eventID)
+                {
+                    return eventItem;
+                }
+            }
+            return null;
+        }
         //Returns the view for a specific item on the list
         //TODO: fix view
         public override View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)

@@ -22,7 +22,7 @@ namespace ITW_MobileApp.Droid
 
 
         const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";
-        const string localDbFilename = "test2.db";
+        const string localDbFilename = "test3.db";
 
         public DatabaseConnection()
         {
@@ -66,7 +66,7 @@ namespace ITW_MobileApp.Droid
             await client.SyncContext.InitializeAsync(store);
         }
 
-        private async Task SyncAsync(bool pullData = false)
+        public async Task SyncAsync(bool pullData = false)
         {
             try
             {
@@ -98,68 +98,17 @@ namespace ITW_MobileApp.Droid
             }
         }
 
-        // Called when the refresh menu option is selected
-        public async void OnRefreshItemsSelected(EmployeeItemAdapter adapter)
+        public IMobileServiceSyncTable<EmployeeItem> getEmployeeSyncTable()
         {
-            await SyncAsync(pullData: true); // get changes from the mobile service
-            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
+            return employeeSyncTable;
         }
-        public async void OnRefreshItemsSelected(EventItemAdapter adapter)
+        public IMobileServiceSyncTable<EventItem> getEventSyncTable()
         {
-            await SyncAsync(pullData: true); // get changes from the mobile service
-            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
+            return eventSyncTable;
         }
-        public async void OnRefreshItemsSelected(RecipientListItemAdapter adapter)
+        public IMobileServiceSyncTable<RecipientListItem> getRecipientListSyncTable()
         {
-            await SyncAsync(pullData: true); // get changes from the mobile service
-            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
+            return recipientListSyncTable;
         }
-
-        //Refresh the list with the items in the local database
-        private async Task RefreshItemsFromTableAsync(EmployeeItemAdapter adapter)
-        {
-            try
-            {
-                // Get the items that weren't marked as completed and add them in the adapter
-                //var list = await toDoTable.Where(item => item.Complete == false).ToListAsync();
-                var employeeList = await employeeSyncTable.ToListAsync();
-                adapter.Clear();
-                foreach (EmployeeItem currentEmployee in employeeList)
-                    adapter.Add(currentEmployee);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-        }
-        private async Task RefreshItemsFromTableAsync(EventItemAdapter adapter)
-        {
-            try
-            {
-                var eventList = await eventSyncTable.ToListAsync();
-               adapter.Clear();
-                foreach (EventItem currentEvent in eventList)
-                  adapter.Add(currentEvent);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-        }
-        private async Task RefreshItemsFromTableAsync(RecipientListItemAdapter adapter)
-        {
-
-            try
-            {
-                var recipientList = await recipientListSyncTable.ToListAsync();
-                ((RecipientListItemAdapter)adapter).Clear();
-                foreach (RecipientListItem currentRecipientList in recipientList)
-                ((RecipientListItemAdapter)adapter).Add(currentRecipientList);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-}
     }
 }
