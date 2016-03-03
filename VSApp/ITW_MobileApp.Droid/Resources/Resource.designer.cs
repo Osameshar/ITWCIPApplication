@@ -1823,6 +1823,9 @@ namespace ITW_MobileApp
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f060075
+			public const int Category = 2131099765;
+			
 			// aapt resource value: 0x7f060077
 			public const int Date = 2131099767;
 			
@@ -1834,9 +1837,6 @@ namespace ITW_MobileApp
 			
 			// aapt resource value: 0x7f060069
 			public const int LinearLayout1 = 2131099753;
-			
-			// aapt resource value: 0x7f060075
-			public const int Meeting = 2131099765;
 			
 			// aapt resource value: 0x7f060076
 			public const int Name = 2131099766;

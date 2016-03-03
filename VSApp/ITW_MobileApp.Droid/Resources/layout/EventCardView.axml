@@ -17,7 +17,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:text="Meeting"
-            android:id="@+id/Meeting"
+            android:id="@+id/Category"
             android:layout_gravity="center_horizontal"
             android:background="#0000FF"
             android:gravity="center" />

@@ -16,7 +16,7 @@ namespace ITW_MobileApp.Droid
             {
                 await IoC.Dbconnect.getRecipientListSyncTable().InsertAsync(new RecipientListItem { EmployeeID = employeeID, EventID = newEventID });
             }
-
+            EmpIds = new List<int>();
             await IoC.Dbconnect.getEventSyncTable().InsertAsync(new EventItem { Name = newName, EventRecipients = newEventRecipients, EventDate = newEventDate, EventTime = newEventTime, Location = newLocation, Category = newCategory, EventPriority = newEventPriority, EventDescription = newEventDescription, EventID = newEventID, EmployeeID = newEmployeeID });
             await IoC.Dbconnect.SyncAsync();
         }
