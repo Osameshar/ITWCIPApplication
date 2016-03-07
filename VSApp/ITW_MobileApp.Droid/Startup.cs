@@ -32,6 +32,20 @@ namespace ITW_MobileApp.Droid
             {
                 IoC.ViewRefresher = new ViewRefresher();
             }
+            if (IoC.EmployeeFactory == null)
+            {
+                IoC.EmployeeFactory = new EmployeeFactory();
+            }
+            if (IoC.RecipientListFactory == null)
+            {
+                IoC.RecipientListFactory = new RecipientListFactory();
+            }
+
+            //IoC.EmployeeFactory.createEmployee("Curtis Keller", "testCurtis@gmail.com", 1, "IT", "User");
+            //IoC.EmployeeFactory.createEmployee("Corey Keller", "testCorey@gmail.com", 2, "HR", "User");
+            //IoC.EmployeeFactory.createEmployee("Alan Keller", "testAlan@gmail.com", 3, "IT", "User");
+
+
             StartActivity(new Intent(this, typeof(LoginActivity)));
 
         }
