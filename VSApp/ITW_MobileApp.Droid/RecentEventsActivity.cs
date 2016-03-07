@@ -113,21 +113,9 @@ namespace ITW_MobileApp.Droid
             //Starting it off
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
             await RefreshView();
-<<<<<<< HEAD
-=======
+
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(1, eventItemAdapter);
             //Initialize the list of events
-                
->>>>>>> refs/remotes/origin/develop
-            
-            //Initialize the list of events
-            //IoC.EventFactory.createEvent("MyEvent", "Emp 1,Employee Two", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 40, 2);
-            //IoC.EventFactory.createEvent("MyEvent", "Emp 1,Employee Two", new DateTime(2016, 3, 3), "Noon", "Nashville", "Meeting", "High", "PARTY AT MARLEY'S", 41, 2);
-            IoC.EventFactory.createEvent("MyEvent", "Emp 1,Employee Two", new DateTime(2016, 3, 3), "Noon", "Nashville", "Emergency", "High", "PARTY AT MARLEY'S", 62, 2);
-            //IoC.EventFactory.createEvent("MyEvent", "Emp 1,Employee Two", new DateTime(2016, 3, 3), "Noon", "Nashville", "Machine Maitenance", "High", "PARTY AT MARLEY'S", 43, 2);
-            await RefreshView();
-            myEventList = recipientListItemAdapter.getEventsByEmployeeID(3, eventItemAdapter);
-
 
             //EventItem myevent = new EventItem();
             //myevent.Name = "My Event";
