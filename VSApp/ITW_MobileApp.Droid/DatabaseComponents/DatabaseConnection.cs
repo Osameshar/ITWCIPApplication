@@ -22,7 +22,7 @@ namespace ITW_MobileApp.Droid
 
 
         const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";
-        const string localDbFilename = "test3.db";
+        const string localDbFilename = "test16.db";
 
         public DatabaseConnection()
         {

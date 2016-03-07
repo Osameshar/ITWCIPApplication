@@ -1799,16 +1799,34 @@ namespace ITW_MobileApp
 			public const int design_snackbar_background = 2130837574;
 			
 			// aapt resource value: 0x7f020047
-			public const int ic_launcher = 2130837575;
+			public const int ic_assignment_black_24dp = 2130837575;
 			
 			// aapt resource value: 0x7f020048
-			public const int Icon = 2130837576;
+			public const int ic_date_range_black_24dp = 2130837576;
 			
 			// aapt resource value: 0x7f020049
-			public const int ITWCIPLogo = 2130837577;
+			public const int ic_launcher = 2130837577;
 			
 			// aapt resource value: 0x7f02004a
-			public const int notification_template_icon_bg = 2130837578;
+			public const int ic_list_black_24dp = 2130837578;
+			
+			// aapt resource value: 0x7f02004b
+			public const int ic_menu_white_24dp = 2130837579;
+			
+			// aapt resource value: 0x7f02004c
+			public const int ic_power_settings_new_black_24dp = 2130837580;
+			
+			// aapt resource value: 0x7f02004d
+			public const int ic_settings_black_24dp = 2130837581;
+			
+			// aapt resource value: 0x7f02004e
+			public const int Icon = 2130837582;
+			
+			// aapt resource value: 0x7f02004f
+			public const int ITWCIPLogo = 2130837583;
+			
+			// aapt resource value: 0x7f020050
+			public const int notification_template_icon_bg = 2130837584;
 			
 			static Drawable()
 			{
@@ -1991,9 +2009,6 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f060025
 			public const int exitUntilCollapsed = 2131099685;
 			
-			// aapt resource value: 0x7f060096
-			public const int exititem = 2131099798;
-			
 			// aapt resource value: 0x7f06003e
 			public const int expand_activities_button = 2131099710;
 			
@@ -2057,6 +2072,9 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f06007e
 			public const int loginBtn = 2131099774;
 			
+			// aapt resource value: 0x7f060096
+			public const int logoutitem = 2131099798;
+			
 			// aapt resource value: 0x7f060086
 			public const int media_actions = 2131099782;
 			
@@ -2072,17 +2090,17 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f060015
 			public const int multiply = 2131099669;
 			
-			// aapt resource value: 0x7f060095
-			public const int nav_favorites = 2131099797;
-			
-			// aapt resource value: 0x7f060092
-			public const int nav_haveRead = 2131099794;
-			
 			// aapt resource value: 0x7f060093
-			public const int nav_readingNow = 2131099795;
+			public const int nav_calendar = 2131099795;
 			
 			// aapt resource value: 0x7f060094
-			public const int nav_toRead = 2131099796;
+			public const int nav_overtime = 2131099796;
+			
+			// aapt resource value: 0x7f060092
+			public const int nav_recentEvents = 2131099794;
+			
+			// aapt resource value: 0x7f060095
+			public const int nav_settings = 2131099797;
 			
 			// aapt resource value: 0x7f060082
 			public const int nav_view = 2131099778;

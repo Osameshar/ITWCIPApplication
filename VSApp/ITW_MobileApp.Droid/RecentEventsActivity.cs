@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Android.Support.V7.Widget;
 using System.Linq;
 using System.Threading.Tasks;
+using Android.Content;
 
 namespace ITW_MobileApp.Droid
 {
@@ -44,10 +45,14 @@ namespace ITW_MobileApp.Droid
 
             await RefreshView();
 
+            //setup toolbar
             _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
             _supporttoolbar.SetTitle(Resource.String.recent_events);
             SetSupportActionBar(_supporttoolbar);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            _supporttoolbar.SetNavigationIcon(Resource.Drawable.ic_menu_white_24dp);
+            
+            SupportActionBar.SetDisplayHomeAsUpEnabled(false);
+            
 
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
 
@@ -58,22 +63,62 @@ namespace ITW_MobileApp.Droid
             {
                 switch (e.MenuItem.ItemId)
                 {
-                    case Resource.Id.nav_haveRead:
-                        Console.WriteLine("Have Read");
+                    case Resource.Id.nav_recentEvents:
+                        {
+                            var intent = new Intent(this, typeof(RecentEventsActivity));
+                            StartActivity(intent);
+                        }
                         break;
-                    case Resource.Id.nav_readingNow:
-                        Console.WriteLine("Reading Now");
+                    case Resource.Id.nav_calendar:
+                        {
+                            Console.WriteLine("calendar");
+                            //switch to calendar view
+                            //var intent = new Intent(this, typeof(RecentEventsActivity));
+                            //StartActivity(intent);
+                        }
+                        break;
+                    case Resource.Id.nav_overtime:
+                        {
+                            Console.WriteLine("overtime");
+                            //switch to overtime view
+                            //var intent = new Intent(this, typeof(RecentEventsActivity));
+                            //StartActivity(intent);
+                        }
+                        break;
+                    case Resource.Id.nav_settings:
+                        {
+                            Console.WriteLine("settings");
+                            //switch to settings view
+                            //var intent = new Intent(this, typeof(RecentEventsActivity));
+                            //StartActivity(intent);
+                        }
+                        break;
+                    case Resource.Id.logoutitem:
+                        {
+                            Console.WriteLine("logout");
+                            //logout
+                            //var intent = new Intent(this, typeof(RecentEventsActivity));
+                            //StartActivity(intent);
+                        }
                         break;
 
                 }
             };
 
-
+           // IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 1, 2);
+           // IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 2, 2);
+           // IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 3, 2);
 
             //Here is where we do the Recyler View
             //Starting it off
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
             await RefreshView();
+<<<<<<< HEAD
+=======
+            myEventList = recipientListItemAdapter.getEventsByEmployeeID(1, eventItemAdapter);
+            //Initialize the list of events
+                
+>>>>>>> refs/remotes/origin/develop
             
             //Initialize the list of events
             //IoC.EventFactory.createEvent("MyEvent", "Emp 1,Employee Two", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 40, 2);
@@ -168,7 +213,8 @@ namespace ITW_MobileApp.Droid
         {
             EventViewHolder vh = holder as EventViewHolder;
 
-            // Load the photo caption from the photo album:
+            // Load the photo caption from the photo album
+
             vh.Name.Text = adaptereventlist.ElementAt(position).Name;
             vh.Date.Text = adaptereventlist.ElementAt(position).EventDate.ToString("MMMM dd, yyyy");
             vh.Time.Text = adaptereventlist.ElementAt(position).EventTime;
