@@ -123,7 +123,9 @@
     <Compile Include="DataObjects\RecipientListItem.cs" />
     <Compile Include="ErrorHandler.cs" />
     <Compile Include="DatabaseComponents\IoC.cs" />
+    <Compile Include="ObjectFactorys\EmployeeFactory.cs" />
     <Compile Include="ObjectFactorys\EventFactory.cs" />
+    <Compile Include="ObjectFactorys\RecipientListFactory.cs" />
     <Compile Include="RecentEventsActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

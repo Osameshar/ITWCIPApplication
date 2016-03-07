@@ -105,16 +105,17 @@ namespace ITW_MobileApp.Droid
                 }
             };
 
-
+           // IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 1, 2);
+           // IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 2, 2);
+           // IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 3, 2);
 
             //Here is where we do the Recyler View
             //Starting it off
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
-            //await RefreshView();
-            myEventList = recipientListItemAdapter.getEventsByEmployeeID(3, eventItemAdapter);
+            await RefreshView();
+            myEventList = recipientListItemAdapter.getEventsByEmployeeID(1, eventItemAdapter);
             //Initialize the list of events
-            //IoC.EventFactory.createEvent("MyEvent", "Emp 1,Employee Two", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 35, 2);
-            
+                
             
 
             //EventItem myevent = new EventItem();
