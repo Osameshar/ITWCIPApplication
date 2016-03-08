@@ -105,9 +105,10 @@ namespace ITW_MobileApp.Droid
                 }
             };
 
-           // IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 1, 2);
-           // IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 2, 2);
-           // IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 3, 2);
+            //IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 1, 2);
+            //IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Emergency", "High", "PARTY AT MARLEY'S", 2, 2);
+            //IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Meeting", "High", "PARTY AT MARLEY'S", 3, 2);
+            //IoC.EventFactory.createEvent("MyEvent4", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Machine Maintenance", "High", "PARTY AT MARLEY'S", 4, 2);
 
             //Here is where we do the Recyler View
             //Starting it off
@@ -115,22 +116,6 @@ namespace ITW_MobileApp.Droid
             await RefreshView();
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(1, eventItemAdapter);
-            //Initialize the list of events
-
-            //EventItem myevent = new EventItem();
-            //myevent.Name = "My Event";
-            //myevent.EventRecipients = "Bob, Same, and Marley";
-            //myevent.EventDate = new DateTime(2016, 3, 3);
-            //myevent.EventTime = "Noon";
-            //myevent.Location = "Nashville";
-            //myevent.Category = "Company Event";
-            //myevent.EventPriority = "Now";
-            //myevent.EventDescription = "PARTY AT MARLEY'S";
-            //myevent.EventID = 1;
-            //myevent.EmployeeID = 0078982;
-            //myevent.deleted = false;
-
-            //myEventList.Add(myevent);
 
             //Plug in the linear layout manager
             mLayoutManager = new LinearLayoutManager(this);
@@ -223,7 +208,7 @@ namespace ITW_MobileApp.Droid
                 vh.Category.SetBackgroundColor(new Android.Graphics.Color(255, 0, 0));
             }
 
-            else if (vh.Category.Text == "Machine Maitenance")
+            else if (vh.Category.Text == "Machine Maintenance")
             {
                 vh.Category.SetBackgroundColor(new Android.Graphics.Color(255, 165, 0));
             }
