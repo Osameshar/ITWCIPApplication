@@ -22,7 +22,7 @@ namespace ITW_MobileApp.Droid
 
 
         const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";
-        const string localDbFilename = "test20.db";
+        const string localDbFilename = "itwlocalstore.db";
 
         public DatabaseConnection()
         {
@@ -51,10 +51,10 @@ namespace ITW_MobileApp.Droid
             // new code to initialize the SQLite store
             string path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), localDbFilename);
 
-            if (!File.Exists(path))
-            {
+           // if (!File.Exists(path))
+           // {
                 File.Create(path).Dispose();
-            }
+           // }
 
             var store = new MobileServiceSQLiteStore(path);
 
