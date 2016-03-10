@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="categorytypelist">
+    <item>@string/categorytype1</item>
+    <item>@string/categorytype2</item>
+    <item>@string/categorytype3</item>
+    <item>@string/categorytype4</item>
+  </string-array>
+  <string-array name="prioritylist">
+    <item>@string/prioritylow</item>
+    <item>@string/prioritymedium</item>
+    <item>@string/priorityhigh</item>
+  </string-array>
+</resources>
