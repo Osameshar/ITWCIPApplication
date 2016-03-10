@@ -34,6 +34,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/eventname"
                     android:inputType="text"
+                    android:layout_margin="10dp"
                     android:layout_width="fill_parent" />
                 <EditText
                     android:id="@+id/EditTextEventRecipients"
@@ -41,34 +42,40 @@
                     android:hint="@string/eventrecipients"
                     android:inputType="text"
                     android:lines="5"
+                    android:layout_margin="10dp"
                     android:layout_width="fill_parent" />
                 <EditText
                     android:id="@+id/EditTextLocation"
                     android:layout_height="wrap_content"
                     android:hint="@string/location"
                     android:inputType="text"
+                    android:layout_margin="10dp"
                     android:layout_width="fill_parent" />
                 <Button
                     android:id="@+id/ButtonPickDate"
                     android:layout_height="wrap_content"
                     android:text="@string/pickdatebutton"
+                    android:layout_margin="10dp"
                     android:layout_width="fill_parent" />
                 <Button
                     android:id="@+id/ButtonPickTime"
                     android:layout_height="wrap_content"
                     android:text="@string/picktimebutton"
+                    android:layout_margin="10dp"
                     android:layout_width="fill_parent" />
                 <Spinner
                     android:id="@+id/SpinnerCategoryType"
                     android:layout_height="wrap_content"
                     android:prompt="@string/category"
                     android:layout_width="fill_parent"
+                    android:layout_margin="10dp"
                     android:entries="@array/categorytypelist" />
                 <Spinner
                     android:id="@+id/SpinnerPriority"
                     android:layout_height="wrap_content"
                     android:prompt="@string/priority"
                     android:layout_width="fill_parent"
+                    android:layout_margin="10dp"
                     android:entries="@array/prioritylist" />
                 <EditText
                     android:id="@+id/EditTextEventDescription"
@@ -76,12 +83,14 @@
                     android:hint="@string/eventdescription"
                     android:inputType="textMultiLine"
                     android:lines="5"
+                    android:layout_margin="10dp"
                     android:layout_width="fill_parent" />
                 <Button
                     android:id="@+id/ButtonCreateEvent"
                     android:layout_height="wrap_content"
                     android:text="@string/createeventbutton"
                     android:onClick="createEvent"
+                    android:layout_margin="10dp"
                     android:layout_width="fill_parent" />
             </LinearLayout>
         </ScrollView>

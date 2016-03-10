@@ -33,6 +33,7 @@ namespace ITW_MobileApp.Droid
             //Login Button sends us to the Main View. THIS WILL NEED TO BE CHANGED FOR AUTHENTICATION.
             loginButton.Click += (sender, e) =>
             {
+                IoC.UserInfo.EmployeeID = 1;//this is acting as "Curtis Keller" logged in.
                 var intent = new Intent(this, typeof(RecentEventsActivity));
                 StartActivity(intent);
             };

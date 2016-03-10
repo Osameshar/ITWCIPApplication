@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="Activities\EventCreationActivity.cs" />
     <Compile Include="DatabaseComponents\DatabaseConnection.cs" />
+    <Compile Include="UserInfo.cs" />
     <Compile Include="DatabaseComponents\ViewRefresher.cs" />
     <Compile Include="DataObjectAdapters\EmployeeItemAdapter.cs" />
     <Compile Include="DataObjectAdapters\EventItemAdapter.cs" />

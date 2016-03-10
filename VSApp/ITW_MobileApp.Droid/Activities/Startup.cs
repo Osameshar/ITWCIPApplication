@@ -40,6 +40,10 @@ namespace ITW_MobileApp.Droid
             {
                 IoC.RecipientListFactory = new RecipientListFactory();
             }
+            if (IoC.UserInfo == null)
+            {
+                IoC.UserInfo = new UserInfo();
+            }
 
             //IoC.EmployeeFactory.createEmployee("Curtis Keller", "testCurtis@gmail.com", 1, "IT", "User");
             //IoC.EmployeeFactory.createEmployee("Corey Keller", "testCorey@gmail.com", 2, "HR", "User");

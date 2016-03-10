@@ -7,7 +7,7 @@
     <DatePicker
         android:id="@+id/date_picker"
         android:layout_width="match_parent"
-        style="@style/datepicker"
+        style="@style/datetimepicker"
         android:calendarViewShown="true"
         android:spinnersShown="false"
         android:layout_weight="4"

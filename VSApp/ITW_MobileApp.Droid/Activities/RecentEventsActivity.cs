@@ -45,14 +45,38 @@ namespace ITW_MobileApp.Droid
 
             await RefreshView();
 
-            //setup toolbar
+            setupToolbar();
+            //IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 1, 2);
+            //IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Emergency", "High", "PARTY AT MARLEY'S", 2, 2);
+            //IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Meeting", "High", "PARTY AT MARLEY'S", 3, 2);
+            //IoC.EventFactory.createEvent("MyEvent4", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Machine Maintenance", "High", "PARTY AT MARLEY'S", 4, 2);
+
+            //Here is where we do the Recyler View
+            //Starting it off
+            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
+            await RefreshView();
+
+            myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+
+            //Plug in the linear layout manager
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.SetLayoutManager(mLayoutManager);
+
+            //Plug in my adapter
+            myEventListAdapter = new EventListAdapter(myEventList);
+            mRecyclerView.SetAdapter(myEventListAdapter);
+
+        }
+
+        public void setupToolbar()
+        {
             _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
             _supporttoolbar.SetTitle(Resource.String.recent_events);
             SetSupportActionBar(_supporttoolbar);
             _supporttoolbar.SetNavigationIcon(Resource.Drawable.ic_menu_white_24dp);
-            
+
             SupportActionBar.SetDisplayHomeAsUpEnabled(false);
-            
+
 
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
 
@@ -69,12 +93,19 @@ namespace ITW_MobileApp.Droid
                             StartActivity(intent);
                         }
                         break;
+                    case Resource.Id.nav_createEvent:
+                        {
+                            //switch to calendar view
+                            var intent = new Intent(this, typeof(EventCreationActivity));
+                            StartActivity(intent);
+                        }
+                        break;
                     case Resource.Id.nav_calendar:
                         {
                             Console.WriteLine("calendar");
                             //switch to calendar view
-                            var intent = new Intent(this, typeof(EventCreationActivity));
-                            StartActivity(intent);
+                            //var intent = new Intent(this, typeof(EventCreationActivity));
+                            //StartActivity(intent);
                         }
                         break;
                     case Resource.Id.nav_overtime:
@@ -104,29 +135,7 @@ namespace ITW_MobileApp.Droid
 
                 }
             };
-
-            //IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 1, 2);
-            //IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Emergency", "High", "PARTY AT MARLEY'S", 2, 2);
-            //IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Meeting", "High", "PARTY AT MARLEY'S", 3, 2);
-            //IoC.EventFactory.createEvent("MyEvent4", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Machine Maintenance", "High", "PARTY AT MARLEY'S", 4, 2);
-
-            //Here is where we do the Recyler View
-            //Starting it off
-            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
-            await RefreshView();
-
-            myEventList = recipientListItemAdapter.getEventsByEmployeeID(1, eventItemAdapter);
-
-            //Plug in the linear layout manager
-            mLayoutManager = new LinearLayoutManager(this);
-            mRecyclerView.SetLayoutManager(mLayoutManager);
-
-            //Plug in my adapter
-            myEventListAdapter = new EventListAdapter(myEventList);
-            mRecyclerView.SetAdapter(myEventListAdapter);
-
         }
-
         //This has nothing to do with this Recycler View. Instead, this deals with the seletion of the Navigation Drawer button
         public override bool OnOptionsItemSelected(IMenuItem item)
         {

@@ -2136,8 +2136,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f06008d
 			public const int loginBtn = 2131099789;
 			
-			// aapt resource value: 0x7f0600a4
-			public const int logoutitem = 2131099812;
+			// aapt resource value: 0x7f0600a5
+			public const int logoutitem = 2131099813;
 			
 			// aapt resource value: 0x7f060092
 			public const int media_actions = 2131099794;
@@ -2154,17 +2154,20 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f060015
 			public const int multiply = 2131099669;
 			
-			// aapt resource value: 0x7f0600a1
-			public const int nav_calendar = 2131099809;
-			
 			// aapt resource value: 0x7f0600a2
-			public const int nav_overtime = 2131099810;
+			public const int nav_calendar = 2131099810;
+			
+			// aapt resource value: 0x7f0600a1
+			public const int nav_createEvent = 2131099809;
+			
+			// aapt resource value: 0x7f0600a3
+			public const int nav_overtime = 2131099811;
 			
 			// aapt resource value: 0x7f0600a0
 			public const int nav_recentEvents = 2131099808;
 			
-			// aapt resource value: 0x7f0600a3
-			public const int nav_settings = 2131099811;
+			// aapt resource value: 0x7f0600a4
+			public const int nav_settings = 2131099812;
 			
 			// aapt resource value: 0x7f060087
 			public const int nav_view = 2131099783;
@@ -3750,7 +3753,7 @@ namespace ITW_MobileApp
 			public const int Widget_Design_TextInputLayout = 2131231046;
 			
 			// aapt resource value: 0x7f080149
-			public const int datepicker = 2131231049;
+			public const int datetimepicker = 2131231049;
 			
 			static Style()
 			{
