@@ -7,7 +7,7 @@
       android:title="Recent Events" />
    <item
       android:id="@+id/nav_createEvent"
-      android:icon="@drawable/ic_date_range_black_24dp"
+      android:icon="@drawable/ic_add_black_24dp"
       android:title="Create Event" />
    <item
       android:id="@+id/nav_calendar"

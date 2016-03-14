@@ -114,8 +114,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\EventCreationActivity.cs" />
+    <Compile Include="AndroidViewSpecific\EventListAdapter.cs" />
+    <Compile Include="AndroidViewSpecific\EventViewHolder.cs" />
     <Compile Include="DatabaseComponents\DatabaseConnection.cs" />
-    <Compile Include="UserInfo.cs" />
+    <Compile Include="DatabaseComponents\UserInfo.cs" />
     <Compile Include="DatabaseComponents\ViewRefresher.cs" />
     <Compile Include="DataObjectAdapters\EmployeeItemAdapter.cs" />
     <Compile Include="DataObjectAdapters\EventItemAdapter.cs" />
@@ -123,7 +125,7 @@
     <Compile Include="DataObjects\EmployeeItem.cs" />
     <Compile Include="DataObjects\EventItem.cs" />
     <Compile Include="DataObjects\RecipientListItem.cs" />
-    <Compile Include="ErrorHandler.cs" />
+    <Compile Include="AndroidViewSpecific\ErrorHandler.cs" />
     <Compile Include="DatabaseComponents\IoC.cs" />
     <Compile Include="ObjectFactorys\EmployeeFactory.cs" />
     <Compile Include="ObjectFactorys\EventFactory.cs" />
@@ -295,6 +297,24 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\arrays.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_add_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_add_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_add_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_add_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_add_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_add_black_24dp.png" />
   </ItemGroup>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

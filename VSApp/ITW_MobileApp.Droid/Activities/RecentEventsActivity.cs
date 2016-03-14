@@ -1,5 +1,4 @@
 using Android.App;
-using Android.Widget;
 using Android.OS;
 using Android.Support.V4.Widget;
 using Android.Views;
@@ -8,9 +7,9 @@ using Android.Support.V7.App;
 using System;
 using System.Collections.Generic;
 using Android.Support.V7.Widget;
-using System.Linq;
 using System.Threading.Tasks;
 using Android.Content;
+using Android.Support.V4.View;
 
 namespace ITW_MobileApp.Droid
 {
@@ -89,19 +88,21 @@ namespace ITW_MobileApp.Droid
                 {
                     case Resource.Id.nav_recentEvents:
                         {
+                            _drawer.CloseDrawer(GravityCompat.Start);
                             var intent = new Intent(this, typeof(RecentEventsActivity));
                             StartActivity(intent);
                         }
                         break;
                     case Resource.Id.nav_createEvent:
                         {
-                            //switch to calendar view
+                            _drawer.CloseDrawer(GravityCompat.Start);
                             var intent = new Intent(this, typeof(EventCreationActivity));
                             StartActivity(intent);
                         }
                         break;
                     case Resource.Id.nav_calendar:
                         {
+                            _drawer.CloseDrawer(GravityCompat.Start);
                             Console.WriteLine("calendar");
                             //switch to calendar view
                             //var intent = new Intent(this, typeof(EventCreationActivity));
@@ -110,6 +111,7 @@ namespace ITW_MobileApp.Droid
                         break;
                     case Resource.Id.nav_overtime:
                         {
+                            _drawer.CloseDrawer(GravityCompat.Start);
                             Console.WriteLine("overtime");
                             //switch to overtime view
                             //var intent = new Intent(this, typeof(RecentEventsActivity));
@@ -118,6 +120,7 @@ namespace ITW_MobileApp.Droid
                         break;
                     case Resource.Id.nav_settings:
                         {
+                            _drawer.CloseDrawer(GravityCompat.Start);
                             Console.WriteLine("settings");
                             //switch to settings view
                             //var intent = new Intent(this, typeof(RecentEventsActivity));
@@ -126,10 +129,11 @@ namespace ITW_MobileApp.Droid
                         break;
                     case Resource.Id.logoutitem:
                         {
+                            _drawer.CloseDrawer(GravityCompat.Start);
                             Console.WriteLine("logout");
                             //logout
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
+                            var intent = new Intent(this, typeof(LoginActivity));
+                            StartActivity(intent);
                         }
                         break;
 
@@ -142,7 +146,7 @@ namespace ITW_MobileApp.Droid
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
-                    _drawer.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
+                    _drawer.OpenDrawer(GravityCompat.Start);
                     return true;
             }
             return base.OnOptionsItemSelected(item);
@@ -154,84 +158,15 @@ namespace ITW_MobileApp.Droid
              await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
              await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
         }
-    }
-
-    public class EventViewHolder: RecyclerView.ViewHolder
-    {
-        public TextView Name { get; private set; }
-        public TextView Date { get; private set; }
-        public TextView Time { get; private set; }
-        public TextView Category { get; private set; }
-
-        public EventViewHolder(View itemView) : base(itemView)
+        public override void OnBackPressed()
         {
-            // Locate and cache view references:
-            Name = itemView.FindViewById<TextView>(Resource.Id.Name);
-            Date = itemView.FindViewById<TextView>(Resource.Id.Date);
-            Time = itemView.FindViewById<TextView>(Resource.Id.Time);
-            Category = itemView.FindViewById<TextView>(Resource.Id.Category);
-        }
-    }
-
-    public class EventListAdapter : RecyclerView.Adapter
-    {
-        public List<EventItem> adaptereventlist;
-
-        public EventListAdapter(List<EventItem> myEventList)
-        {
-            adaptereventlist = myEventList;
-        }
-
-        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
-        {
-            // Inflate the CardView for the photo:
-            View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.EventCardView, parent, false);
-
-            // Create a ViewHolder to hold view references inside the CardView:
-            EventViewHolder vh = new EventViewHolder(itemView);
-            return vh;
-        }
-
-        public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
-        {
-            EventViewHolder vh = holder as EventViewHolder;
-
-            // Load the photo caption from the photo album
-
-            vh.Name.Text = adaptereventlist.ElementAt(position).Name;
-            vh.Date.Text = adaptereventlist.ElementAt(position).EventDate.ToString("MMMM dd, yyyy");
-            vh.Time.Text = adaptereventlist.ElementAt(position).EventTime;
-            vh.Category.Text = adaptereventlist.ElementAt(position).Category;
-
-            if (vh.Category.Text == "Meeting")
+            if (_drawer.IsDrawerOpen(GravityCompat.Start))
             {
-                vh.Category.SetBackgroundColor(new Android.Graphics.Color(0, 0, 255));
+                _drawer.CloseDrawer(GravityCompat.Start);
             }
-
-            else if (vh.Category.Text == "Company Event")
-            {
-                vh.Category.SetBackgroundColor(new Android.Graphics.Color(0, 255, 0));
+            else {
+                base.OnBackPressed();
             }
-
-            else if (vh.Category.Text == "Emergency")
-            {
-                vh.Category.SetBackgroundColor(new Android.Graphics.Color(255, 0, 0));
-            }
-
-            else if (vh.Category.Text == "Machine Maintenance")
-            {
-                vh.Category.SetBackgroundColor(new Android.Graphics.Color(255, 165, 0));
-            }
-
-            else
-            {
-                vh.Category.SetBackgroundColor(new Android.Graphics.Color(0, 0, 255));
-            }
-        }
-
-        public override int ItemCount
-        {
-            get { return adaptereventlist.Count; }
         }
     }
 }

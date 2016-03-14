@@ -6,12 +6,8 @@ using Android.Views;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using System;
-using System.Collections.Generic;
-using Android.Support.V7.Widget;
-using System.Linq;
-using System.Threading.Tasks;
 using Android.Content;
-using Java.Util;
+using Android.Support.V4.View;
 
 namespace ITW_MobileApp.Droid
 {
@@ -230,10 +226,21 @@ namespace ITW_MobileApp.Droid
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
-                    _drawer.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
+                    _drawer.OpenDrawer(GravityCompat.Start);
                     return true;
             }
             return base.OnOptionsItemSelected(item);
+        }
+
+        public override void OnBackPressed()
+        {
+            if (_drawer.IsDrawerOpen(GravityCompat.Start))
+            {
+                _drawer.CloseDrawer(GravityCompat.Start);
+            }
+            else {
+                base.OnBackPressed();
+            }
         }
     }
 }
