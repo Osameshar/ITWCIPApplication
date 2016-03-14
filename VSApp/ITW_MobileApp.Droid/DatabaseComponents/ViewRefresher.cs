@@ -1,35 +1,26 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 namespace ITW_MobileApp.Droid
 {
     public class ViewRefresher
     {
         // Called when the refresh menu option is selected
-        public async void OnRefreshItemsSelected(EmployeeItemAdapter adapter)
-        {
-            await IoC.Dbconnect.SyncAsync(pullData: true); // get changes from the mobile service
-            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
-        }
-        public async void OnRefreshItemsSelected(EventItemAdapter adapter)
-        {
-            await IoC.Dbconnect.SyncAsync(pullData: true); // get changes from the mobile service
-            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
-        }
-        public async void OnRefreshItemsSelected(RecipientListItemAdapter adapter)
-        {
-            await IoC.Dbconnect.SyncAsync(pullData: true); // get changes from the mobile service
-            await RefreshItemsFromTableAsync(adapter); // refresh view using local database
-        }
+        //public async void OnRefreshItemsSelected(EmployeeItemAdapter adapter)
+        //{
+        //    await IoC.Dbconnect.SyncAsync(pullData: true); // get changes from the mobile service
+        //    await RefreshItemsFromTableAsync(adapter); // refresh view using local database
+        //}
+        //public async void OnRefreshItemsSelected(EventItemAdapter adapter)
+        //{
+        //    await IoC.Dbconnect.SyncAsync(pullData: true); // get changes from the mobile service
+        //    await RefreshItemsFromTableAsync(adapter); // refresh view using local database
+        //}
+        //public async void OnRefreshItemsSelected(RecipientListItemAdapter adapter)
+        //{
+        //    await IoC.Dbconnect.SyncAsync(pullData: true); // get changes from the mobile service
+        //    await RefreshItemsFromTableAsync(adapter); // refresh view using local database
+        //}
 
         public async Task RefreshItemsFromTableAsync(EventItemAdapter adapter)
         {

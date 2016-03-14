@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 namespace ITW_MobileApp.Droid
 {
     public class EventFactory
-    {        
-
-        public async void createEvent(string newName, string newEventRecipients, DateTime newEventDate, string newEventTime, string newLocation, string newCategory, string newEventPriority, string newEventDescription, int newEventID, int newEmployeeID)
+    {
+        int newEventID = 0;
+        public async void createEvent(string newName, string newEventRecipients, DateTime newEventDate, string newEventTime, string newLocation, string newCategory, string newEventPriority, string newEventDescription)
         {
+            
+            await setNextEventID();
+            
             //create a recipientListitem for every EventRecipient after parsing Event Recipients
             List<int> EmpIds = new List<int>();
             await parseRecipients(newEventRecipients, EmpIds);
@@ -18,8 +21,23 @@ namespace ITW_MobileApp.Droid
                 IoC.RecipientListFactory.createRecipientList(employeeID,newEventID);
             }
 
-            await IoC.Dbconnect.getEventSyncTable().InsertAsync(new EventItem { Name = newName, EventRecipients = newEventRecipients, EventDate = newEventDate, EventTime = newEventTime, Location = newLocation, Category = newCategory, EventPriority = newEventPriority, EventDescription = newEventDescription, EventID = newEventID, EmployeeID = newEmployeeID });
+            await IoC.Dbconnect.getEventSyncTable().InsertAsync(new EventItem { Name = newName, EventRecipients = newEventRecipients, EventDate = newEventDate, EventTime = newEventTime, Location = newLocation, Category = newCategory, EventPriority = newEventPriority, EventDescription = newEventDescription, EventID = newEventID, EmployeeID = IoC.UserInfo.EmployeeID });
             await IoC.Dbconnect.SyncAsync();
+        }
+
+        private async Task setNextEventID()
+        {
+            List<EventItem> eventItems = await IoC.Dbconnect.getEventSyncTable().ToListAsync();
+            int highestID = -1;
+            foreach (EventItem eventItem in eventItems)
+            {
+                int currID = eventItem.EventID;
+                if (highestID < currID)
+                {                    
+                    highestID = currID;
+                }
+            }
+            newEventID = highestID + 1;
         }
 
         //TODO: potentially make this more efficient

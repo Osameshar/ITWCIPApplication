@@ -5,10 +5,13 @@
   <style name="MyTheme" parent="MyTheme.Base"></style>
 
   <style name="MyTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-
+    
     <item name="android:statusBarColor">#42A5F5</item>
-    <item name="colorPrimary">#75002A</item>
+    <item name="colorPrimary">@color/primary</item>
     <item name="android:windowBackground">@color/window_background</item>
   </style>
-
+  
+  <style name="datetimepicker">
+    <item name="@android:headerBackground">@color/primary</item>
+  </style>
 </resources>

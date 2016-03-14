@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -39,6 +34,10 @@ namespace ITW_MobileApp.Droid
             if (IoC.RecipientListFactory == null)
             {
                 IoC.RecipientListFactory = new RecipientListFactory();
+            }
+            if (IoC.UserInfo == null)
+            {
+                IoC.UserInfo = new UserInfo();
             }
 
             //IoC.EmployeeFactory.createEmployee("Curtis Keller", "testCurtis@gmail.com", 1, "IT", "User");

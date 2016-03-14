@@ -17,4 +17,6 @@
 
 <resources>
   <color name="window_background">#FFF5F5F5</color>
+  <color name="primary">#75002A</color>
+  <color name="primary_dark">#000000</color>
 </resources>

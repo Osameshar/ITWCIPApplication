@@ -7,4 +7,20 @@
     <string name="menu_refresh">Refresh</string>
     <string name="checkbox_text">Item Text</string>
     <string name="recent_events">Recent Events</string>
+    <string name="categorytype1">Meeting</string>
+    <string name="categorytype2">Company Event</string>
+    <string name="categorytype3">Machine Maintenance</string>
+    <string name="categorytype4">Emergency</string>
+    <string name="prioritylow">Low</string>
+    <string name="prioritymedium">Medium</string>
+    <string name="priorityhigh">High</string>
+    <string name="eventname">Enter the Event\'s Name</string>
+    <string name="eventrecipients">Enter Recipients\' Names</string>
+    <string name="location">Enter the Location</string>
+    <string name="category">Select the Category</string>
+    <string name="priority">Select the Priority</string>
+    <string name="eventdescription">Enter the Event Description</string>
+    <string name="createeventbutton">Create Event</string>
+    <string name="pickdatebutton">Pick the Date</string>
+    <string name="picktimebutton">Pick the Time</string>
 </resources>

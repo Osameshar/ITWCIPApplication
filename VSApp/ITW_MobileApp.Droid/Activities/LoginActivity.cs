@@ -1,9 +1,7 @@
-using System;
 using Android.OS;
 using Android.App;
 using Android.Widget;
 using Android.Content;
-using System.Collections.Generic;
 
 namespace ITW_MobileApp.Droid
 {
@@ -15,7 +13,7 @@ namespace ITW_MobileApp.Droid
         private EventItemAdapter eventItemAdapter;
         private RecipientListItemAdapter recipientListItemAdapter;
 
-        protected override async void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -33,6 +31,7 @@ namespace ITW_MobileApp.Droid
             //Login Button sends us to the Main View. THIS WILL NEED TO BE CHANGED FOR AUTHENTICATION.
             loginButton.Click += (sender, e) =>
             {
+                IoC.UserInfo.EmployeeID = 1;//this is acting as "Curtis Keller" logged in.
                 var intent = new Intent(this, typeof(RecentEventsActivity));
                 StartActivity(intent);
             };

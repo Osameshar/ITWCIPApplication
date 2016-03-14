@@ -7,5 +7,6 @@ namespace ITW_MobileApp.Droid
         public static ViewRefresher ViewRefresher { get; set; }
         public static EmployeeFactory EmployeeFactory { get; set; }
         public static RecipientListFactory RecipientListFactory { get; set; }
+        public static UserInfo UserInfo { get; set; }
     }
 }
