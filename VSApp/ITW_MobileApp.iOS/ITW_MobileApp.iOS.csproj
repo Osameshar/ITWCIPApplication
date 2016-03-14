@@ -60,6 +60,10 @@
     <MtouchArch>ARMv7, ARM64</MtouchArch>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ModernHttpClient, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -100,8 +104,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseComponents\DatabaseConnection.cs" />
+    <Compile Include="DatabaseComponents\IoC.cs" />
+    <Compile Include="DatabaseComponents\UserInfo.cs" />
+    <Compile Include="DatabaseComponents\ViewRefresher.cs" />
+    <Compile Include="DataObjectAdapters\EmployeeItemAdapter.cs" />
+    <Compile Include="DataObjectAdapters\EventItemAdapter.cs" />
+    <Compile Include="DataObjectAdapters\RecipientListItemAdapter.cs" />
+    <Compile Include="DataObjects\EmployeeItem.cs" />
+    <Compile Include="DataObjects\EventItem.cs" />
+    <Compile Include="DataObjects\RecipientListItem.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="ObjectFactorys\EmployeeFactory.cs" />
+    <Compile Include="ObjectFactorys\EventFactory.cs" />
+    <Compile Include="ObjectFactorys\RecipientListFactory.cs" />
     <Compile Include="QSTodoListViewController.cs" />
     <Compile Include="QSTodoListViewController.designer.cs">
       <DependentUpon>QSTodoListViewController.cs</DependentUpon>
