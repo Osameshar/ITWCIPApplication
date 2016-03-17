@@ -18,7 +18,7 @@ namespace ITW_MobileApp.Droid
     public class RecentEventsActivity : AppCompatActivity
     {
 
-        Android.Support.V7.Widget.Toolbar _supporttoolbar;
+        Toolbar _supporttoolbar;
         DrawerLayout _drawer;
         NavigationView _navigationview;
 
@@ -71,7 +71,7 @@ namespace ITW_MobileApp.Droid
 
         public void setupToolbar()
         {
-            _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
+            _supporttoolbar = FindViewById<Toolbar>(Resource.Id.ToolBar);
             _supporttoolbar.SetTitle(Resource.String.recent_events);
             SetSupportActionBar(_supporttoolbar);
             _supporttoolbar.SetNavigationIcon(Resource.Drawable.ic_menu_white_24dp);
@@ -107,8 +107,8 @@ namespace ITW_MobileApp.Droid
                             _drawer.CloseDrawer(GravityCompat.Start);
                             Console.WriteLine("calendar");
                             //switch to calendar view
-                            //var intent = new Intent(this, typeof(EventCreationActivity));
-                            //StartActivity(intent);
+                            var intent = new Intent(this, typeof(EventDeletionActivity));
+                            StartActivity(intent);
                         }
                         break;
                     case Resource.Id.nav_overtime:

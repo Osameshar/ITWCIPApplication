@@ -24,4 +24,6 @@
     <string name="pickdatebutton">Pick the Date</string>
     <string name="picktimebutton">Pick the Time</string>
     <string name="event_details">Event Details</string>
+    <string name="event_deletion">Event Deletion</string>
+    <string name="create_event">Event Creation</string>
 </resources>

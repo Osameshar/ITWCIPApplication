@@ -104,7 +104,7 @@ namespace ITW_MobileApp.Droid
         private void setupToolbar()
         {
             _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
-            _supporttoolbar.SetTitle(Resource.String.recent_events);
+            _supporttoolbar.SetTitle(Resource.String.create_event);
             SetSupportActionBar(_supporttoolbar);
             _supporttoolbar.SetNavigationIcon(Resource.Drawable.ic_menu_white_24dp);
 
