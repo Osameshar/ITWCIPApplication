@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\EventCreationActivity.cs" />
+    <Compile Include="Activities\EventDetailsActivity.cs" />
     <Compile Include="AndroidViewSpecific\EventListAdapter.cs" />
     <Compile Include="AndroidViewSpecific\EventViewHolder.cs" />
     <Compile Include="DatabaseComponents\DatabaseConnection.cs" />
@@ -163,6 +164,7 @@
     <AndroidResource Include="Resources\layout\time_picker.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\EventDetails.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

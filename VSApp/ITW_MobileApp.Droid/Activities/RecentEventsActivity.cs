@@ -10,6 +10,7 @@ using Android.Support.V7.Widget;
 using System.Threading.Tasks;
 using Android.Content;
 using Android.Support.V4.View;
+using System.Linq;
 
 namespace ITW_MobileApp.Droid
 {
@@ -63,6 +64,7 @@ namespace ITW_MobileApp.Droid
 
             //Plug in my adapter
             myEventListAdapter = new EventListAdapter(myEventList);
+            myEventListAdapter.ItemClick += OnItemClick;
             mRecyclerView.SetAdapter(myEventListAdapter);
 
         }
@@ -167,6 +169,19 @@ namespace ITW_MobileApp.Droid
             else {
                 base.OnBackPressed();
             }
+        }
+        void OnItemClick(object sender, int position)
+        {
+            //int eventNum = position + 1;
+            //Toast.MakeText(this, "This is event number " + eventNum, ToastLength.Short).Show();
+            var intent = new Intent(this, typeof(EventDetailsActivity));
+            intent.PutExtra("Name", myEventList.ElementAt(position).Name);
+            intent.PutExtra("Date", myEventList.ElementAt(position).EventDate.ToString("MMMM dd, yyyy"));
+            intent.PutExtra("Time", myEventList.ElementAt(position).EventTime);
+            intent.PutExtra("Location", myEventList.ElementAt(position).Location);
+            intent.PutExtra("Category", myEventList.ElementAt(position).Category);
+            intent.PutExtra("Description", myEventList.ElementAt(position).EventDescription);
+            StartActivity(intent);
         }
     }
 }
