@@ -11,4 +11,7 @@
     <item>@string/prioritymedium</item>
     <item>@string/priorityhigh</item>
   </string-array>
+  <string-array name="eventdetailsmenu">
+    <item>@string/event_details</item>
+  </string-array>
 </resources>

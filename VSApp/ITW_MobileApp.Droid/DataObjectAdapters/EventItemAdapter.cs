@@ -28,6 +28,29 @@ namespace ITW_MobileApp.Droid
             }
             return null;
         }
+        public EventItem getEventByIDNotDeleted(int eventID)
+        {
+            foreach (EventItem eventItem in items)
+            {
+                if (eventItem.EventID == eventID && eventItem.IsDeleted == false)
+                {
+                    return eventItem;
+                }
+            }
+            return null;
+        }
+        public List<EventItem> getEventsByEmployeeID()
+        {
+            List<EventItem> filteredItems = new List<EventItem>();
+            foreach (EventItem eventItem in items)
+            {
+                if (eventItem.EmployeeID == IoC.UserInfo.EmployeeID && eventItem.IsDeleted == false)
+                {
+                    filteredItems.Add(eventItem);
+                }
+            }
+            return filteredItems;
+        }
         //Returns the view for a specific item on the list
         //TODO: fix view
         public override View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)

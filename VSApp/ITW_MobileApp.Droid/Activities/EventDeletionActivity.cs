@@ -6,73 +6,111 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using System;
 using System.Collections.Generic;
-using Android.Support.V7.Widget;
 using System.Threading.Tasks;
 using Android.Content;
 using Android.Support.V4.View;
 using System.Linq;
+using Android.Widget;
+using Android.Util;
 
 namespace ITW_MobileApp.Droid
 {
     [Activity(Theme = "@style/MyTheme")]
-    public class RecentEventsActivity : AppCompatActivity
+    public class EventDeletionActivity : AppCompatActivity
     {
 
-        Toolbar _supporttoolbar;
+        Android.Support.V7.Widget.Toolbar _supporttoolbar;
         DrawerLayout _drawer;
         NavigationView _navigationview;
 
-        //this section starts off objects for the recycler view
-        RecyclerView mRecyclerView;
-        RecyclerView.LayoutManager mLayoutManager;
+        Button DeleteEventsBtn;
+        List<EventItem> checkedEvents;
+
+        ListView deletionListView;
         //This should eventually be the list inside of the EventItemAdapter
         List<EventItem> myEventList;
         //This is different from the EventItemAdapter, as this how to deal with the RecyclerView
-        EventListAdapter myEventListAdapter;
+        CheckBoxAdapter myCheckBoxAdapter;
 
         EventItemAdapter eventItemAdapter;
-        RecipientListItemAdapter recipientListItemAdapter;
+
+        EventDeleter eventDeleter;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
-
-            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Main);
-            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Main);
-
+            SetContentView(Resource.Layout.EventDeletion);
+            eventDeleter = new EventDeleter();
+            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.EventDeletion);
+            deletionListView = FindViewById<ListView>(Resource.Id.listDeletion);
+            DeleteEventsBtn = FindViewById<Button>(Resource.Id.DeleteEventsBtn);
             await RefreshView();
 
-            setupToolbar();
-            //IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S");
-            //IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Emergency", "High", "PARTY AT MARLEY'S");
-            //IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Meeting", "High", "PARTY AT MARLEY'S");
-            //IoC.EventFactory.createEvent("MyEvent4", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Machine Maintenance", "High", "PARTY AT MARLEY'S");
+            setupToolbar();                     
 
-            //Here is where we do the Recyler View
-            //Starting it off
-            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
-            await RefreshView();
-
-            myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
-
-            //Plug in the linear layout manager
-            mLayoutManager = new LinearLayoutManager(this);
-            mRecyclerView.SetLayoutManager(mLayoutManager);
+            myEventList = eventItemAdapter.getEventsByEmployeeID();
 
             //Plug in my adapter
-            myEventListAdapter = new EventListAdapter(myEventList);
-            myEventListAdapter.ItemClick += OnItemClick;
-            mRecyclerView.SetAdapter(myEventListAdapter);
+            myCheckBoxAdapter = new CheckBoxAdapter(this,myEventList);
+            deletionListView.Adapter = myCheckBoxAdapter;
+            RegisterForContextMenu(deletionListView);
 
+            DeleteEventsBtn.Click += delegate
+            {
+                checkedEvents = ((CheckBoxAdapter)deletionListView.Adapter).getCheckedList();
+                deleteEvents(deletionListView.Adapter.Count);
+            };
+
+        }
+        private void deleteEvents(int numItems)
+        {
+
+            foreach (EventItem eventItem in checkedEvents)
+            {
+                eventDeleter.deleteEvent(eventItem.EventID);
+            }
+            var intent = new Intent(this, typeof(EventDeletionActivity));
+            StartActivity(intent);
+        }
+
+        public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+        {
+            if (v.Id == Resource.Id.listDeletion)
+            {
+                var info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+                menu.SetHeaderTitle("Event Options");
+                
+                var menuItems = Resources.GetStringArray(Resource.Array.eventdetailsmenu);
+                for (var i = 0; i < menuItems.Length; i++)
+                    menu.Add(Menu.None, i, i, menuItems[i]);
+                
+            }
+        }
+        public override bool OnContextItemSelected(IMenuItem item)
+        {
+            var info = (AdapterView.AdapterContextMenuInfo)item.MenuInfo;
+            var menuItemIndex = item.ItemId;
+            var menuItems = Resources.GetStringArray(Resource.Array.eventdetailsmenu);
+            var menuItemName = menuItems[menuItemIndex];
+            if (menuItemIndex == 0)
+            {
+                var intent = new Intent(this, typeof(EventDetailsActivity));
+                intent.PutExtra("Name", myEventList.ElementAt(info.Position).Name);
+                intent.PutExtra("Date", myEventList.ElementAt(info.Position).EventDate.ToString("MMMM dd, yyyy"));
+                intent.PutExtra("Time", myEventList.ElementAt(info.Position).EventTime);
+                intent.PutExtra("Location", myEventList.ElementAt(info.Position).Location);
+                intent.PutExtra("Category", myEventList.ElementAt(info.Position).Category);
+                intent.PutExtra("Description", myEventList.ElementAt(info.Position).EventDescription);
+                StartActivity(intent);
+            }
+            return true;
         }
 
         public void setupToolbar()
         {
-            _supporttoolbar = FindViewById<Toolbar>(Resource.Id.ToolBar);
-            _supporttoolbar.SetTitle(Resource.String.recent_events);
+            _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
+            _supporttoolbar.SetTitle(Resource.String.event_deletion);
             SetSupportActionBar(_supporttoolbar);
             _supporttoolbar.SetNavigationIcon(Resource.Drawable.ic_menu_white_24dp);
 
@@ -107,8 +145,8 @@ namespace ITW_MobileApp.Droid
                             _drawer.CloseDrawer(GravityCompat.Start);
                             Console.WriteLine("calendar");
                             //switch to calendar view
-                            var intent = new Intent(this, typeof(EventDeletionActivity));
-                            StartActivity(intent);
+                            //var intent = new Intent(this, typeof(EventCreationActivity));
+                            //StartActivity(intent);
                         }
                         break;
                     case Resource.Id.nav_overtime:
@@ -142,7 +180,6 @@ namespace ITW_MobileApp.Droid
                 }
             };
         }
-        //This has nothing to do with this Recycler View. Instead, this deals with the seletion of the Navigation Drawer button
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -156,9 +193,8 @@ namespace ITW_MobileApp.Droid
 
         public async Task RefreshView()
         {
-             await IoC.Dbconnect.SyncAsync(pullData: true);
-             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
-             await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
+            await IoC.Dbconnect.SyncAsync(pullData: true);
+            await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
         }
         public override void OnBackPressed()
         {
@@ -170,20 +206,5 @@ namespace ITW_MobileApp.Droid
                 base.OnBackPressed();
             }
         }
-        void OnItemClick(object sender, int position)
-        {
-            //int eventNum = position + 1;
-            //Toast.MakeText(this, "This is event number " + eventNum, ToastLength.Short).Show();
-            var intent = new Intent(this, typeof(EventDetailsActivity));
-            intent.PutExtra("Name", myEventList.ElementAt(position).Name);
-            intent.PutExtra("Date", myEventList.ElementAt(position).EventDate.ToString("MMMM dd, yyyy"));
-            intent.PutExtra("Time", myEventList.ElementAt(position).EventTime);
-            intent.PutExtra("Location", myEventList.ElementAt(position).Location);
-            intent.PutExtra("Category", myEventList.ElementAt(position).Category);
-            intent.PutExtra("Description", myEventList.ElementAt(position).EventDescription);
-            StartActivity(intent);
-        }
     }
 }
-
-

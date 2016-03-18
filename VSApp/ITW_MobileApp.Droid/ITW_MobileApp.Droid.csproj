@@ -114,7 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\EventCreationActivity.cs" />
+    <Compile Include="Activities\EventDeletionActivity.cs" />
     <Compile Include="Activities\EventDetailsActivity.cs" />
+    <Compile Include="AndroidViewSpecific\CheckBoxAdapter.cs" />
     <Compile Include="AndroidViewSpecific\EventListAdapter.cs" />
     <Compile Include="AndroidViewSpecific\EventViewHolder.cs" />
     <Compile Include="DatabaseComponents\DatabaseConnection.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="AndroidViewSpecific\ErrorHandler.cs" />
     <Compile Include="DatabaseComponents\IoC.cs" />
     <Compile Include="ObjectFactorys\EmployeeFactory.cs" />
+    <Compile Include="ObjectFactorys\EventDeleter.cs" />
     <Compile Include="ObjectFactorys\EventFactory.cs" />
     <Compile Include="ObjectFactorys\RecipientListFactory.cs" />
     <Compile Include="Activities\RecentEventsActivity.cs" />
@@ -165,6 +168,12 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\EventDetails.axml" />
+    <AndroidResource Include="Resources\layout\EventDeletion.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EventListItems.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

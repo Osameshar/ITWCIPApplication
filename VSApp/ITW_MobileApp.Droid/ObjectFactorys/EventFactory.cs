@@ -21,7 +21,7 @@ namespace ITW_MobileApp.Droid
                 IoC.RecipientListFactory.createRecipientList(employeeID,newEventID);
             }
 
-            await IoC.Dbconnect.getEventSyncTable().InsertAsync(new EventItem { Name = newName, EventRecipients = newEventRecipients, EventDate = newEventDate, EventTime = newEventTime, Location = newLocation, Category = newCategory, EventPriority = newEventPriority, EventDescription = newEventDescription, EventID = newEventID, EmployeeID = IoC.UserInfo.EmployeeID });
+            await IoC.Dbconnect.getEventSyncTable().InsertAsync(new EventItem { Name = newName, EventRecipients = newEventRecipients, EventDate = newEventDate, EventTime = newEventTime, Location = newLocation, Category = newCategory, EventPriority = newEventPriority, EventDescription = newEventDescription, EventID = newEventID, EmployeeID = IoC.UserInfo.EmployeeID, IsDeleted = false });
             await IoC.Dbconnect.SyncAsync();
         }
 

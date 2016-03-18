@@ -24,7 +24,7 @@ namespace ITW_MobileApp.Droid
             {
                 if (currentEvent.EmployeeID == employeeID)
                 {
-                    EventItem selectedEvent = eventAdapter.getEventByID(currentEvent.EventID);
+                    EventItem selectedEvent = eventAdapter.getEventByIDNotDeleted(currentEvent.EventID);
                     if (selectedEvent != null)
                     {
                         filteredItems.Add(selectedEvent);

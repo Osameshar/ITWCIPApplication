@@ -53,7 +53,7 @@ namespace ITW_MobileApp.Droid
                 vh.Category.SetBackgroundColor(new Android.Graphics.Color(255, 0, 0));
             }
 
-            else if (vh.Category.Text == "Machine Maitenance")
+            else if (vh.Category.Text == "Machine Maintenance")
             {
                 vh.Category.SetBackgroundColor(new Android.Graphics.Color(255, 165, 0));
             }
