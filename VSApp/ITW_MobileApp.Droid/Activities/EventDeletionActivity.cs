@@ -11,7 +11,7 @@ using Android.Content;
 using Android.Support.V4.View;
 using System.Linq;
 using Android.Widget;
-
+using Android.Util;
 
 namespace ITW_MobileApp.Droid
 {
@@ -23,6 +23,9 @@ namespace ITW_MobileApp.Droid
         DrawerLayout _drawer;
         NavigationView _navigationview;
 
+        Button DeleteEventsBtn;
+        List<EventItem> checkedEvents;
+
         ListView deletionListView;
         //This should eventually be the list inside of the EventItemAdapter
         List<EventItem> myEventList;
@@ -30,30 +33,47 @@ namespace ITW_MobileApp.Droid
         CheckBoxAdapter myCheckBoxAdapter;
 
         EventItemAdapter eventItemAdapter;
-        RecipientListItemAdapter recipientListItemAdapter;
+
+        EventDeleter eventDeleter;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.EventDeletion);
-
+            eventDeleter = new EventDeleter();
             eventItemAdapter = new EventItemAdapter(this, Resource.Layout.EventDeletion);
-            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.EventDeletion);
             deletionListView = FindViewById<ListView>(Resource.Id.listDeletion);
-
+            DeleteEventsBtn = FindViewById<Button>(Resource.Id.DeleteEventsBtn);
             await RefreshView();
 
             setupToolbar();                     
 
-            myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+            myEventList = eventItemAdapter.getEventsByEmployeeID();
 
             //Plug in my adapter
             myCheckBoxAdapter = new CheckBoxAdapter(this,myEventList);
             deletionListView.Adapter = myCheckBoxAdapter;
             RegisterForContextMenu(deletionListView);
 
+            DeleteEventsBtn.Click += delegate
+            {
+                checkedEvents = ((CheckBoxAdapter)deletionListView.Adapter).getCheckedList();
+                deleteEvents(deletionListView.Adapter.Count);
+            };
+
         }
+        private void deleteEvents(int numItems)
+        {
+
+            foreach (EventItem eventItem in checkedEvents)
+            {
+                eventDeleter.deleteEvent(eventItem.EventID);
+            }
+            var intent = new Intent(this, typeof(EventDeletionActivity));
+            StartActivity(intent);
+        }
+
         public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
         {
             if (v.Id == Resource.Id.listDeletion)
@@ -175,7 +195,6 @@ namespace ITW_MobileApp.Droid
         {
             await IoC.Dbconnect.SyncAsync(pullData: true);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
-            await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
         }
         public override void OnBackPressed()
         {

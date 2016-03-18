@@ -37,8 +37,8 @@ namespace ITW_MobileApp.Droid
         [JsonProperty(PropertyName = "EmployeeID")]
         public int EmployeeID { get; set; }
 
-        [JsonProperty(PropertyName = "deleted")]
-        public bool deleted { get; set; }
+        [JsonProperty(PropertyName = "IsDeleted")]
+        public bool IsDeleted { get; set; }
 
     }
 

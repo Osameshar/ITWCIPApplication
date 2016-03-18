@@ -1878,9 +1878,6 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f06006f
 			public const int ButtonDateSet = 2131099759;
 			
-			// aapt resource value: 0x7f060089
-			public const int ButtonDelete = 2131099785;
-			
 			// aapt resource value: 0x7f060081
 			public const int ButtonPickDate = 2131099777;
 			
@@ -1895,6 +1892,9 @@ namespace ITW_MobileApp
 			
 			// aapt resource value: 0x7f060079
 			public const int Date = 2131099769;
+			
+			// aapt resource value: 0x7f060089
+			public const int DeleteEventsBtn = 2131099785;
 			
 			// aapt resource value: 0x7f06008b
 			public const int Description = 2131099787;

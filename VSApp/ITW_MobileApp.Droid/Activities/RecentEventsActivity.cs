@@ -46,10 +46,10 @@ namespace ITW_MobileApp.Droid
             await RefreshView();
 
             setupToolbar();
-            //IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S", 1, 2);
-            //IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Emergency", "High", "PARTY AT MARLEY'S", 2, 2);
-            //IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Meeting", "High", "PARTY AT MARLEY'S", 3, 2);
-            //IoC.EventFactory.createEvent("MyEvent4", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Machine Maintenance", "High", "PARTY AT MARLEY'S", 4, 2);
+            //IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S");
+            //IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Emergency", "High", "PARTY AT MARLEY'S");
+            IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Meeting", "High", "PARTY AT MARLEY'S");
+            //IoC.EventFactory.createEvent("MyEvent4", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Machine Maintenance", "High", "PARTY AT MARLEY'S");
 
             //Here is where we do the Recyler View
             //Starting it off

@@ -131,6 +131,7 @@
     <Compile Include="AndroidViewSpecific\ErrorHandler.cs" />
     <Compile Include="DatabaseComponents\IoC.cs" />
     <Compile Include="ObjectFactorys\EmployeeFactory.cs" />
+    <Compile Include="ObjectFactorys\EventDeleter.cs" />
     <Compile Include="ObjectFactorys\EventFactory.cs" />
     <Compile Include="ObjectFactorys\RecipientListFactory.cs" />
     <Compile Include="Activities\RecentEventsActivity.cs" />

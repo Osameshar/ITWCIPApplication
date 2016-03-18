@@ -12,11 +12,13 @@ namespace ITW_MobileApp.Droid
     {
         private Activity activity;
         private List<EventItem> events;
+        public List<EventItem> checkedItems;
 
         public CheckBoxAdapter(Activity activity, List<EventItem> eventList)
         {
             this.activity = activity;
             this.events = eventList;
+            checkedItems = new List<EventItem>();
         }
 
         public override EventItem this[int position]
@@ -33,7 +35,7 @@ namespace ITW_MobileApp.Droid
         {
             return 0;
         }
-
+        
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             View view = convertView;
@@ -53,25 +55,43 @@ namespace ITW_MobileApp.Droid
             chkEvent.Tag = eventItem.Name;
 
             chkEvent.SetOnCheckedChangeListener(null);
-            chkEvent.Checked = eventItem.deleted;
-            chkEvent.SetOnCheckedChangeListener(new CheckedChangeListener(activity));
+            chkEvent.Checked = eventItem.IsDeleted;
+            chkEvent.SetOnCheckedChangeListener(new CheckedChangeListener(activity,position,events, this));
 
             return view;
+        }
+        public EventItem GetItemAtPosition(int position)
+        {
+            return events[position];
+        }
+        public List<EventItem> getCheckedList()
+        {
+            return checkedItems;
         }
         public class CheckedChangeListener : Java.Lang.Object, CompoundButton.IOnCheckedChangeListener
         {
             private Activity activity;
+            private int index;
+            private List<EventItem> localEvents;
+            private CheckBoxAdapter localAdapter;
 
-            public CheckedChangeListener(Activity activity)
+            public CheckedChangeListener(Activity activity, int position, List<EventItem> events, CheckBoxAdapter adapter)
             {
                 this.activity = activity;
+                index = position;
+                localEvents = events;
+                localAdapter = adapter;
             }
 
             public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
             {
                 if (isChecked)
                 {
-
+                    localAdapter.getCheckedList().Add(localEvents[index]);
+                }
+                else
+                {
+                    localAdapter.getCheckedList().Remove(localEvents[index]);
                 }
             }
         }
