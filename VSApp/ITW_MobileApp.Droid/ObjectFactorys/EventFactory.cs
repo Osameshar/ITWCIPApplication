@@ -9,7 +9,7 @@ namespace ITW_MobileApp.Droid
         int newEventID = 0;
         public async void createEvent(string newName, string newEventRecipients, DateTime newEventDate, string newEventTime, string newLocation, string newCategory, string newEventPriority, string newEventDescription)
         {
-            
+            await IoC.Dbconnect.SyncAsync();
             await setNextEventID();
             
             //create a recipientListitem for every EventRecipient after parsing Event Recipients
