@@ -254,7 +254,8 @@ namespace ITW_MobileApp.Droid
                 _drawer.CloseDrawer(GravityCompat.Start);
             }
             else {
-                base.OnBackPressed();
+                var intent = new Intent(this, typeof(RecentEventsActivity));
+                StartActivity(intent);
             }
         }
     }
