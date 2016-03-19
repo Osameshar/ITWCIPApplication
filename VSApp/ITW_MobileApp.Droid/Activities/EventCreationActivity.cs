@@ -45,7 +45,11 @@ namespace ITW_MobileApp.Droid
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.EventCreation);
 
-            setupToolbar();
+            _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
+            _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
+            _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
+            ToolbarCreator toolbarCreator = new ToolbarCreator();
+            toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.create_event, this);
 
             DatePickerBtn = FindViewById<Button>(Resource.Id.ButtonPickDate);
             TimePickerBtn = FindViewById<Button>(Resource.Id.ButtonPickTime);
@@ -114,74 +118,6 @@ namespace ITW_MobileApp.Droid
 
             var intent = new Intent(this, typeof(RecentEventsActivity));
             StartActivity(intent);
-        }
-
-        private void setupToolbar()
-        {
-            _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
-            _supporttoolbar.SetTitle(Resource.String.create_event);
-            SetSupportActionBar(_supporttoolbar);
-            _supporttoolbar.SetNavigationIcon(Resource.Drawable.ic_menu_white_24dp);
-
-            SupportActionBar.SetDisplayHomeAsUpEnabled(false);
-
-            _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
-
-            _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
-
-            _navigationview.NavigationItemSelected += (sender, e) =>
-
-            {
-                switch (e.MenuItem.ItemId)
-                {
-                    case Resource.Id.nav_recentEvents:
-                        {
-                            var intent = new Intent(this, typeof(RecentEventsActivity));
-                            StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_createEvent:
-                        {
-                            //switch to calendar view
-                            var intent = new Intent(this, typeof(EventCreationActivity));
-                            StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_calendar:
-                        {
-                            Console.WriteLine("calendar");
-                            //switch to calendar view
-                            //var intent = new Intent(this, typeof(EventCreationActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_overtime:
-                        {
-                            Console.WriteLine("overtime");
-                            //switch to overtime view
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_settings:
-                        {
-                            Console.WriteLine("settings");
-                            //switch to settings view
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.logoutitem:
-                        {
-                            Console.WriteLine("logout");
-                            //logout
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-
-                }
-            };
         }
 
         public void dialogDateOpen()

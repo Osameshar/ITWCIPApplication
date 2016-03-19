@@ -1836,28 +1836,31 @@ namespace ITW_MobileApp
 			public const int ic_date_range_black_24dp = 2130837577;
 			
 			// aapt resource value: 0x7f02004a
-			public const int ic_launcher = 2130837578;
+			public const int ic_delete_forever_black_24dp = 2130837578;
 			
 			// aapt resource value: 0x7f02004b
-			public const int ic_list_black_24dp = 2130837579;
+			public const int ic_launcher = 2130837579;
 			
 			// aapt resource value: 0x7f02004c
-			public const int ic_menu_white_24dp = 2130837580;
+			public const int ic_list_black_24dp = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int ic_power_settings_new_black_24dp = 2130837581;
+			public const int ic_menu_white_24dp = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int ic_settings_black_24dp = 2130837582;
+			public const int ic_power_settings_new_black_24dp = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public const int Icon = 2130837583;
+			public const int ic_settings_black_24dp = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public const int ITWCIPLogo = 2130837584;
+			public const int Icon = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public const int notification_template_icon_bg = 2130837585;
+			public const int ITWCIPLogo = 2130837585;
+			
+			// aapt resource value: 0x7f020052
+			public const int notification_template_icon_bg = 2130837586;
 			
 			static Drawable()
 			{
@@ -2169,8 +2172,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f060096
 			public const int loginBtn = 2131099798;
 			
-			// aapt resource value: 0x7f0600ae
-			public const int logoutitem = 2131099822;
+			// aapt resource value: 0x7f0600af
+			public const int logoutitem = 2131099823;
 			
 			// aapt resource value: 0x7f06009b
 			public const int media_actions = 2131099803;
@@ -2187,20 +2190,23 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f060015
 			public const int multiply = 2131099669;
 			
-			// aapt resource value: 0x7f0600ab
-			public const int nav_calendar = 2131099819;
+			// aapt resource value: 0x7f0600ac
+			public const int nav_calendar = 2131099820;
 			
 			// aapt resource value: 0x7f0600aa
 			public const int nav_createEvent = 2131099818;
 			
-			// aapt resource value: 0x7f0600ac
-			public const int nav_overtime = 2131099820;
+			// aapt resource value: 0x7f0600ab
+			public const int nav_deleteEvent = 2131099819;
+			
+			// aapt resource value: 0x7f0600ad
+			public const int nav_overtime = 2131099821;
 			
 			// aapt resource value: 0x7f0600a9
 			public const int nav_recentEvents = 2131099817;
 			
-			// aapt resource value: 0x7f0600ad
-			public const int nav_settings = 2131099821;
+			// aapt resource value: 0x7f0600ae
+			public const int nav_settings = 2131099822;
 			
 			// aapt resource value: 0x7f060087
 			public const int nav_view = 2131099783;
