@@ -119,6 +119,7 @@
     <Compile Include="AndroidViewSpecific\CheckBoxAdapter.cs" />
     <Compile Include="AndroidViewSpecific\EventListAdapter.cs" />
     <Compile Include="AndroidViewSpecific\EventViewHolder.cs" />
+    <Compile Include="AndroidViewSpecific\ToolbarCreator.cs" />
     <Compile Include="DatabaseComponents\DatabaseConnection.cs" />
     <Compile Include="DatabaseComponents\UserInfo.cs" />
     <Compile Include="DatabaseComponents\ViewRefresher.cs" />
@@ -326,6 +327,24 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_add_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_delete_forever_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_delete_forever_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_delete_forever_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_delete_forever_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_delete_forever_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_delete_forever_black_24dp.png" />
   </ItemGroup>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
