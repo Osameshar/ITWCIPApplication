@@ -97,7 +97,37 @@ namespace ITW_MobileApp.Droid
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
+        public async Task SyncAsyncConnected(bool pullData = false)
+        {
+            try
+            {
+                await client.SyncContext.PushAsync();
 
+                if (pullData)
+                {
+                    await employeeSyncTable.PullAsync("allEmployeeItems", employeeSyncTable.CreateQuery());
+                    await eventSyncTable.PullAsync("allEventItems", eventSyncTable.CreateQuery());
+                    await recipientListSyncTable.PullAsync("allRecipientListItems", recipientListSyncTable.CreateQuery());
+                }
+
+            }
+            catch (Java.Net.MalformedURLException)
+            {
+                System.Diagnostics.Debug.WriteLine("There was an error creating the Mobile Service. Verify the URL");
+            }
+            catch (MobileServicePushFailedException)
+            {
+                throw;
+            }
+            catch (Java.Net.UnknownHostException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
         public IMobileServiceSyncTable<EmployeeItem> getEmployeeSyncTable()
         {
             return employeeSyncTable;

@@ -1,3 +1,4 @@
+using Microsoft.WindowsAzure.MobileServices.Sync;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,22 +8,36 @@ namespace ITW_MobileApp.Droid
     public class EventFactory
     {
         int newEventID = 0;
-        public async void createEvent(string newName, string newEventRecipients, DateTime newEventDate, string newEventTime, string newLocation, string newCategory, string newEventPriority, string newEventDescription)
+        public async Task createEvent(string newName, string newEventRecipients, DateTime newEventDate, string newEventTime, string newLocation, string newCategory, string newEventPriority, string newEventDescription)
         {
-            await IoC.Dbconnect.SyncAsync();
-            await setNextEventID();
-            
-            //create a recipientListitem for every EventRecipient after parsing Event Recipients
-            List<int> EmpIds = new List<int>();
-            await parseRecipients(newEventRecipients, EmpIds);
+            try {
+                await IoC.Dbconnect.SyncAsyncConnected(pullData: true);
+                await setNextEventID();
 
-            foreach (int employeeID in EmpIds)
-            {                
-                IoC.RecipientListFactory.createRecipientList(employeeID,newEventID);
+                //create a recipientListitem for every EventRecipient after parsing Event Recipients
+                List<int> EmpIds = new List<int>();
+                await parseRecipients(newEventRecipients, EmpIds);
+
+                foreach (int employeeID in EmpIds)
+                {
+                    IoC.RecipientListFactory.createRecipientList(employeeID, newEventID);
+                }
+
+                await IoC.Dbconnect.getEventSyncTable().InsertAsync(new EventItem { Name = newName, EventRecipients = newEventRecipients, EventDate = newEventDate, EventTime = newEventTime, Location = newLocation, Category = newCategory, EventPriority = newEventPriority, EventDescription = newEventDescription, EventID = newEventID, EmployeeID = IoC.UserInfo.EmployeeID, IsDeleted = false });
+                await IoC.Dbconnect.SyncAsyncConnected(pullData: true);
             }
-
-            await IoC.Dbconnect.getEventSyncTable().InsertAsync(new EventItem { Name = newName, EventRecipients = newEventRecipients, EventDate = newEventDate, EventTime = newEventTime, Location = newLocation, Category = newCategory, EventPriority = newEventPriority, EventDescription = newEventDescription, EventID = newEventID, EmployeeID = IoC.UserInfo.EmployeeID, IsDeleted = false });
-            await IoC.Dbconnect.SyncAsync();
+            catch (MobileServicePushFailedException)
+            {
+                throw;
+            }
+            catch (Java.Net.UnknownHostException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private async Task setNextEventID()

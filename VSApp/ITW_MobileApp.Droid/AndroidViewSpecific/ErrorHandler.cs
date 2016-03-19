@@ -15,7 +15,7 @@ namespace ITW_MobileApp.Droid
             builder = new AlertDialog.Builder(context);
         }
 
-        private void CreateAndShowDialog(Exception exception, String title)
+        public void CreateAndShowDialog(Exception exception, String title)
         {
             CreateAndShowDialog(exception.Message, title);
         }

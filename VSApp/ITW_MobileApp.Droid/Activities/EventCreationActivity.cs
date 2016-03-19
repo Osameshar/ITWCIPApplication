@@ -8,6 +8,7 @@ using Android.Support.V7.App;
 using System;
 using Android.Content;
 using Android.Support.V4.View;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace ITW_MobileApp.Droid
 {
@@ -79,7 +80,7 @@ namespace ITW_MobileApp.Droid
 
         }
 
-        private void createEvent()
+        private async void createEvent()
         {
             ErrorHandler error = new ErrorHandler(this);
             string EventName;
@@ -113,11 +114,30 @@ namespace ITW_MobileApp.Droid
             {
                 EventDateTime = new DateTime(year, month, day, hour, minute, 0);
                 time = hour.ToString() + ":" + minute.ToString();
-                IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
+                try
+                {
+                    await IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
+                    var intent = new Intent(this, typeof(RecentEventsActivity));
+                    StartActivity(intent);
+                }
+                catch (Java.Net.MalformedURLException)
+                {
+                    System.Diagnostics.Debug.WriteLine("There was an error creating the Mobile Service. Verify the URL");
+                }
+                catch (MobileServicePushFailedException ex)
+                {
+                    error.CreateAndShowDialog("Internet connection required for Event creation.", "Connection Failed");
+                }
+                catch (Java.Net.UnknownHostException ex)
+                {
+                    error.CreateAndShowDialog("Internet connection required for Event creation.", "Connection Failed");
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                }
             }
 
-            var intent = new Intent(this, typeof(RecentEventsActivity));
-            StartActivity(intent);
         }
 
         public void dialogDateOpen()

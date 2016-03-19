@@ -49,7 +49,7 @@ namespace ITW_MobileApp.Droid
                     case Resource.Id.nav_calendar:
                         {
                             _drawer.CloseDrawer(GravityCompat.Start);
-                            error.CreateAndShowDialog("Calender not yet implemented", "Work In Progress");
+                            error.CreateAndShowDialog("Calender not yet implemented.", "Work In Progress");
                             //switch to calendar view
                             //var intent = new Intent(context, typeof(EventDeletionActivity));
                             //context.StartActivity(intent);
@@ -58,7 +58,7 @@ namespace ITW_MobileApp.Droid
                     case Resource.Id.nav_overtime:
                         {
                             _drawer.CloseDrawer(GravityCompat.Start);
-                            error.CreateAndShowDialog("Overtime not yet implemented", "Work In Progress");
+                            error.CreateAndShowDialog("Overtime not yet implemented.", "Work In Progress");
                             //switch to overtime view
                             //var intent = new Intent(this, typeof(RecentEventsActivity));
                             //StartActivity(intent);
