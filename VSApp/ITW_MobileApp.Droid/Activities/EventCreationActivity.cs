@@ -34,11 +34,11 @@ namespace ITW_MobileApp.Droid
         View dialogView;
         Android.Support.V7.App.AlertDialog alertDialog;
 
-        int year;
-        int month;
-        int day;
-        int hour;
-        int minute;
+        int year = -1;
+        int month = -1;
+        int day = -1;
+        int hour = -1;
+        int minute = -1;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -77,6 +77,7 @@ namespace ITW_MobileApp.Droid
 
         private void createEvent()
         {
+            ErrorHandler error = new ErrorHandler(this);
             string EventName;
             string Recipients;
             string Location;
@@ -86,16 +87,30 @@ namespace ITW_MobileApp.Droid
             DateTime EventDateTime;
             string time;
 
+
             EventName = EditTextEventName.Text.ToString();
             Recipients = EditTextEventRecipients.Text.ToString();
             Location = EditTextLocation.Text.ToString();
             Category = SpinnerCategoryType.SelectedItem.ToString();
             Priority = SpinnerPriorty.SelectedItem.ToString();
             EventDescription = EditTextEventDescription.Text.ToString();
-            EventDateTime = new DateTime(year, month, day, hour, minute,0);
-            time = hour.ToString() + ":" + minute.ToString();
 
-            IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
+            if (string.IsNullOrEmpty(EventName))
+            {
+                 error.CreateAndShowDialog("Event name is required", "Error");
+                 return;
+            }
+            else if (year == -1 || month == -1 || day == -1 || hour == -1 || minute == -1)
+            {
+                error.CreateAndShowDialog("Event Time and Date is required", "Error");
+                return;
+            }
+            else
+            {
+                EventDateTime = new DateTime(year, month, day, hour, minute, 0);
+                time = hour.ToString() + ":" + minute.ToString();
+                IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
+            }
 
             var intent = new Intent(this, typeof(RecentEventsActivity));
             StartActivity(intent);
