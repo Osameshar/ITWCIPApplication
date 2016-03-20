@@ -22,7 +22,7 @@
         android:lineSpacingExtra="3dp"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textStyle="bold"
         android:typeface="sans" />
     <TextView
@@ -34,7 +34,7 @@
         android:layout_toRightOf="@id/chkEvent"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
-        android:textColor="#fff"
+        android:textColor="#000"
         android:textSize="11sp" />
     <TextView
         android:text="Recipients"
@@ -45,6 +45,6 @@
         android:layout_toRightOf="@id/chkEvent"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
-        android:textColor="#fff"
+        android:textColor="#000"
         android:textSize="11sp" />
 </RelativeLayout>

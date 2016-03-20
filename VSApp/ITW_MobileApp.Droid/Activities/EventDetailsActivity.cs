@@ -36,19 +36,19 @@ namespace ITW_MobileApp
             //setup toolbar
             setupToolbar();
 
-            Name = FindViewById<TextView>(Resource.Id.Name);
-            Date = FindViewById<TextView>(Resource.Id.Date);
-            Time = FindViewById<TextView>(Resource.Id.Time);
-            Location = FindViewById<TextView>(Resource.Id.Location);
+            Name = FindViewById<TextView>(Resource.Id.NameText);
+            Date = FindViewById<TextView>(Resource.Id.DateText);
+            Time = FindViewById<TextView>(Resource.Id.TimeText);
+            Location = FindViewById<TextView>(Resource.Id.LocationText);
             Category = FindViewById<TextView>(Resource.Id.Category);
-            Description = FindViewById<TextView>(Resource.Id.Description);
+            Description = FindViewById<TextView>(Resource.Id.DescriptionText);
 
-            Name.Text += Intent.GetStringExtra("Name") ?? "Data not available";
-            Date.Text += Intent.GetStringExtra("Date") ?? "Data not available";
-            Time.Text += Intent.GetStringExtra("Time") ?? "Data not available";
-            Location.Text += Intent.GetStringExtra("Location") ?? "Data not available";
+            Name.Text = Intent.GetStringExtra("Name") ?? "Data not available";
+            Date.Text = Intent.GetStringExtra("Date") ?? "Data not available";
+            Time.Text = Intent.GetStringExtra("Time") ?? "Data not available";
+            Location.Text = Intent.GetStringExtra("Location") ?? "Data not available";
             Category.Text = Intent.GetStringExtra("Category") ?? "Data not available";
-            Description.Text += Intent.GetStringExtra("Description") ?? "Data not available";
+            Description.Text = Intent.GetStringExtra("Description") ?? "Data not available";
 
          }
 
