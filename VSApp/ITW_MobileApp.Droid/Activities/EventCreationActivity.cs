@@ -91,6 +91,7 @@ namespace ITW_MobileApp.Droid
             string EventDescription;
             DateTime EventDateTime;
             string time;
+            bool cancelled = false;
 
 
             EventName = EditTextEventName.Text.ToString();
@@ -108,6 +109,11 @@ namespace ITW_MobileApp.Droid
             else if (year == -1 || month == -1 || day == -1 || hour == -1 || minute == -1)
             {
                 error.CreateAndShowDialog("Event Time and Date is required", "Error");
+                return;
+            }
+            else if (minute < DateTime.Now.Minute)
+            {
+                error.CreateAndShowDialog("Event is set to a past date.", "Error");
                 return;
             }
             else
