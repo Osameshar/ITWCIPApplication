@@ -58,15 +58,15 @@ namespace ITW_MobileApp.Droid
         //TODO: potentially make this more efficient
         public async Task parseRecipients(string recipients, List<int> EmpIds)
         {
-            
             List<EmployeeItem> empItems = await IoC.Dbconnect.getEmployeeSyncTable().ToListAsync();
             string[] parsedRecipients = recipients.Split(',');
 
             foreach (string employee in parsedRecipients)
             {
+                string trimedEmployee = employee.Trim();
                 foreach (EmployeeItem employeeItem in empItems)
                 {
-                    if (employee.Equals(employeeItem.Name))
+                    if (trimedEmployee.Equals(employeeItem.Name))
                     {
                         EmpIds.Add(employeeItem.EmployeeID);
                     }
