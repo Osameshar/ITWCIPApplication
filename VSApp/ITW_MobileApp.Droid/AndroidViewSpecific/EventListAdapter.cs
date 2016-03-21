@@ -35,7 +35,7 @@ namespace ITW_MobileApp.Droid
 
             vh.Name.Text = adaptereventlist.ElementAt(position).Name;
             vh.Date.Text = adaptereventlist.ElementAt(position).EventDate.ToString("MMMM dd, yyyy");
-            vh.Time.Text = adaptereventlist.ElementAt(position).EventTime;
+            vh.Time.Text = adaptereventlist.ElementAt(position).EventDate.ToString("h:mm tt");
             vh.Category.Text = adaptereventlist.ElementAt(position).Category;
 
             if (vh.Category.Text == "Meeting")
