@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Android.Content;
 using Android.Support.V4.View;
 using System.Linq;
+using System;
 
 namespace ITW_MobileApp.Droid
 {
@@ -61,7 +62,7 @@ namespace ITW_MobileApp.Droid
            
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
-
+            sortByDate(myEventList);
             //Plug in the linear layout manager
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.SetLayoutManager(mLayoutManager);
@@ -72,7 +73,11 @@ namespace ITW_MobileApp.Droid
             mRecyclerView.SetAdapter(myEventListAdapter);
 
         }
-        
+        public void sortByDate(List<EventItem> eventList)
+        {
+            eventList.Sort((x, y) => DateTime.Compare(x.EventDate, y.EventDate));
+            eventList.Reverse();
+        }
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -107,7 +112,7 @@ namespace ITW_MobileApp.Droid
             var intent = new Intent(this, typeof(EventDetailsActivity));
             intent.PutExtra("Name", myEventList.ElementAt(position).Name);
             intent.PutExtra("Date", myEventList.ElementAt(position).EventDate.ToString("MMMM dd, yyyy"));
-            intent.PutExtra("Time", myEventList.ElementAt(position).EventTime);
+            intent.PutExtra("Time", myEventList.ElementAt(position).EventDate.ToString("HH:MM"));
             intent.PutExtra("Location", myEventList.ElementAt(position).Location);
             intent.PutExtra("Category", myEventList.ElementAt(position).Category);
             intent.PutExtra("Description", myEventList.ElementAt(position).EventDescription);

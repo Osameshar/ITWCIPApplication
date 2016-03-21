@@ -10,6 +10,7 @@ using Android.Content;
 using Android.Support.V4.View;
 using System.Linq;
 using Android.Widget;
+using System;
 
 namespace ITW_MobileApp.Droid
 {
@@ -52,7 +53,7 @@ namespace ITW_MobileApp.Droid
             toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.event_deletion, this);
 
             myEventList = eventItemAdapter.getEventsByEmployeeID();
-
+            sortByDate(myEventList);
             //Plug in my adapter
             myCheckBoxAdapter = new CheckBoxAdapter(this,myEventList);
             deletionListView.Adapter = myCheckBoxAdapter;
@@ -64,6 +65,11 @@ namespace ITW_MobileApp.Droid
                 deleteEvents(deletionListView.Adapter.Count);
             };
 
+        }
+        private void sortByDate(List<EventItem> eventList)
+        {
+            eventList.Sort((x, y) => DateTime.Compare(x.EventDate, y.EventDate));
+            eventList.Reverse();
         }
         private void deleteEvents(int numItems)
         {
