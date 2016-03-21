@@ -4,7 +4,7 @@
     android:id="@+id/DrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#716969"
+    android:background="#E0E0E0"
     android:fitsSystemWindows="true">
     <LinearLayout
         android:orientation="vertical"
@@ -27,56 +27,122 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:text="Default Category"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="50dp"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:id="@+id/Category"
-                    android:textColor="#FFFFFF"
-                    android:paddingTop="75dp" />
+                    android:textColor="#000000"
+                    android:paddingTop="35dp" />
                 <TextView
                     android:text="Name: "
+                    android:textSize="16dp"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:id="@+id/Name"
                     android:paddingTop="20dp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" />
+                <TextView
+                    android:text="Name Not Found"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/NameText"
+                    android:textColor="#000000"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp" />
                 <TextView
                     android:text="Date: "
+                    android:textSize="16dp"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:id="@+id/Date"
-                    android:paddingTop="20dp"
-                    android:textColor="#FFFFFF"
+                    android:paddingTop="10dp"
+                    android:textColor="#000000"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" />
+                <TextView
+                    android:text="Date Not Found"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/DateText"
+                    android:textColor="#000000"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp" />
                 <TextView
                     android:text="Time: "
+                    android:textSize="16dp"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:id="@+id/Time"
-                    android:paddingTop="20dp"
-                    android:textColor="#FFFFFF"
+                    android:paddingTop="10dp"
+                    android:textColor="#000000"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" />
+                <TextView
+                    android:text="Time Not Found"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/TimeText"
+                    android:textColor="#000000"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp" />
                 <TextView
                     android:text="Location: "
+                    android:textSize="16dp"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:id="@+id/Location"
-                    android:paddingTop="20dp"
-                    android:textColor="#FFFFFF"
+                    android:paddingTop="10dp"
+                    android:textColor="#000000"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" />
+                <TextView
+                    android:text="Location Not Found"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/LocationText"
+                    android:textColor="#000000"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp" />
                 <TextView
                     android:text="Description: "
+                    android:textSize="16dp"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:id="@+id/Description"
-                    android:paddingTop="20dp"
-                    android:textColor="#FFFFFF"
+                    android:paddingTop="10dp"
+                    android:textColor="#000000"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" />
+                <TextView
+                    android:text="Description Not Found"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/DescriptionText"
+                    android:textColor="#000000"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp" />
             </LinearLayout>
