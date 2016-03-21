@@ -91,8 +91,6 @@ namespace ITW_MobileApp.Droid
             string EventDescription;
             DateTime EventDateTime;
             string time;
-            bool cancelled = false;
-
 
             EventName = EditTextEventName.Text.ToString();
             Recipients = EditTextEventRecipients.Text.ToString();
@@ -111,11 +109,12 @@ namespace ITW_MobileApp.Droid
                 error.CreateAndShowDialog("Event Time and Date is required", "Error");
                 return;
             }
-            else if (minute < DateTime.Now.Minute)
+            else if (new DateTime(year, month, day).Date.CompareTo(DateTime.Now.Date) < 0 ||
+                     (new DateTime(year, month, day).Date.CompareTo(DateTime.Now.Date) == 0 && hour < DateTime.Now.Hour))
             {
                 error.CreateAndShowDialog("Event is set to a past date.", "Error");
                 return;
-            }
+            }            
             else
             {
                 EventDateTime = new DateTime(year, month, day, hour, minute, 0);
@@ -175,7 +174,7 @@ namespace ITW_MobileApp.Droid
             DatePicker datePicker = (DatePicker)dialogView.FindViewById(Resource.Id.date_picker);
 
             year = datePicker.Year;
-            month = datePicker.Month;
+            month = datePicker.Month + 1;
             day = datePicker.DayOfMonth;
 
             alertDialog.Dismiss();
