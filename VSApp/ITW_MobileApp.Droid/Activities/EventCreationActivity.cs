@@ -8,6 +8,7 @@ using Android.Support.V7.App;
 using System;
 using Android.Content;
 using Android.Support.V4.View;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace ITW_MobileApp.Droid
 {
@@ -34,18 +35,22 @@ namespace ITW_MobileApp.Droid
         View dialogView;
         Android.Support.V7.App.AlertDialog alertDialog;
 
-        int year;
-        int month;
-        int day;
-        int hour;
-        int minute;
+        int year = -1;
+        int month = -1;
+        int day = -1;
+        int hour = -1;
+        int minute = -1;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.EventCreation);
 
-            setupToolbar();
+            _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
+            _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
+            _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
+            ToolbarCreator toolbarCreator = new ToolbarCreator();
+            toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.create_event, this);
 
             DatePickerBtn = FindViewById<Button>(Resource.Id.ButtonPickDate);
             TimePickerBtn = FindViewById<Button>(Resource.Id.ButtonPickTime);
@@ -75,8 +80,9 @@ namespace ITW_MobileApp.Droid
 
         }
 
-        private void createEvent()
+        private async void createEvent()
         {
+            ErrorHandler error = new ErrorHandler(this);
             string EventName;
             string Recipients;
             string Location;
@@ -92,81 +98,51 @@ namespace ITW_MobileApp.Droid
             Category = SpinnerCategoryType.SelectedItem.ToString();
             Priority = SpinnerPriorty.SelectedItem.ToString();
             EventDescription = EditTextEventDescription.Text.ToString();
-            EventDateTime = new DateTime(year, month, day, hour, minute,0);
-            time = hour.ToString() + ":" + minute.ToString();
 
-            IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
-
-            var intent = new Intent(this, typeof(RecentEventsActivity));
-            StartActivity(intent);
-        }
-
-        private void setupToolbar()
-        {
-            _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
-            _supporttoolbar.SetTitle(Resource.String.create_event);
-            SetSupportActionBar(_supporttoolbar);
-            _supporttoolbar.SetNavigationIcon(Resource.Drawable.ic_menu_white_24dp);
-
-            SupportActionBar.SetDisplayHomeAsUpEnabled(false);
-
-            _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
-
-            _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
-
-            _navigationview.NavigationItemSelected += (sender, e) =>
-
+            if (string.IsNullOrEmpty(EventName))
             {
-                switch (e.MenuItem.ItemId)
+                 error.CreateAndShowDialog("Event name is required", "Error");
+                 return;
+            }
+            else if (year == -1 || month == -1 || day == -1 || hour == -1 || minute == -1)
+            {
+                error.CreateAndShowDialog("Event Time and Date is required", "Error");
+                return;
+            }
+            else if (new DateTime(year, month, day).Date.CompareTo(DateTime.Now.Date) < 0 ||
+                     (new DateTime(year, month, day).Date.CompareTo(DateTime.Now.Date) == 0 && hour < DateTime.Now.Hour))
+            {
+                error.CreateAndShowDialog("Event is set to a past date.", "Error");
+                return;
+            }            
+            else
+            {
+                EventDateTime = new DateTime(year, month, day, hour, minute, 0);
+                time = hour.ToString() + ":" + minute.ToString();
+                try
                 {
-                    case Resource.Id.nav_recentEvents:
-                        {
-                            var intent = new Intent(this, typeof(RecentEventsActivity));
-                            StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_createEvent:
-                        {
-                            //switch to calendar view
-                            var intent = new Intent(this, typeof(EventCreationActivity));
-                            StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_calendar:
-                        {
-                            Console.WriteLine("calendar");
-                            //switch to calendar view
-                            //var intent = new Intent(this, typeof(EventCreationActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_overtime:
-                        {
-                            Console.WriteLine("overtime");
-                            //switch to overtime view
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_settings:
-                        {
-                            Console.WriteLine("settings");
-                            //switch to settings view
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.logoutitem:
-                        {
-                            Console.WriteLine("logout");
-                            //logout
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-
+                    await IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
+                    var intent = new Intent(this, typeof(RecentEventsActivity));
+                    StartActivity(intent);
                 }
-            };
+                catch (Java.Net.MalformedURLException)
+                {
+                    System.Diagnostics.Debug.WriteLine("There was an error creating the Mobile Service. Verify the URL");
+                }
+                catch (MobileServicePushFailedException ex)
+                {
+                    error.CreateAndShowDialog("Internet connection required for Event creation.", "Connection Failed");
+                }
+                catch (Java.Net.UnknownHostException ex)
+                {
+                    error.CreateAndShowDialog("Internet connection required for Event creation.", "Connection Failed");
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                }
+            }
+
         }
 
         public void dialogDateOpen()
@@ -198,7 +174,7 @@ namespace ITW_MobileApp.Droid
             DatePicker datePicker = (DatePicker)dialogView.FindViewById(Resource.Id.date_picker);
 
             year = datePicker.Year;
-            month = datePicker.Month;
+            month = datePicker.Month + 1;
             day = datePicker.DayOfMonth;
 
             alertDialog.Dismiss();

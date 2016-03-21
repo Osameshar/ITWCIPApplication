@@ -2,6 +2,7 @@ using System;
 
 using Android.App;
 using Android.Content;
+using Android.Widget;
 
 namespace ITW_MobileApp.Droid
 {
@@ -13,15 +14,21 @@ namespace ITW_MobileApp.Droid
         {
             builder = new AlertDialog.Builder(context);
         }
-        private void CreateAndShowDialog(Exception exception, String title)
+
+        public void CreateAndShowDialog(Exception exception, String title)
         {
             CreateAndShowDialog(exception.Message, title);
         }
 
-        private void CreateAndShowDialog(string message, string title)
+        public void CreateAndShowDialog(string message, string title)
         {
             builder.SetMessage(message);
             builder.SetTitle(title);
+            builder.SetCancelable(true);
+            builder.SetNeutralButton("Ok", (senderAlert, args) => {
+
+            }); 
+           
             builder.Create().Show();
         }
     }

@@ -5,7 +5,7 @@ using Android.OS;
 
 namespace ITW_MobileApp.Droid
 {
-    [Activity(Label = "Startup", Theme = "@android:style/Theme.Black.NoTitleBar", MainLauncher = true)]
+    [Activity(Label = "CIPConnect", Theme = "@android:style/Theme.Black.NoTitleBar", MainLauncher = true)]
     public class Startup : Activity
     {
 

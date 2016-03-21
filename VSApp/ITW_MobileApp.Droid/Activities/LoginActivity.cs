@@ -5,7 +5,7 @@ using Android.Content;
 
 namespace ITW_MobileApp.Droid
 {
-    [Activity(Theme = "@android:style/Theme.Black.NoTitleBar")]
+    [Activity(Theme = "@style/MyTheme")]
     public class LoginActivity : Activity
     {
         //Adapter to map the items list to the view

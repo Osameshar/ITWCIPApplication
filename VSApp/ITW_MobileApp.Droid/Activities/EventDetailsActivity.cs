@@ -5,6 +5,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using Android.Support.V7.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
@@ -34,7 +35,12 @@ namespace ITW_MobileApp
             SetContentView(Resource.Layout.EventDetails);
 
             //setup toolbar
-            setupToolbar();
+            
+            _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
+            _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
+            _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
+            ToolbarCreator toolbarCreator = new ToolbarCreator();
+            toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.event_details, this);
 
             Name = FindViewById<TextView>(Resource.Id.NameText);
             Date = FindViewById<TextView>(Resource.Id.DateText);
@@ -61,79 +67,6 @@ namespace ITW_MobileApp
                     return true;
             }
             return base.OnOptionsItemSelected(item);
-        }
-        public void setupToolbar()
-        {
-            _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
-            _supporttoolbar.SetTitle(Resource.String.event_details);
-            SetSupportActionBar(_supporttoolbar);
-            _supporttoolbar.SetNavigationIcon(Resource.Drawable.ic_menu_white_24dp);
-
-            SupportActionBar.SetDisplayHomeAsUpEnabled(false);
-
-
-            _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
-
-            _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
-
-            _navigationview.NavigationItemSelected += (sender, e) =>
-
-            {
-                switch (e.MenuItem.ItemId)
-                {
-                    case Resource.Id.nav_recentEvents:
-                        {
-                            _drawer.CloseDrawer(GravityCompat.Start);
-                            var intent = new Intent(this, typeof(RecentEventsActivity));
-                            StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_createEvent:
-                        {
-                            _drawer.CloseDrawer(GravityCompat.Start);
-                            var intent = new Intent(this, typeof(EventCreationActivity));
-                            StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_calendar:
-                        {
-                            _drawer.CloseDrawer(GravityCompat.Start);
-                            Console.WriteLine("calendar");
-                            //switch to calendar view
-                            //var intent = new Intent(this, typeof(EventCreationActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_overtime:
-                        {
-                            _drawer.CloseDrawer(GravityCompat.Start);
-                            Console.WriteLine("overtime");
-                            //switch to overtime view
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.nav_settings:
-                        {
-                            _drawer.CloseDrawer(GravityCompat.Start);
-                            Console.WriteLine("settings");
-                            //switch to settings view
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
-                        }
-                        break;
-                    case Resource.Id.logoutitem:
-                        {
-                            _drawer.CloseDrawer(GravityCompat.Start);
-                            Console.WriteLine("logout");
-                            //logout
-                            var intent = new Intent(this, typeof(LoginActivity));
-                            StartActivity(intent);
-                        }
-                        break;
-
-                }
-            };
         }
         public override void OnBackPressed()
         {
