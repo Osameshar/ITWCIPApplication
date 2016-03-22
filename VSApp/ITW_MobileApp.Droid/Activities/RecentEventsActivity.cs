@@ -76,7 +76,6 @@ namespace ITW_MobileApp.Droid
         public void sortByDate(List<EventItem> eventList)
         {
             eventList.Sort((x, y) => DateTime.Compare(x.EventDate, y.EventDate));
-            eventList.Reverse();
         }
         public override bool OnOptionsItemSelected(IMenuItem item)
         {

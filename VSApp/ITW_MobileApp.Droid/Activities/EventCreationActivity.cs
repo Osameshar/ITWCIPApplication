@@ -75,13 +75,13 @@ namespace ITW_MobileApp.Droid
             DatePickerBtn.Click += delegate
             {
                 dialogDateOpen();
-                EventDate.Text = "Date: ";
+
             };
 
             TimePickerBtn.Click += delegate
             {
                 dialogTimeOpen();
-                EventTime.Text = "Time: ";
+
             };
 
             CreateEventBtn.Click += delegate
@@ -164,6 +164,7 @@ namespace ITW_MobileApp.Droid
             DateSetBtn = dialogView.FindViewById<Button>(Resource.Id.ButtonDateSet);
             DateSetBtn.Click += delegate
             {
+                EventDate.Text = "Date: ";
                 pickDate();
             };
             alertDialog.SetView(dialogView);
@@ -176,6 +177,7 @@ namespace ITW_MobileApp.Droid
             TimeSetBtn = dialogView.FindViewById<Button>(Resource.Id.ButtonTimeSet);
             TimeSetBtn.Click += delegate
             {
+                EventTime.Text = "Time: ";
                 pickTime();
             };
             alertDialog.SetView(dialogView);

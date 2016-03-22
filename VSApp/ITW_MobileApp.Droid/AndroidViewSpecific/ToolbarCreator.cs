@@ -67,7 +67,7 @@ namespace ITW_MobileApp.Droid
                     case Resource.Id.nav_settings:
                         {
                             _drawer.CloseDrawer(GravityCompat.Start);
-                            Console.WriteLine("settings");
+                            error.CreateAndShowDialog("Settings not yet implemented.", "Work In Progress");
                             //switch to settings view
                             //var intent = new Intent(this, typeof(RecentEventsActivity));
                             //StartActivity(intent);
