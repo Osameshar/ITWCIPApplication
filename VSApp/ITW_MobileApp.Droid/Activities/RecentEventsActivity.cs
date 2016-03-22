@@ -112,7 +112,7 @@ namespace ITW_MobileApp.Droid
             var intent = new Intent(this, typeof(EventDetailsActivity));
             intent.PutExtra("Name", myEventList.ElementAt(position).Name);
             intent.PutExtra("Date", myEventList.ElementAt(position).EventDate.ToString("MMMM dd, yyyy"));
-            intent.PutExtra("Time", myEventList.ElementAt(position).EventDate.ToString("HH:MM"));
+            intent.PutExtra("Time", myEventList.ElementAt(position).EventDate.ToString("h:mm tt"));
             intent.PutExtra("Location", myEventList.ElementAt(position).Location);
             intent.PutExtra("Category", myEventList.ElementAt(position).Category);
             intent.PutExtra("Description", myEventList.ElementAt(position).EventDescription);
