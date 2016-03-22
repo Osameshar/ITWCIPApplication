@@ -29,11 +29,16 @@ namespace ITW_MobileApp.Droid
         Spinner SpinnerCategoryType;
         Spinner SpinnerPriorty;
         EditText EditTextEventDescription;
+        TextView EventDate;
+        TextView EventTime;
 
         Button CreateEventBtn;
 
         View dialogView;
         Android.Support.V7.App.AlertDialog alertDialog;
+
+        DateTime newDate;
+        DateTime newTime;
 
         int year = -1;
         int month = -1;
@@ -60,16 +65,23 @@ namespace ITW_MobileApp.Droid
             SpinnerCategoryType = FindViewById<Spinner>(Resource.Id.SpinnerCategoryType);
             SpinnerPriorty = FindViewById<Spinner>(Resource.Id.SpinnerPriority);
             EditTextEventDescription = FindViewById<EditText>(Resource.Id.EditTextEventDescription);
-
+            EventDate = FindViewById<TextView>(Resource.Id.EventDate);
+            EventTime = FindViewById<TextView>(Resource.Id.EventTime);
             CreateEventBtn = FindViewById<Button>(Resource.Id.ButtonCreateEvent);
+
+            EventDate.Text += "No date entered.";
+            EventTime.Text += "No time entered";
 
             DatePickerBtn.Click += delegate
             {
                 dialogDateOpen();
+                EventDate.Text = "Date: ";
             };
+
             TimePickerBtn.Click += delegate
             {
                 dialogTimeOpen();
+                EventTime.Text = "Time: ";
             };
 
             CreateEventBtn.Click += delegate
@@ -176,8 +188,15 @@ namespace ITW_MobileApp.Droid
             year = datePicker.Year;
             month = datePicker.Month + 1;
             day = datePicker.DayOfMonth;
+            assignDate();
 
             alertDialog.Dismiss();
+        }
+
+        public void assignDate()
+        {
+            newDate = new DateTime(year, month, day);
+            EventDate.Text += newDate.ToString("MMMM dd, yyyy");
         }
         public void pickTime()
         {
@@ -193,8 +212,15 @@ namespace ITW_MobileApp.Droid
                 hour = (int)timePicker.CurrentHour;
                 minute = (int)timePicker.CurrentMinute;
             }
+            assignTime();
 
             alertDialog.Dismiss();
+        }
+
+        public void assignTime()
+        {
+            newTime = new DateTime(2000, 1, 1, hour, minute, 0);
+            EventTime.Text += newTime.ToString("h:mm tt");
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

@@ -53,12 +53,28 @@
                     android:inputType="text"
                     android:layout_margin="10dp"
                     android:layout_width="fill_parent" />
+                <TextView
+                    android:text="Date: "
+                    android:textSize="15dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/EventDate"
+                    android:layout_margin="10dp"
+                    android:textColor="#000000" />
                 <Button
                     android:id="@+id/ButtonPickDate"
                     android:layout_height="wrap_content"
                     android:text="@string/pickdatebutton"
                     android:layout_margin="10dp"
                     android:layout_width="fill_parent" />
+                <TextView
+                    android:text="Time: "
+                    android:textSize="15dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/EventTime"
+                    android:layout_margin="10dp"
+                    android:textColor="#000000" />
                 <Button
                     android:id="@+id/ButtonPickTime"
                     android:layout_height="wrap_content"
