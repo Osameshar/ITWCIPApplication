@@ -44,7 +44,9 @@ namespace ITW_MobileApp.Droid
             eventItemAdapter = new EventItemAdapter(this, Resource.Layout.EventDeletion);
             deletionListView = FindViewById<ListView>(Resource.Id.listDeletion);
             DeleteEventsBtn = FindViewById<Button>(Resource.Id.DeleteEventsBtn);
+
             await RefreshView();
+            FindViewById(Resource.Id.loadingPanel).Visibility = ViewStates.Gone;
 
             _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);

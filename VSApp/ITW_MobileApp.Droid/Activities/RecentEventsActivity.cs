@@ -51,15 +51,16 @@ namespace ITW_MobileApp.Droid
             ToolbarCreator toolbarCreator = new ToolbarCreator();
             toolbarCreator.setupToolbar(_supporttoolbar,_drawer,_navigationview, Resource.String.recent_events,this);
 
-            await RefreshView();
 
-            
+            await RefreshView();
+            FindViewById(Resource.Id.loadingPanel).Visibility = ViewStates.Gone;
+
             //IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S");
             //IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Emergency", "High", "PARTY AT MARLEY'S");
             //IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Meeting", "High", "PARTY AT MARLEY'S");
             //IoC.EventFactory.createEvent("MyEvent4", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Machine Maintenance", "High", "PARTY AT MARLEY'S");
 
-           
+
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
             sortByDate(myEventList);
@@ -101,7 +102,7 @@ namespace ITW_MobileApp.Droid
                 _drawer.CloseDrawer(GravityCompat.Start);
             }
             else {
-                base.OnBackPressed();
+                MoveTaskToBack(true);
             }
         }
         void OnItemClick(object sender, int position)
