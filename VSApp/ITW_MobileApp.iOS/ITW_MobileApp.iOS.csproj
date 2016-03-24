@@ -100,8 +100,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseComponents\DatabaseConnection.cs" />
+    <Compile Include="DatabaseComponents\IoC.cs" />
+    <Compile Include="DatabaseComponents\UserInfo.cs" />
+    <Compile Include="DatabaseComponents\ViewRefresher.cs" />
+    <Compile Include="DataObjectAdapters\EmployeeItemAdapter.cs" />
+    <Compile Include="DataObjectAdapters\EventItemAdapter.cs" />
+    <Compile Include="DataObjectAdapters\RecipientListItemAdapter.cs" />
+    <Compile Include="DataObjects\EmployeeItem.cs" />
+    <Compile Include="DataObjects\EventItem.cs" />
+    <Compile Include="DataObjects\RecipientListItem.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="ObjectFactorys\EmployeeFactory.cs" />
+    <Compile Include="ObjectFactorys\EventDeleter.cs" />
+    <Compile Include="ObjectFactorys\EventFactory.cs" />
+    <Compile Include="ObjectFactorys\RecipientListFactory.cs" />
     <Compile Include="QSTodoListViewController.cs" />
     <Compile Include="QSTodoListViewController.designer.cs">
       <DependentUpon>QSTodoListViewController.cs</DependentUpon>
