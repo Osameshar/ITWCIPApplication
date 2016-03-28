@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json;
 
 namespace ITW_MobileApp.Droid
@@ -12,15 +11,5 @@ namespace ITW_MobileApp.Droid
 
         [JsonProperty(PropertyName = "EventID")]
         public int EventID { get; set; }
-    }
-
-    public class RecipientListItemWrapper : Java.Lang.Object
-    {
-        public RecipientListItemWrapper(RecipientListItem item)
-        {
-            RecipientListItem = item;
-        }
-
-        public RecipientListItem RecipientListItem { get; private set; }
     }
 }

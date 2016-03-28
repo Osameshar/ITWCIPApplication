@@ -30,10 +30,10 @@ namespace ITW_MobileApp.Droid
             {
                 throw;
             }
-            catch (Java.Net.UnknownHostException)
-            {
-                throw;
-            }
+            //catch (Java.Net.UnknownHostException)
+            //{
+            //    throw;
+            //}
             catch (Exception)
             {
                 throw;

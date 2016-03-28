@@ -1,5 +1,5 @@
-using System;
 using Newtonsoft.Json;
+using System;
 
 namespace ITW_MobileApp.Droid
 {
@@ -40,15 +40,5 @@ namespace ITW_MobileApp.Droid
         [JsonProperty(PropertyName = "IsDeleted")]
         public bool IsDeleted { get; set; }
 
-    }
-
-    public class EventItemWrapper : Java.Lang.Object
-    {
-        public EventItemWrapper(EventItem item)
-        {
-            EventItem = item;
-        }
-
-        public EventItem EventItem { get; private set; }
     }
 }
