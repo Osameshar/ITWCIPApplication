@@ -5,6 +5,7 @@ using Android.Support.V4.Widget;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Support.V4.View;
+using Android.Webkit;
 
 namespace ITW_MobileApp.Droid
 {
@@ -87,6 +88,7 @@ namespace ITW_MobileApp.Droid
         }
         async void OnLogoutClicked()
         {
+            CookieManager.Instance.RemoveAllCookie();
             await IoC.Dbconnect.getClient().LogoutAsync();
         }
     }
