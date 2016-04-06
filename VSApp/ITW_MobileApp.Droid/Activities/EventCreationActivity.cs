@@ -9,6 +9,7 @@ using System;
 using Android.Content;
 using Android.Support.V4.View;
 using Microsoft.WindowsAzure.MobileServices.Sync;
+using System.Threading.Tasks;
 
 namespace ITW_MobileApp.Droid
 {
@@ -33,7 +34,7 @@ namespace ITW_MobileApp.Droid
         TextView EventTime;
 
         Button CreateEventBtn;
-
+        ErrorHandler error;
         View dialogView;
         Android.Support.V7.App.AlertDialog alertDialog;
 
@@ -84,17 +85,19 @@ namespace ITW_MobileApp.Droid
 
             };
 
-            CreateEventBtn.Click += delegate
+            CreateEventBtn.Click += async delegate
             {
-                createEvent();
+                CreateEventBtn.Enabled = false;
+                await createEvent();
+                CreateEventBtn.Enabled = true;
             };
             
 
         }
 
-        private async void createEvent()
+        private async Task createEvent()
         {
-            ErrorHandler error = new ErrorHandler(this);
+            error = new ErrorHandler(this);
             string EventName;
             string Recipients;
             string Location;
@@ -147,6 +150,7 @@ namespace ITW_MobileApp.Droid
                 }
                 catch (Java.Net.UnknownHostException ex)
                 {
+                    
                     error.CreateAndShowDialog("Internet connection required for Event creation.", "Connection Failed");
                 }
                 catch (Exception e)

@@ -76,8 +76,7 @@ namespace ITW_MobileApp.Droid
                     case Resource.Id.logoutitem:
                         {
                             _drawer.CloseDrawer(GravityCompat.Start);
-                            Console.WriteLine("logout");
-                            //logout
+                            OnLogoutClicked();
                             var intent = new Intent(context, typeof(LoginActivity));
                             context.StartActivity(intent);
                         }
@@ -85,6 +84,10 @@ namespace ITW_MobileApp.Droid
 
                 }
             };
+        }
+        async void OnLogoutClicked()
+        {
+            await IoC.Dbconnect.getClient().LogoutAsync();
         }
     }
 }

@@ -2,6 +2,10 @@ using Android.OS;
 using Android.App;
 using Android.Widget;
 using Android.Content;
+using Microsoft.WindowsAzure.MobileServices;
+using System.Threading.Tasks;
+using Android.Views;
+using System;
 
 namespace ITW_MobileApp.Droid
 {
@@ -12,6 +16,8 @@ namespace ITW_MobileApp.Droid
         private EmployeeItemAdapter employeeItemAdapter;
         private EventItemAdapter eventItemAdapter;
         private RecipientListItemAdapter recipientListItemAdapter;
+        private MobileServiceUser user;
+        ErrorHandler error;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -24,20 +30,50 @@ namespace ITW_MobileApp.Droid
             employeeItemAdapter = new EmployeeItemAdapter(this, Resource.Layout.Row_List_To_Do);
             eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
             recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
-
+            error = new ErrorHandler(this);
 
             Button loginButton = FindViewById<Button>(Resource.Id.loginBtn);
 
             //Login Button sends us to the Main View. THIS WILL NEED TO BE CHANGED FOR AUTHENTICATION.
             loginButton.Click += (sender, e) =>
             {
-                IoC.UserInfo.EmployeeID = 1;//this is acting as "Curtis Keller" logged in.
-                var intent = new Intent(this, typeof(RecentEventsActivity));
-                StartActivity(intent);
+                //IoC.UserInfo.EmployeeID = 1;//this is acting as "Curtis Keller" logged in.
+                //var intent = new Intent(this, typeof(RecentEventsActivity));
+                //StartActivity(intent);
+                 LoginUser();
             };
 
         }
 
+        private async Task<bool> Authenticate()
+        {
+            var success = false;
+            try
+            {
+                // Sign in with Facebook login using a server-managed flow.
+                user = await IoC.Dbconnect.getClient().LoginAsync(this,
+                    MobileServiceAuthenticationProvider.Google);
+
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                error.CreateAndShowDialog(ex, "Authentication failed");
+            }
+            return success;
+        }
+
+        [Java.Interop.Export()]
+        public async void LoginUser()
+        {
+            // Load data only after authentication succeeds.
+            if (await Authenticate())
+            {
+                IoC.UserInfo.EmployeeID = 1;//this is acting as "Curtis Keller" logged in.
+                var intent = new Intent(this, typeof(RecentEventsActivity));
+                StartActivity(intent);
+            }
+        }
 
 
         /*
