@@ -7,13 +7,13 @@
         <!--View Controller-->
         <scene sceneID="3">
             <objects>
-                <viewController id="4" customModuleProvider="" sceneMemberID="viewController" customClass="LoginController" storyboardIdentifier="LoginController">
+                <viewController id="4" customModuleProvider="" sceneMemberID="viewController" customClass="LoginController" storyboardIdentifier="LoginController" useStoryboardIdentifierAsRestorationIdentifier="YES">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="14"/>
                         <viewControllerLayoutGuide type="bottom" id="15"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="12">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="13" translatesAutoresizingMaskIntoConstraints="NO" image="ITWCIPLogo.png" fixedFrame="YES">
@@ -22,7 +22,7 @@
                                     <rect key="frame" x="76" y="212" width="224" height="98"/>
                                 </variation>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="26" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Username">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="26" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Username" fixedFrame="YES">
                                 <rect key="frame" x="139" y="354" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -30,7 +30,7 @@
                                     <rect key="frame" x="76" y="318" width="224" height="30"/>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="27" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Password">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="27" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Password" fixedFrame="YES">
                                 <rect key="frame" x="139" y="354" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -38,18 +38,16 @@
                                     <rect key="frame" x="76" y="373" width="224" height="30"/>
                                 </variation>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="255" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="164" y="434" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="898" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="137" y="433" width="46" height="30"/>
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="164" y="434" width="46" height="30"/>
+                                    <rect key="frame" x="164" y="432" width="46" height="30"/>
                                 </variation>
-                                <connections>
-                                    <segue id="482" destination="36" kind="show"/>
-                                </connections>
+                                <connections/>
                             </button>
                         </subviews>
                         <variation key="default">
@@ -57,7 +55,7 @@
                                 <exclude reference="13"/>
                                 <exclude reference="26"/>
                                 <exclude reference="27"/>
-                                <exclude reference="255"/>
+                                <exclude reference="898"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -65,7 +63,7 @@
                                 <include reference="13"/>
                                 <include reference="26"/>
                                 <include reference="27"/>
-                                <include reference="255"/>
+                                <include reference="898"/>
                             </mask>
                         </variation>
                         <color key="backgroundColor" colorSpace="calibratedRGB" red="0.45882352941176469" green="0" blue="0.16470588235294117" alpha="1"/>
@@ -73,39 +71,57 @@
                     <connections>
                         <outlet property="Username" destination="26" id="name-outlet-26"/>
                         <outlet property="Password" destination="27" id="name-outlet-27"/>
+                        <outlet property="LoginButton" destination="898" id="name-outlet-898"/>
                     </connections>
                     <navigationItem title="Login" id="11" key="navigationItem"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="16" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-500" y="13"/>
+            <point key="canvasLocation" x="-665" y="13"/>
         </scene>
-        <scene sceneID="35">
+        <scene sceneID="701">
             <objects>
-                <tableViewController id="36" sceneMemberID="viewController" customClass="RecentEventsController" storyboardIdentifier="RecentEventsController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="37">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <viewController id="702" sceneMemberID="viewController" customClass="ParentController" storyboardIdentifier="ParentController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="699"/>
+                        <viewControllerLayoutGuide type="bottom" id="700"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="703">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="704" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-185" y="15"/>
+        </scene>
+        <scene sceneID="706">
+            <objects>
+                <tableViewController id="707" sceneMemberID="viewController" customClass="RecentEventsController" storyboardIdentifier="RecentEventsController" useStoryboardIdentifierAsRestorationIdentifier="YES" title="Recent Events">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="708">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="40" rowHeight="44">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="711" rowHeight="44">
+                                <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="40" id="41">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="711" id="712">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="36" id="38"/>
-                            <outlet property="delegate" destination="36" id="39"/>
+                            <outlet property="dataSource" destination="707" id="709"/>
+                            <outlet property="delegate" destination="707" id="710"/>
                         </connections>
                     </tableView>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="42" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="713" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="467" y="14"/>
+            <point key="canvasLocation" x="279" y="17"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

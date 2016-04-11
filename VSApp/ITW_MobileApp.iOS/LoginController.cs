@@ -10,5 +10,20 @@ namespace ITW_MobileApp.iOS
 		public LoginController (IntPtr handle) : base (handle)
 		{
 		}
-	}
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            // code goes here
+
+            LoginButton.TouchUpInside += (object sender, EventArgs e) => {
+               // Launches a new instance of CallHistoryController
+                ParentController parent = this.Storyboard.InstantiateViewController("ParentController") as ParentController;
+                if (parent != null)
+                {
+                    PresentViewController(parent, true, null);
+                }
+            };
+        }
+    }
 }

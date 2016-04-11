@@ -94,12 +94,12 @@
     <Compile Include="RecentEventsController.designer.cs">
       <DependentUpon>RecentEventsController.cs</DependentUpon>
     </Compile>
-    <Compile Include="RootViewController.cs" />
-    <Compile Include="RootViewController.designer.cs">
-      <DependentUpon>RootViewController.cs</DependentUpon>
-    </Compile>
     <None Include="GettingStarted.Xamarin" />
     <None Include="Info.plist" />
+    <Compile Include="ParentController.cs" />
+    <Compile Include="ParentController.designer.cs">
+      <DependentUpon>ParentController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

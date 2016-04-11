@@ -11,8 +11,8 @@ using UIKit;
 
 namespace ITW_MobileApp.iOS
 {
-	[Register ("RootViewController")]
-	partial class RootViewController
+	[Register ("ParentController")]
+	partial class ParentController
 	{
 		void ReleaseDesignerOutlets ()
 		{
