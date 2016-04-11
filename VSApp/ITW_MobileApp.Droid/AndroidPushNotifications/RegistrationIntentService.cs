@@ -46,6 +46,7 @@ namespace ITW_MobileApp.Droid
         {
             var pubSub = GcmPubSub.GetInstance(this);
             pubSub.Subscribe(token, "/topics/global", null);
+            pubSub.Subscribe(token, "/topics/" + IoC.UserInfo.EmployeeID.ToString(), null);
         }
     }
 }

@@ -161,6 +161,7 @@
     <Compile Include="Activities\EventDetailsActivity.cs" />
     <Compile Include="AndroidPushNotifications\GcmListenerService.cs" />
     <Compile Include="AndroidPushNotifications\InstanceIDListenerService.cs" />
+    <Compile Include="AndroidPushNotifications\PushSender.cs" />
     <Compile Include="AndroidPushNotifications\RegistrationIntentService.cs" />
     <Compile Include="AndroidViewSpecific\CheckBoxAdapter.cs" />
     <Compile Include="AndroidViewSpecific\EventListAdapter.cs" />

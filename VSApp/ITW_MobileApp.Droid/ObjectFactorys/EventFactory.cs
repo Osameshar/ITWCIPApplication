@@ -20,11 +20,20 @@ namespace ITW_MobileApp.Droid
 
                 foreach (int employeeID in EmpIds)
                 {
-                    IoC.RecipientListFactory.createRecipientList(employeeID, newEventID);
+                   await IoC.RecipientListFactory.createRecipientList(employeeID, newEventID);
                 }
 
                 await IoC.Dbconnect.getEventSyncTable().InsertAsync(new EventItem { Name = newName, EventRecipients = newEventRecipients, EventDate = newEventDate, EventTime = newEventTime, Location = newLocation, Category = newCategory, EventPriority = newEventPriority, EventDescription = newEventDescription, EventID = newEventID, EmployeeID = IoC.UserInfo.EmployeeID, IsDeleted = false });
                 await IoC.Dbconnect.SyncAsyncConnected(pullData: true);
+                PushSender pusher = new PushSender();
+               
+                //fix for departments
+                foreach (int employeeID in EmpIds)
+                {
+                    await pusher.sendPush(employeeID.ToString(), newName);
+                }
+                
+                
             }
             catch (MobileServicePushFailedException)
             {

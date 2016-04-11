@@ -4,10 +4,7 @@ using Android.Widget;
 using Android.Content;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
-using Android.Views;
 using System;
-using Android.Gms.Common;
-using Android.Util;
 
 namespace ITW_MobileApp.Droid
 {
@@ -35,20 +32,25 @@ namespace ITW_MobileApp.Droid
             error = new ErrorHandler(this);
 
             Button loginButton = FindViewById<Button>(Resource.Id.loginBtn);
+            EditText EditTextEmployeeID = FindViewById<EditText>(Resource.Id.userName);
 
-            if (IsPlayServicesAvailable())
-            {
-                var intent = new Intent(this, typeof(RegistrationIntentService));
-                StartService(intent);
-            }
+
 
             //Login Button sends us to the Main View. THIS WILL NEED TO BE CHANGED FOR AUTHENTICATION.
+            
             loginButton.Click += (sender, e) =>
             {
-                //IoC.UserInfo.EmployeeID = 1;//this is acting as "Curtis Keller" logged in.
-                //var intent = new Intent(this, typeof(RecentEventsActivity));
-                //StartActivity(intent);
-                 LoginUser();
+                if (EditTextEmployeeID.Text != "")
+                {
+                    IoC.UserInfo.EmployeeID = int.Parse(EditTextEmployeeID.Text);
+                    var intent = new Intent(this, typeof(RecentEventsActivity));
+                    StartActivity(intent);
+                }
+                else
+                {
+                    error.CreateAndShowDialog("EmployeeID required.","Authentication Error");
+                }
+                //LoginUser();
             };
 
         }
@@ -83,26 +85,6 @@ namespace ITW_MobileApp.Droid
             }
         }
 
-        public bool IsPlayServicesAvailable()
-        {
-            int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
-            if (resultCode != ConnectionResult.Success)
-            {
-                if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
-                    error.CreateAndShowDialog(new Exception(), GoogleApiAvailability.Instance.GetErrorString(resultCode));
-                else
-                {
-                    error.CreateAndShowDialog(new Exception(),"Sorry, this device is not supported");
-                    Finish();
-                }
-                return false;
-            }
-            else
-            {
-                error.CreateAndShowDialog(new Exception(), "Google Play Services is available.");
-                return true;
-            }
-        }
         /*
                 //Initializes the activity menu
                 public override bool OnCreateOptionsMenu(IMenu menu)
