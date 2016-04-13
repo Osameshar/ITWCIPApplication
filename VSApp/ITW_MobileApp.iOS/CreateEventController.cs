@@ -9,6 +9,11 @@ namespace ITW_MobileApp.iOS
 	{
 		public CreateEventController (IntPtr handle) : base (handle)
 		{
-		}
+            UIImage hamburgericon = UIImage.FromFile("Menu Filled-30");
+            NavigationItem.LeftBarButtonItem = new UIBarButtonItem(hamburgericon, UIBarButtonItemStyle.Plain, delegate
+            {
+                ParentController.getNavigationMenu().ToggleMenu();
+            });
+        }
 	}
 }

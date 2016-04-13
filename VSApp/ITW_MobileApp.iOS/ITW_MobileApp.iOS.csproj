@@ -127,7 +127,7 @@
   <ItemGroup>
     <Content Include="Entitlements.plist" />
     <BundleResource Include="Resources\ITWCIPLogo.png" />
-    <BundleResource Include="Resources\hamburger.png" />
+    <BundleResource Include="Resources\Menu Filled-30.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">

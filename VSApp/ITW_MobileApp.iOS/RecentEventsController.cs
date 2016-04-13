@@ -9,13 +9,11 @@ namespace ITW_MobileApp.iOS
 	{
 		public RecentEventsController (IntPtr handle) : base (handle)
 		{
-            NavigationItem.LeftBarButtonItem = new UIBarButtonItem(UIBarButtonSystemItem.Action, delegate {
+            UIImage hamburgericon = UIImage.FromFile("Menu Filled-30");
+            NavigationItem.LeftBarButtonItem = new UIBarButtonItem(hamburgericon, UIBarButtonItemStyle.Plain, delegate
+            {
                 ParentController.getNavigationMenu().ToggleMenu();
             });
-
-            //NavigationItem.LeftBarButtonItem = new UIBarButtonItem(UIImage.FromFile("hamburger.png"), UIBarButtonItemStyle.Plain, delegate {
-            //    ParentController.getNavigationMenu().ToggleMenu();
-            //});
         }
 	}
 }
