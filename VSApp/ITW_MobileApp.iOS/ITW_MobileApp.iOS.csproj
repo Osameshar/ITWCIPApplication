@@ -84,6 +84,14 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CreateEventController.cs" />
+    <Compile Include="CreateEventController.designer.cs">
+      <DependentUpon>CreateEventController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteEventController.cs" />
+    <Compile Include="DeleteEventController.designer.cs">
+      <DependentUpon>DeleteEventController.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginController.cs" />
     <Compile Include="LoginController.designer.cs">
       <DependentUpon>LoginController.cs</DependentUpon>
@@ -119,6 +127,7 @@
   <ItemGroup>
     <Content Include="Entitlements.plist" />
     <BundleResource Include="Resources\ITWCIPLogo.png" />
+    <BundleResource Include="Resources\hamburger.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">

@@ -10,20 +10,12 @@ namespace ITW_MobileApp.iOS
 {
     partial class ParentController : UIViewController
     {
+
         public ParentController(IntPtr handle) : base(handle)
         {
         }
 
-        FlyoutNavigationController navigation;
-
-        string[] Tasks = {
-            "Get Xamarin",
-            "Learn C#",
-            "Write Killer App",
-            "Add Platforms",
-            "Profit",
-            "Meet Obama",
-        };
+        private static FlyoutNavigationController navigation;
 
         public override void ViewDidLoad()
         {
@@ -38,33 +30,34 @@ namespace ITW_MobileApp.iOS
             this.AddChildViewController(navigation);
 
             // Create the menu:
-            navigation.NavigationRoot = new RootElement("Task List") {
-                new Section ("Task List") {
-                    from page in Tasks
-                        select new StringElement (page) as Element
+            navigation.NavigationRoot = new RootElement("Menu") {
+                new Section ("Menu") {
+                   new StringElement("Recent Events"),
+                   new StringElement("Create Event"),
+                   new StringElement("Delete Event"),
+                   new StringElement("Calendar"),
+                   new StringElement("Overtime Schedule"),
+                   new StringElement("Setting"),
+                   new StringElement("Logout"),
                 }
             };
-
             // Create an array of UINavigationControllers that correspond to your
             // menu items:
-            navigation.ViewControllers = Array.ConvertAll(Tasks, title =>
-                  new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController"))
-            );
+            navigation.ViewControllers = new[] {
+               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+               new UINavigationController((CreateEventController)this.Storyboard.InstantiateViewController("CreateEventController")),
+               new UINavigationController((DeleteEventController)this.Storyboard.InstantiateViewController("DeleteEventController")),
+               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+               new UINavigationController((LoginController)this.Storyboard.InstantiateViewController("LoginController")),
+            };
+
         }
 
-        class TaskPageController : DialogViewController
+        public static FlyoutNavigationController getNavigationMenu()
         {
-            public TaskPageController(FlyoutNavigationController navigation, string title) : base(null)
-            {
-                Root = new RootElement(title) {
-                    new Section {
-                        new CheckboxElement (title)
-                    }
-                };
-                NavigationItem.LeftBarButtonItem = new UIBarButtonItem(UIBarButtonSystemItem.Action, delegate {
-                    navigation.ToggleMenu();
-                });
-            }
+            return navigation;
         }
 
     }
