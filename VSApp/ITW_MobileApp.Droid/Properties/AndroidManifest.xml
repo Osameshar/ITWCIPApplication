@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="ITW_MobileApp.ITW_MobileApp.Droid">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="itwcip.mobile" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="15" />
-	<application android:allowBackup="true" android:icon="@drawable/ITWCIPLogo" android:label="@string/app_name" android:theme="@style/MyTheme"></application>
+	<application android:allowBackup="true" android:icon="@drawable/ITWCIPLogo" android:label="@string/app_name" android:theme="@style/MyTheme">
+		<receiver android:name="com.google.android.gms.gcm.GcmReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+				<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+				<category android:name="itwcip.mobile" />
+			</intent-filter>
+		</receiver>
+	</application>
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="itwcip.mobile.permission.C2D_MESSAGE" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<permission android:name="itwcip.mobile.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 </manifest>

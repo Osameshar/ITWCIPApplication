@@ -140,5 +140,9 @@ namespace ITW_MobileApp.Droid
         {
             return recipientListSyncTable;
         }
+        public MobileServiceClient getClient()
+        {
+            return client;
+        }
     }
 }

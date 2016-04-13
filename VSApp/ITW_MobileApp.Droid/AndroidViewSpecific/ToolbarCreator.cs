@@ -5,6 +5,7 @@ using Android.Support.V4.Widget;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Support.V4.View;
+using Android.Webkit;
 
 namespace ITW_MobileApp.Droid
 {
@@ -76,8 +77,7 @@ namespace ITW_MobileApp.Droid
                     case Resource.Id.logoutitem:
                         {
                             _drawer.CloseDrawer(GravityCompat.Start);
-                            Console.WriteLine("logout");
-                            //logout
+                            OnLogoutClicked();
                             var intent = new Intent(context, typeof(LoginActivity));
                             context.StartActivity(intent);
                         }
@@ -85,6 +85,11 @@ namespace ITW_MobileApp.Droid
 
                 }
             };
+        }
+        async void OnLogoutClicked()
+        {
+            CookieManager.Instance.RemoveAllCookie();
+            await IoC.Dbconnect.getClient().LogoutAsync();
         }
     }
 }
