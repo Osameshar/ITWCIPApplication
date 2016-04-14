@@ -199,7 +199,7 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\headerlayout.axml" />
-    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\RecentEvents.axml" />
     <AndroidResource Include="Resources\layout\EventCardView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>

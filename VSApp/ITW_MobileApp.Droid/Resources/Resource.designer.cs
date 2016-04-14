@@ -1026,32 +1026,32 @@ namespace ITW_MobileApp
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f07005b
-			public const int abc_background_cache_hint_selector_material_dark = 2131165275;
+			// aapt resource value: 0x7f07005e
+			public const int abc_background_cache_hint_selector_material_dark = 2131165278;
 			
-			// aapt resource value: 0x7f07005c
-			public const int abc_background_cache_hint_selector_material_light = 2131165276;
+			// aapt resource value: 0x7f07005f
+			public const int abc_background_cache_hint_selector_material_light = 2131165279;
 			
-			// aapt resource value: 0x7f07005d
-			public const int abc_color_highlight_material = 2131165277;
+			// aapt resource value: 0x7f070060
+			public const int abc_color_highlight_material = 2131165280;
 			
 			// aapt resource value: 0x7f070015
 			public const int abc_input_method_navigation_guard = 2131165205;
 			
-			// aapt resource value: 0x7f07005e
-			public const int abc_primary_text_disable_only_material_dark = 2131165278;
-			
-			// aapt resource value: 0x7f07005f
-			public const int abc_primary_text_disable_only_material_light = 2131165279;
-			
-			// aapt resource value: 0x7f070060
-			public const int abc_primary_text_material_dark = 2131165280;
-			
 			// aapt resource value: 0x7f070061
-			public const int abc_primary_text_material_light = 2131165281;
+			public const int abc_primary_text_disable_only_material_dark = 2131165281;
 			
 			// aapt resource value: 0x7f070062
-			public const int abc_search_url_text = 2131165282;
+			public const int abc_primary_text_disable_only_material_light = 2131165282;
+			
+			// aapt resource value: 0x7f070063
+			public const int abc_primary_text_material_dark = 2131165283;
+			
+			// aapt resource value: 0x7f070064
+			public const int abc_primary_text_material_light = 2131165284;
+			
+			// aapt resource value: 0x7f070065
+			public const int abc_search_url_text = 2131165285;
 			
 			// aapt resource value: 0x7f070016
 			public const int abc_search_url_text_normal = 2131165206;
@@ -1062,11 +1062,14 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f070018
 			public const int abc_search_url_text_selected = 2131165208;
 			
-			// aapt resource value: 0x7f070063
-			public const int abc_secondary_text_material_dark = 2131165283;
+			// aapt resource value: 0x7f070066
+			public const int abc_secondary_text_material_dark = 2131165286;
 			
-			// aapt resource value: 0x7f070064
-			public const int abc_secondary_text_material_light = 2131165284;
+			// aapt resource value: 0x7f070067
+			public const int abc_secondary_text_material_light = 2131165287;
+			
+			// aapt resource value: 0x7f07005b
+			public const int accent = 2131165275;
 			
 			// aapt resource value: 0x7f070019
 			public const int accent_material_dark = 2131165209;
@@ -1125,8 +1128,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f070008
 			public const int common_action_bar_splitter = 2131165192;
 			
-			// aapt resource value: 0x7f070065
-			public const int common_google_signin_btn_text_dark = 2131165285;
+			// aapt resource value: 0x7f070068
+			public const int common_google_signin_btn_text_dark = 2131165288;
 			
 			// aapt resource value: 0x7f070009
 			public const int common_google_signin_btn_text_dark_default = 2131165193;
@@ -1140,8 +1143,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f07000a
 			public const int common_google_signin_btn_text_dark_pressed = 2131165194;
 			
-			// aapt resource value: 0x7f070066
-			public const int common_google_signin_btn_text_light = 2131165286;
+			// aapt resource value: 0x7f070069
+			public const int common_google_signin_btn_text_light = 2131165289;
 			
 			// aapt resource value: 0x7f07000d
 			public const int common_google_signin_btn_text_light_default = 2131165197;
@@ -1155,8 +1158,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f07000e
 			public const int common_google_signin_btn_text_light_pressed = 2131165198;
 			
-			// aapt resource value: 0x7f070067
-			public const int common_plus_signin_btn_text_dark = 2131165287;
+			// aapt resource value: 0x7f07006a
+			public const int common_plus_signin_btn_text_dark = 2131165290;
 			
 			// aapt resource value: 0x7f070000
 			public const int common_plus_signin_btn_text_dark_default = 2131165184;
@@ -1170,8 +1173,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f070001
 			public const int common_plus_signin_btn_text_dark_pressed = 2131165185;
 			
-			// aapt resource value: 0x7f070068
-			public const int common_plus_signin_btn_text_light = 2131165288;
+			// aapt resource value: 0x7f07006b
+			public const int common_plus_signin_btn_text_light = 2131165291;
 			
 			// aapt resource value: 0x7f070004
 			public const int common_plus_signin_btn_text_light_default = 2131165188;
@@ -1241,6 +1244,9 @@ namespace ITW_MobileApp
 			
 			// aapt resource value: 0x7f070030
 			public const int hint_foreground_material_light = 2131165232;
+			
+			// aapt resource value: 0x7f07005c
+			public const int iron = 2131165276;
 			
 			// aapt resource value: 0x7f070031
 			public const int material_blue_grey_800 = 2131165233;
@@ -1332,17 +1338,20 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f07004c
 			public const int switch_thumb_disabled_material_light = 2131165260;
 			
-			// aapt resource value: 0x7f070069
-			public const int switch_thumb_material_dark = 2131165289;
+			// aapt resource value: 0x7f07006c
+			public const int switch_thumb_material_dark = 2131165292;
 			
-			// aapt resource value: 0x7f07006a
-			public const int switch_thumb_material_light = 2131165290;
+			// aapt resource value: 0x7f07006d
+			public const int switch_thumb_material_light = 2131165293;
 			
 			// aapt resource value: 0x7f07004d
 			public const int switch_thumb_normal_material_dark = 2131165261;
 			
 			// aapt resource value: 0x7f07004e
 			public const int switch_thumb_normal_material_light = 2131165262;
+			
+			// aapt resource value: 0x7f07005d
+			public const int white = 2131165277;
 			
 			// aapt resource value: 0x7f070058
 			public const int window_background = 2131165272;
@@ -2094,8 +2103,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f09008c
 			public const int ButtonPickTime = 2131296396;
 			
-			// aapt resource value: 0x7f0900b7
-			public const int ButtonTimeSet = 2131296439;
+			// aapt resource value: 0x7f0900b5
+			public const int ButtonTimeSet = 2131296437;
 			
 			// aapt resource value: 0x7f09007f
 			public const int Category = 2131296383;
@@ -2129,9 +2138,6 @@ namespace ITW_MobileApp
 			
 			// aapt resource value: 0x7f090088
 			public const int EditTextLocation = 2131296392;
-			
-			// aapt resource value: 0x7f0900a4
-			public const int EmployeeID = 2131296420;
 			
 			// aapt resource value: 0x7f090089
 			public const int EventDate = 2131296393;
@@ -2172,8 +2178,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f090084
 			public const int ToolBar = 2131296388;
 			
-			// aapt resource value: 0x7f0900a8
-			public const int action0 = 2131296424;
+			// aapt resource value: 0x7f0900a5
+			public const int action0 = 2131296421;
 			
 			// aapt resource value: 0x7f090062
 			public const int action_bar = 2131296354;
@@ -2199,8 +2205,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f090063
 			public const int action_context_bar = 2131296355;
 			
-			// aapt resource value: 0x7f0900ac
-			public const int action_divider = 2131296428;
+			// aapt resource value: 0x7f0900a9
+			public const int action_divider = 2131296425;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -2247,8 +2253,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f09004c
 			public const int buttonPanel = 2131296332;
 			
-			// aapt resource value: 0x7f0900a9
-			public const int cancel_action = 2131296425;
+			// aapt resource value: 0x7f0900a6
+			public const int cancel_action = 2131296422;
 			
 			// aapt resource value: 0x7f090033
 			public const int center = 2131296307;
@@ -2259,8 +2265,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f090035
 			public const int center_vertical = 2131296309;
 			
-			// aapt resource value: 0x7f0900b5
-			public const int checkToDoItem = 2131296437;
+			// aapt resource value: 0x7f0900b3
+			public const int checkToDoItem = 2131296435;
 			
 			// aapt resource value: 0x7f09005a
 			public const int checkbox = 2131296346;
@@ -2268,8 +2274,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f09009d
 			public const int chkEvent = 2131296413;
 			
-			// aapt resource value: 0x7f0900af
-			public const int chronometer = 2131296431;
+			// aapt resource value: 0x7f0900ac
+			public const int chronometer = 2131296428;
 			
 			// aapt resource value: 0x7f09003b
 			public const int clip_horizontal = 2131296315;
@@ -2322,8 +2328,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f090023
 			public const int end = 2131296291;
 			
-			// aapt resource value: 0x7f0900b4
-			public const int end_padder = 2131296436;
+			// aapt resource value: 0x7f0900b1
+			public const int end_padder = 2131296433;
 			
 			// aapt resource value: 0x7f09002b
 			public const int enterAlways = 2131296299;
@@ -2382,8 +2388,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f0900a1
 			public const int imageITWLogo = 2131296417;
 			
-			// aapt resource value: 0x7f0900b3
-			public const int info = 2131296435;
+			// aapt resource value: 0x7f0900b0
+			public const int info = 2131296432;
 			
 			// aapt resource value: 0x7f090000
 			public const int item_touch_helper_previous_elevation = 2131296256;
@@ -2394,11 +2400,11 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f090013
 			public const int light = 2131296275;
 			
-			// aapt resource value: 0x7f0900ad
-			public const int line1 = 2131296429;
+			// aapt resource value: 0x7f0900aa
+			public const int line1 = 2131296426;
 			
-			// aapt resource value: 0x7f0900b1
-			public const int line3 = 2131296433;
+			// aapt resource value: 0x7f0900ae
+			public const int line3 = 2131296430;
 			
 			// aapt resource value: 0x7f090093
 			public const int listDeletion = 2131296403;
@@ -2418,17 +2424,17 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f090092
 			public const int loadingPanel = 2131296402;
 			
-			// aapt resource value: 0x7f0900a6
-			public const int loginBtn = 2131296422;
+			// aapt resource value: 0x7f0900a4
+			public const int loginBtn = 2131296420;
 			
-			// aapt resource value: 0x7f0900bf
-			public const int logoutitem = 2131296447;
+			// aapt resource value: 0x7f0900bd
+			public const int logoutitem = 2131296445;
 			
-			// aapt resource value: 0x7f0900ab
-			public const int media_actions = 2131296427;
+			// aapt resource value: 0x7f0900a8
+			public const int media_actions = 2131296424;
 			
-			// aapt resource value: 0x7f0900b8
-			public const int menu_refresh = 2131296440;
+			// aapt resource value: 0x7f0900b6
+			public const int menu_refresh = 2131296438;
 			
 			// aapt resource value: 0x7f090024
 			public const int middle = 2131296292;
@@ -2439,23 +2445,23 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f09001d
 			public const int multiply = 2131296285;
 			
-			// aapt resource value: 0x7f0900bc
-			public const int nav_calendar = 2131296444;
-			
 			// aapt resource value: 0x7f0900ba
-			public const int nav_createEvent = 2131296442;
+			public const int nav_calendar = 2131296442;
 			
-			// aapt resource value: 0x7f0900bb
-			public const int nav_deleteEvent = 2131296443;
-			
-			// aapt resource value: 0x7f0900bd
-			public const int nav_overtime = 2131296445;
+			// aapt resource value: 0x7f0900b8
+			public const int nav_createEvent = 2131296440;
 			
 			// aapt resource value: 0x7f0900b9
-			public const int nav_recentEvents = 2131296441;
+			public const int nav_deleteEvent = 2131296441;
 			
-			// aapt resource value: 0x7f0900be
-			public const int nav_settings = 2131296446;
+			// aapt resource value: 0x7f0900bb
+			public const int nav_overtime = 2131296443;
+			
+			// aapt resource value: 0x7f0900b7
+			public const int nav_recentEvents = 2131296439;
+			
+			// aapt resource value: 0x7f0900bc
+			public const int nav_settings = 2131296444;
 			
 			// aapt resource value: 0x7f090091
 			public const int nav_view = 2131296401;
@@ -2478,8 +2484,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f09004e
 			public const int parentPanel = 2131296334;
 			
-			// aapt resource value: 0x7f0900a5
-			public const int password = 2131296421;
+			// aapt resource value: 0x7f0900a3
+			public const int password = 2131296419;
 			
 			// aapt resource value: 0x7f090031
 			public const int pin = 2131296305;
@@ -2493,8 +2499,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f09005c
 			public const int radio = 2131296348;
 			
-			// aapt resource value: 0x7f0900a7
-			public const int recyclerView = 2131296423;
+			// aapt resource value: 0x7f0900b2
+			public const int recyclerView = 2131296434;
 			
 			// aapt resource value: 0x7f090038
 			public const int right = 2131296312;
@@ -2592,8 +2598,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f090039
 			public const int start = 2131296313;
 			
-			// aapt resource value: 0x7f0900aa
-			public const int status_bar_latest_event_content = 2131296426;
+			// aapt resource value: 0x7f0900a7
+			public const int status_bar_latest_event_content = 2131296423;
 			
 			// aapt resource value: 0x7f09006d
 			public const int submit_area = 2131296365;
@@ -2601,14 +2607,11 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f090016
 			public const int tabMode = 2131296278;
 			
-			// aapt resource value: 0x7f0900b2
-			public const int text = 2131296434;
+			// aapt resource value: 0x7f0900af
+			public const int text = 2131296431;
 			
-			// aapt resource value: 0x7f0900b0
-			public const int text2 = 2131296432;
-			
-			// aapt resource value: 0x7f0900a2
-			public const int textEmployeeID = 2131296418;
+			// aapt resource value: 0x7f0900ad
+			public const int text2 = 2131296429;
 			
 			// aapt resource value: 0x7f090073
 			public const int textNewToDo = 2131296371;
@@ -2619,11 +2622,11 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f090072
 			public const int textViewTitle = 2131296370;
 			
-			// aapt resource value: 0x7f0900ae
-			public const int time = 2131296430;
+			// aapt resource value: 0x7f0900ab
+			public const int time = 2131296427;
 			
-			// aapt resource value: 0x7f0900b6
-			public const int time_picker = 2131296438;
+			// aapt resource value: 0x7f0900b4
+			public const int time_picker = 2131296436;
 			
 			// aapt resource value: 0x7f09004b
 			public const int title = 2131296331;
@@ -2643,8 +2646,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f09001c
 			public const int useLogo = 2131296284;
 			
-			// aapt resource value: 0x7f0900a3
-			public const int userName = 2131296419;
+			// aapt resource value: 0x7f0900a2
+			public const int userName = 2131296418;
 			
 			// aapt resource value: 0x7f09000a
 			public const int view_offset_helper = 2131296266;
@@ -2841,31 +2844,31 @@ namespace ITW_MobileApp
 			public const int Login = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int Main = 2130903085;
+			public const int notification_media_action = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int notification_media_action = 2130903086;
+			public const int notification_media_cancel_action = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int notification_media_cancel_action = 2130903087;
+			public const int notification_template_big_media = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int notification_template_big_media = 2130903088;
+			public const int notification_template_big_media_narrow = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int notification_template_big_media_narrow = 2130903089;
+			public const int notification_template_lines = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public const int notification_template_lines = 2130903090;
+			public const int notification_template_media = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public const int notification_template_media = 2130903091;
+			public const int notification_template_part_chronometer = 2130903091;
 			
 			// aapt resource value: 0x7f030034
-			public const int notification_template_part_chronometer = 2130903092;
+			public const int notification_template_part_time = 2130903092;
 			
 			// aapt resource value: 0x7f030035
-			public const int notification_template_part_time = 2130903093;
+			public const int RecentEvents = 2130903093;
 			
 			// aapt resource value: 0x7f030036
 			public const int Row_List_To_Do = 2130903094;
@@ -3623,6 +3626,9 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f0a0148
 			public const int MyTheme_Base = 2131362120;
 			
+			// aapt resource value: 0x7f0a0149
+			public const int MyTheme_Login = 2131362121;
+			
 			// aapt resource value: 0x7f0a0013
 			public const int Platform_AppCompat = 2131361811;
 			
@@ -4160,8 +4166,8 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f0a0146
 			public const int Widget_Design_TextInputLayout = 2131362118;
 			
-			// aapt resource value: 0x7f0a0149
-			public const int datetimepicker = 2131362121;
+			// aapt resource value: 0x7f0a014a
+			public const int datetimepicker = 2131362122;
 			
 			static Style()
 			{
