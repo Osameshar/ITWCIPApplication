@@ -38,19 +38,18 @@ namespace ITW_MobileApp.iOS
                    new StringElement("Calendar"),
                    new StringElement("Overtime Schedule"),
                    new StringElement("Setting"),
-                   new StringElement("Logout"),
+                   new StringElement("Logout", delegate {DismissModalViewController(true); }),
                 }
             };
             // Create an array of UINavigationControllers that correspond to your
             // menu items:
             navigation.ViewControllers = new[] {
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
-               new UINavigationController((CreateEventController)this.Storyboard.InstantiateViewController("CreateEventController")),
-               new UINavigationController((DeleteEventController)this.Storyboard.InstantiateViewController("DeleteEventController")),
+               new UINavigationController(new CreateEventController()),
+               new UINavigationController(new DeleteEventController()),
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
-               new UINavigationController((LoginController)this.Storyboard.InstantiateViewController("LoginController")),
             };
 
         }

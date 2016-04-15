@@ -1,19 +1,34 @@
-using Foundation;
 using System;
-using System.CodeDom.Compiler;
+using System.Drawing;
+
+using CoreFoundation;
 using UIKit;
+using Foundation;
+using MonoTouch.Dialog;
+using CoreGraphics;
 
 namespace ITW_MobileApp.iOS
 {
-	partial class DeleteEventController : UIViewController
-	{
-		public DeleteEventController (IntPtr handle) : base (handle)
-		{
-            UIImage hamburgericon = UIImage.FromFile("Menu Filled-30");
+    public class DeleteEventController : DialogViewController
+    {
+        public DeleteEventController() : base(new RootElement("Event Deletion"), true)
+        {
+
+            UIImage hamburgericon = UIImage.FromFile("Menu Filled-20");
             NavigationItem.LeftBarButtonItem = new UIBarButtonItem(hamburgericon, UIBarButtonItemStyle.Plain, delegate
             {
                 ParentController.getNavigationMenu().ToggleMenu();
             });
+
         }
-	}
+
+        public override void ViewDidLoad()
+        {
+
+            base.ViewDidLoad();
+
+            // Perform any additional setup after loading the view
+
+        }
+    }
 }
