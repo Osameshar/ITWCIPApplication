@@ -11,6 +11,9 @@ using Android.Content;
 using Android.Support.V4.View;
 using System.Linq;
 using System;
+using Android.Gms.Common;
+using Android.Util;
+using Android.Views;
 
 namespace ITW_MobileApp.Droid
 {
@@ -33,6 +36,8 @@ namespace ITW_MobileApp.Droid
         EventItemAdapter eventItemAdapter;
         RecipientListItemAdapter recipientListItemAdapter;
 
+        ErrorHandler error; 
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -44,13 +49,20 @@ namespace ITW_MobileApp.Droid
             recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Main);
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
 
-           
+
             _supporttoolbar = FindViewById<Toolbar>(Resource.Id.ToolBar);
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
             _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
             ToolbarCreator toolbarCreator = new ToolbarCreator();
-            toolbarCreator.setupToolbar(_supporttoolbar,_drawer,_navigationview, Resource.String.recent_events,this);
+            toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.recent_events, this);
 
+            error = new ErrorHandler(this);
+
+            if (IsPlayServicesAvailable())
+            {
+                var intentRegistration = new Intent(this, typeof(RegistrationIntentService));
+                StartService(intentRegistration);
+            }
 
             await RefreshView();
             FindViewById(Resource.Id.loadingPanel).Visibility = ViewStates.Gone;
@@ -91,9 +103,9 @@ namespace ITW_MobileApp.Droid
 
         public async Task RefreshView()
         {
-             await IoC.Dbconnect.SyncAsync(pullData: true);
-             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
-             await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
+            await IoC.Dbconnect.SyncAsync(pullData: true);
+            await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
+            await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
         }
         public override void OnBackPressed()
         {
@@ -117,6 +129,25 @@ namespace ITW_MobileApp.Droid
             intent.PutExtra("Category", myEventList.ElementAt(position).Category);
             intent.PutExtra("Description", myEventList.ElementAt(position).EventDescription);
             StartActivity(intent);
+        }
+        public bool IsPlayServicesAvailable()
+        {
+            int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
+            if (resultCode != ConnectionResult.Success)
+            {
+                if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
+                    error.CreateAndShowDialog(GoogleApiAvailability.Instance.GetErrorString(resultCode),"GoogleAPI");
+                else
+                {
+                    error.CreateAndShowDialog("Sorry, this device is not supported","Unsupported device");
+                    Finish();
+                }
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
