@@ -110,7 +110,7 @@ namespace ITW_MobileApp.Droid
 
         private bool AuthenticateUser(string employeeID, string password)
         {
-            return false;
+            return true;
         }
 
         public bool Validate()

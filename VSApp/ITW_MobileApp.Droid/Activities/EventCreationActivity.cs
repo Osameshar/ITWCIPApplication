@@ -10,6 +10,7 @@ using Android.Content;
 using Android.Support.V4.View;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace ITW_MobileApp.Droid
 {
@@ -136,9 +137,15 @@ namespace ITW_MobileApp.Droid
                 time = hour.ToString() + ":" + minute.ToString();
                 try
                 {
-                    await IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
-                    var intent = new Intent(this, typeof(RecentEventsActivity));
-                    StartActivity(intent);
+                    var progressDialog = ProgressDialog.Show(this, "Please wait...", "Creating Event...", true);
+                    new Thread(new ThreadStart(async delegate
+                    {
+                        await IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
+                        var intent = new Intent(this, typeof(RecentEventsActivity));
+                        StartActivity(intent);
+                        RunOnUiThread(() => progressDialog.Hide());
+                    })).Start();
+
                 }
                 catch (Java.Net.MalformedURLException)
                 {

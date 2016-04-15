@@ -12,8 +12,6 @@ using Android.Support.V4.View;
 using System.Linq;
 using System;
 using Android.Gms.Common;
-using Android.Util;
-using Android.Views;
 
 namespace ITW_MobileApp.Droid
 {

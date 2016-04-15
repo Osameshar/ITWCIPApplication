@@ -19,7 +19,7 @@
   <color name="window_background">#FFF5F5F5</color>
   <color name="primary">#75002A</color>
   <color name="primary_dark">#000000</color>
-  <color name="accent">#FFFFFF</color>
+  <color name="accent">#42A5F5</color>
   <color name="iron">#CCCCCC</color>
   <color name="white">#FFFFFF</color>
 </resources>
