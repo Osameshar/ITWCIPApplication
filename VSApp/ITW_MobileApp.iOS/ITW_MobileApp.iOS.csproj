@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="CreateEventController.cs" />
     <Compile Include="DeleteEventController.cs" />
+    <Compile Include="TableSource.cs" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="Info.plist" />
     <Compile Include="ParentController.cs" />

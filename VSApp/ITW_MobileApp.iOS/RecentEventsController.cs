@@ -5,15 +5,29 @@ using UIKit;
 
 namespace ITW_MobileApp.iOS
 {
-	partial class RecentEventsController : UITableViewController
-	{
-		public RecentEventsController (IntPtr handle) : base (handle)
+    partial class RecentEventsController : UITableViewController
+    {
+        private UITableView table;
+        private string[] eventList;
+
+        public RecentEventsController (IntPtr handle) : base (handle)
 		{
             UIImage hamburgericon = UIImage.FromFile("Menu Filled-20");
             NavigationItem.LeftBarButtonItem = new UIBarButtonItem(hamburgericon, UIBarButtonItemStyle.Plain, delegate
             {
                 ParentController.getNavigationMenu().ToggleMenu();
             });
+
+            eventList = ParentController.getEventList();
+
         }
-	}
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            table = new UITableView(View.Bounds); // defaults to Plain style
+            table.Source = new TableSource(eventList);
+            Add(table);
+        }
+    }
 }

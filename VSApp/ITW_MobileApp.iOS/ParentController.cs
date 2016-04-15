@@ -16,6 +16,7 @@ namespace ITW_MobileApp.iOS
         }
 
         private static FlyoutNavigationController navigation;
+        private static string[] eventList = new string[] { "Vegetables", "Fruits", "Flower Buds", "Legumes", "Bulbs", "Tubers" };
 
         public override void ViewDidLoad()
         {
@@ -43,11 +44,14 @@ namespace ITW_MobileApp.iOS
             };
             // Create an array of UINavigationControllers that correspond to your
             // menu items:
+
+            RecentEventsController recentEvents = (RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController");
+
             navigation.ViewControllers = new[] {
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                new UINavigationController(new CreateEventController()),
                new UINavigationController(new DeleteEventController()),
-               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+               new UINavigationController(recentEvents),
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
             };
@@ -57,6 +61,11 @@ namespace ITW_MobileApp.iOS
         public static FlyoutNavigationController getNavigationMenu()
         {
             return navigation;
+        }
+
+        public static string[] getEventList()
+        {
+            return eventList;
         }
 
     }
