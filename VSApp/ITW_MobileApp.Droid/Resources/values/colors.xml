@@ -22,4 +22,5 @@
   <color name="accent">#42A5F5</color>
   <color name="iron">#CCCCCC</color>
   <color name="white">#FFFFFF</color>
+  <color name="black">#000000</color>
 </resources>
