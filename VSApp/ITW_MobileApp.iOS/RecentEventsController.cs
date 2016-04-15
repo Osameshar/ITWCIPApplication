@@ -10,7 +10,6 @@ namespace ITW_MobileApp.iOS
     {
         private UITableView table;
         private List<EventItem> eventList;
-        private List<string> eventStrings;
 
         public RecentEventsController (IntPtr handle) : base (handle)
 		{
@@ -21,12 +20,6 @@ namespace ITW_MobileApp.iOS
             });
 
             eventList = ParentController.getEventList();
-            eventStrings = new List<string>();
-
-            foreach (EventItem element in eventList)
-            {
-                eventStrings.Add(element.Name);
-            }
 
         }
 
@@ -34,7 +27,7 @@ namespace ITW_MobileApp.iOS
         {
             base.ViewDidLoad();
             table = new UITableView(View.Bounds); // defaults to Plain style
-            table.Source = new TableSource(eventStrings.ToArray());
+            table.Source = new TableSource(eventList);
             Add(table);
         }
     }

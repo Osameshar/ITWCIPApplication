@@ -9,29 +9,29 @@ namespace ITW_MobileApp.iOS
     public class TableSource : UITableViewSource
     {
 
-        string[] TableItems;
+        List<EventItem> TableItems;
         string CellIdentifier = "TableCell";
 
-        public TableSource(string[] items)
+        public TableSource(List<EventItem> items)
         {
             TableItems = items;
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            return TableItems.Length;
+            return TableItems.Count;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
-            string item = TableItems[indexPath.Row];
+            string tLabel  = TableItems[indexPath.Row].Name;
 
             //---- if there are no cells to reuse, create a new one
             if (cell == null)
             { cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier); }
 
-            cell.TextLabel.Text = item;
+            cell.TextLabel.Text = tLabel;
 
             return cell;
         }
