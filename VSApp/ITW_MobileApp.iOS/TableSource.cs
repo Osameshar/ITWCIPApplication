@@ -26,12 +26,14 @@ namespace ITW_MobileApp.iOS
         {
             UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
             string tLabel  = TableItems[indexPath.Row].Name;
+            string dLabel = TableItems[indexPath.Row].EventDate.ToString();
 
             //---- if there are no cells to reuse, create a new one
             if (cell == null)
-            { cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier); }
+            { cell = new UITableViewCell(UITableViewCellStyle.Value1, CellIdentifier); }
 
             cell.TextLabel.Text = tLabel;
+            cell.DetailTextLabel.Text = dLabel;
 
             return cell;
         }
