@@ -5,19 +5,24 @@ using System;
 using System.CodeDom.Compiler;
 using System.Linq;
 using UIKit;
+using System.Collections.Generic;
 
 namespace ITW_MobileApp.iOS
 {
     partial class ParentController : UIViewController
     {
 
+        EventItem testItem = new EventItem { Id = "test", Name = "Test Event", Category = "Meeting", EmployeeID = 0, EventDate = DateTime.Now, Location = "ITWCIP", EventDescription = "", EventID = 0, EventPriority = "Low", EventRecipients = "Curtis Keller", EventTime = "12:00 PM", IsDeleted = false };
+
         public ParentController(IntPtr handle) : base(handle)
         {
+            eventList.Add(testItem);
         }
 
-        private static ParentController parentController;
         private static FlyoutNavigationController navigation;
-        private string[] eventList = new string[] { "Vegetables", "Fruits", "Flower Buds", "Legumes", "Bulbs", "Tubers" };
+        private static List<EventItem> eventList = new List<EventItem>();
+
+       
 
         public override void ViewDidLoad()
         {
@@ -25,7 +30,6 @@ namespace ITW_MobileApp.iOS
 
             // Create the flyout view controller, make it large,
             // and add it as a subview:
-            parentController = this;
             navigation = new FlyoutNavigationController();
             navigation.Position = FlyOutNavigationPosition.Left;
             navigation.View.Frame = UIScreen.MainScreen.Bounds;
@@ -63,9 +67,9 @@ namespace ITW_MobileApp.iOS
             return navigation;
         }
 
-        public static string[] getEventList()
+        public static List<EventItem> getEventList()
         {
-            return parentController.eventList;
+            return eventList;
         }
 
     }

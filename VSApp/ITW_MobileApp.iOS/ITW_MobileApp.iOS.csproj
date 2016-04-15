@@ -84,6 +84,8 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DataObjects\EmployeeItem.cs" />
+    <Compile Include="DataObjects\EventItem.cs" />
     <Compile Include="LoginController.cs" />
     <Compile Include="LoginController.designer.cs">
       <DependentUpon>LoginController.cs</DependentUpon>
@@ -96,6 +98,7 @@
     </Compile>
     <Compile Include="CreateEventController.cs" />
     <Compile Include="DeleteEventController.cs" />
+    <Compile Include="DataObjects\RecipientListItem.cs" />
     <Compile Include="TableSource.cs" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="Info.plist" />
@@ -104,6 +107,7 @@
       <DependentUpon>ParentController.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
@@ -114,6 +118,10 @@
       <HintPath>..\Components\flyoutnavigation-1.5.1\lib\ios-unified\FlyoutNavigation.dll</HintPath>
     </Reference>
     <Reference Include="MonoTouch.Dialog-1" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
