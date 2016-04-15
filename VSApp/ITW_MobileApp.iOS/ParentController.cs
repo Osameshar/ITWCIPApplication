@@ -15,8 +15,9 @@ namespace ITW_MobileApp.iOS
         {
         }
 
+        private static ParentController parentController;
         private static FlyoutNavigationController navigation;
-        private static string[] eventList = new string[] { "Vegetables", "Fruits", "Flower Buds", "Legumes", "Bulbs", "Tubers" };
+        private string[] eventList = new string[] { "Vegetables", "Fruits", "Flower Buds", "Legumes", "Bulbs", "Tubers" };
 
         public override void ViewDidLoad()
         {
@@ -24,6 +25,7 @@ namespace ITW_MobileApp.iOS
 
             // Create the flyout view controller, make it large,
             // and add it as a subview:
+            parentController = this;
             navigation = new FlyoutNavigationController();
             navigation.Position = FlyOutNavigationPosition.Left;
             navigation.View.Frame = UIScreen.MainScreen.Bounds;
@@ -65,7 +67,7 @@ namespace ITW_MobileApp.iOS
 
         public static string[] getEventList()
         {
-            return eventList;
+            return parentController.eventList;
         }
 
     }
