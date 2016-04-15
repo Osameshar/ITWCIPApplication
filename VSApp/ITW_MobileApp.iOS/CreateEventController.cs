@@ -70,15 +70,15 @@ namespace ITW_MobileApp.iOS
                 new Section()
                 {
                     new EntryElement("Description", "Enter a Description", null)
-                },
-
-                new Section()
-                {
-                    new StringElement("Add Event")
                 }
             };
 
             Root.Add(info);
+
+            UIButton myBUtton = UIButton.FromType(UIButtonType.RoundedRect);
+            myBUtton.SetTitle("Add Event", UIControlState.Normal);
+            myBUtton.Frame = new Rectangle(22, 545, 320, 44);
+            View.AddSubview(myBUtton);
         }
     }
 }

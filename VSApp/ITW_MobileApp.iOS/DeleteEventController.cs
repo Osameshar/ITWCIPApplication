@@ -29,6 +29,20 @@ namespace ITW_MobileApp.iOS
 
             // Perform any additional setup after loading the view
 
-        }
+            UIButton myBUtton = UIButton.FromType(UIButtonType.RoundedRect);
+            myBUtton.SetTitle("Delete Events", UIControlState.Normal);
+            myBUtton.Frame = new Rectangle(22, 0, 320, 44);
+            View.AddSubview(myBUtton);
+
+            var page = new RootElement("Event Deletion Page") {
+
+                new Section()
+                {
+
+                }
+            };
+
+            Root.Add(page);
+        } 
     }
 }
