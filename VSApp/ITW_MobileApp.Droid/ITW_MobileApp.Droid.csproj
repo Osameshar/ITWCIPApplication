@@ -168,6 +168,7 @@
     <Compile Include="AndroidViewSpecific\EventViewHolder.cs" />
     <Compile Include="AndroidViewSpecific\ToolbarCreator.cs" />
     <Compile Include="DatabaseComponents\DatabaseConnection.cs" />
+    <Compile Include="DatabaseComponents\LoginAuthenticator.cs" />
     <Compile Include="DatabaseComponents\UserInfo.cs" />
     <Compile Include="DatabaseComponents\ViewRefresher.cs" />
     <Compile Include="DataObjectAdapters\EmployeeItemAdapter.cs" />

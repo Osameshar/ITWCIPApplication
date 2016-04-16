@@ -9,7 +9,10 @@ namespace ITW_MobileApp.Droid
         [JsonProperty(PropertyName = "EmployeeID")]
         public int EmployeeID { get; set; }
 
-        [JsonProperty(PropertyName = "Password")]
-        public string Password { get; set; }
+        [JsonProperty(PropertyName = "Hash")]
+        public string Hash { get; set; }
+
+        [JsonProperty(PropertyName = "Salt")]
+        public string Salt { get; set; }
     }
 }

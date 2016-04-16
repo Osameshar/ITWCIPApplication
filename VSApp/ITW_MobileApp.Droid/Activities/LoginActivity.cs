@@ -19,8 +19,8 @@ namespace ITW_MobileApp.Droid
         private EmployeeItemAdapter employeeItemAdapter;
         private EventItemAdapter eventItemAdapter;
         private RecipientListItemAdapter recipientListItemAdapter;
-        private MobileServiceUser user;
         private Button loginButton;
+        private Button createUserButton;
         private EditText EditTextEmployeeID;
         private EditText EditTextPassword;
         ErrorHandler error;
@@ -41,28 +41,34 @@ namespace ITW_MobileApp.Droid
             loginButton = FindViewById<Button>(Resource.Id.loginBtn);
             EditTextEmployeeID = FindViewById<EditText>(Resource.Id.userName);
             EditTextPassword = FindViewById<EditText>(Resource.Id.password);
+            createUserButton = FindViewById<Button>(Resource.Id.createUserBtn);
 
-
-            //Login Button sends us to the Main View. THIS WILL NEED TO BE CHANGED FOR AUTHENTICATION.
-            
+            createUserButton.Click += (sender, e) =>
+            {
+                ValidateCreateUser();
+            };
             loginButton.Click += (sender, e) =>
             {
                 Login();
-                //if (EditTextEmployeeID.Text != "")
-                //{
-                //    IoC.UserInfo.EmployeeID = int.Parse(EditTextEmployeeID.Text);
-                //    var intent = new Intent(this, typeof(RecentEventsActivity));
-                //    StartActivity(intent);
-                //}
-                //else
-                //{
-                //    error.CreateAndShowDialog("EmployeeID required.","Authentication Error");
-                //}
-                //LoginUser();
             };
 
         }
+        public async void ValidateCreateUser()
+        {
+            if (!Validate())
+            {
+                return;
+            }
 
+            createUserButton.Enabled = false;
+
+            string EmployeeID = EditTextEmployeeID.Text;
+            string password = EditTextPassword.Text;
+
+            await createUser(EmployeeID, password);
+
+            createUserButton.Enabled = true;
+        }
         public void Login()
         {
             if (!Validate())
@@ -75,14 +81,14 @@ namespace ITW_MobileApp.Droid
             string EmployeeID = EditTextEmployeeID.Text;
             string password = EditTextPassword.Text;
 
-            //implement authentication
+
             var progressDialog = ProgressDialog.Show(this, "Please wait...", "Checking account info...", true);
-            new Thread(new ThreadStart(delegate
+            new Thread(new ThreadStart(async delegate
             {
-                //LOAD METHOD TO GET ACCOUNT INFO
-                if (AuthenticateUser(EmployeeID,password))
+                bool authenticated = await AuthenticateUser(EmployeeID, password);
+                if (authenticated)
                 {
-                    IoC.UserInfo.EmployeeID = int.Parse(EmployeeID);//this is acting as "Curtis Keller" logged in.
+                    IoC.UserInfo.EmployeeID = int.Parse(EmployeeID);
                     var intent = new Intent(this, typeof(RecentEventsActivity));
                     StartActivity(intent);
                 }
@@ -93,26 +99,12 @@ namespace ITW_MobileApp.Droid
                 RunOnUiThread(() => progressDialog.Hide());
             })).Start();
 
-            //ProgressDialog progressDialog = new ProgressDialog(this, Resource.Style.MyTheme_Login);
-            //progressDialog.Indeterminate = true;
-            //progressDialog.SetMessage("Authenticating...");
-            //progressDialog.Show();
-            //new Android.OS.Handler().PostDelayed( new Java.Lang.Runnable(() =>
-            //    {
-            //        IoC.UserInfo.EmployeeID = 1;//this is acting as "Curtis Keller" logged in.
-            //        var intent = new Intent(this, typeof(RecentEventsActivity));
-            //        StartActivity(intent);
-            //        progressDialog.Dismiss();
-            //    })
-            //   , 3000);
             loginButton.Enabled = true;
         }
-
-        private bool AuthenticateUser(string employeeID, string password)
+        private async Task<bool> AuthenticateUser(string employeeID, string password)
         {
-            return true;
+            return await LoginAuthenticator.Authenticate(employeeID, password);
         }
-
         public bool Validate()
         {
             bool valid = true;
@@ -141,38 +133,52 @@ namespace ITW_MobileApp.Droid
 
             return valid;
         }
-
-        //private async Task<bool> Authenticate()
-        //{
-        //    var success = false;
-        //    try
-        //    {
-        //        // Sign in with Facebook login using a server-managed flow.
-        //        user = await IoC.Dbconnect.getClient().LoginAsync(this,
-        //            MobileServiceAuthenticationProvider.Google);
-
-        //        success = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        error.CreateAndShowDialog(ex, "Authentication failed");
-        //    }
-        //    return success;
-        //}
-        //public override void OnBackPressed()
-        //{
-        //      MoveTaskToBack(true);
-        //}
-        //[Java.Interop.Export()]
-        //public async void LoginUser()
-        //{
-        //    // Load data only after authentication succeeds.
-        //    if (await Authenticate())
-        //    {
-        //        IoC.UserInfo.EmployeeID = 1;//this is acting as "Curtis Keller" logged in.
-        //        var intent = new Intent(this, typeof(RecentEventsActivity));
-        //        StartActivity(intent);
-        //    }
-        //}
+        public async Task createUser(string employeeID, string password)
+        {
+            int empID = int.Parse(employeeID);
+            bool isEmployee = await searchForEmployee(empID);
+            bool isUser = await searchForUser(empID);
+            if (isEmployee && !isUser)
+            {
+                await LoginAuthenticator.GenerateSaltedSHA1(password, empID);
+                RunOnUiThread(() => Toast.MakeText(this, "User Creation Successful.", ToastLength.Long).Show());
+            }
+            else if (isEmployee == false)
+            {
+                error.CreateAndShowDialog("This EmployeeID is not setup as an Employee.", "Incorrect ID");
+            }
+            else
+            {
+                error.CreateAndShowDialog("This EmployeeID is already a user.", "User Already Exists");
+            }
+        }
+        public async Task<bool> searchForEmployee(int employeeID)
+        {
+            var employees = await IoC.Dbconnect.getEmployeeSyncTable().ToListAsync();
+            foreach (EmployeeItem employee in employees)
+            {
+                if (employee.EmployeeID == employeeID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public async Task<bool> searchForUser(int employeeID)
+        {
+            var users = await IoC.Dbconnect.getClient().GetTable<EmployeeLoginItem>().ToListAsync();
+            foreach (EmployeeLoginItem user in users)
+            {
+                if (user.EmployeeID == employeeID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public override void OnBackPressed()
+        {
+             MoveTaskToBack(true);
+        }
     }
 }
