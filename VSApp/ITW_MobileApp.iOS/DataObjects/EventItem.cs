@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace ITW_MobileApp.Droid
+namespace ITW_MobileApp.iOS
 {
     public class EventItem
     {
@@ -42,13 +42,4 @@ namespace ITW_MobileApp.Droid
 
     }
 
-    public class EventItemWrapper : Java.Lang.Object
-    {
-        public EventItemWrapper(EventItem item)
-        {
-            EventItem = item;
-        }
-
-        public EventItem EventItem { get; private set; }
-    }
 }

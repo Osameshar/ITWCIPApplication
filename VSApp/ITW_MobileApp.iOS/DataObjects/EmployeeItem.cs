@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace ITW_MobileApp.Droid
+namespace ITW_MobileApp.iOS
 {
     public class EmployeeItem
     {
@@ -21,15 +21,5 @@ namespace ITW_MobileApp.Droid
 
         [JsonProperty(PropertyName = "PrivledgeLevel")]
         public string PrivledgeLevel { get; set; }
-    }
-
-    public class EmployeeItemWrapper : Java.Lang.Object
-    {
-        public EmployeeItemWrapper(EmployeeItem item)
-        {
-            EmployeeItem = item;
-        }
-
-        public EmployeeItem EmployeeItem { get; private set; }
     }
 }

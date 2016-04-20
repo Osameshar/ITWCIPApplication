@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace ITW_MobileApp.Droid
+namespace ITW_MobileApp.iOS
 {
     public class RecipientListItem
     {
@@ -14,13 +14,4 @@ namespace ITW_MobileApp.Droid
         public int EventID { get; set; }
     }
 
-    public class RecipientListItemWrapper : Java.Lang.Object
-    {
-        public RecipientListItemWrapper(RecipientListItem item)
-        {
-            RecipientListItem = item;
-        }
-
-        public RecipientListItem RecipientListItem { get; private set; }
-    }
 }
