@@ -27,13 +27,39 @@ namespace ITW_MobileApp.iOS
             UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
             string tLabel  = TableItems[indexPath.Row].Name;
             string dLabel = TableItems[indexPath.Row].EventDate.ToString();
+            string category = TableItems[indexPath.Row].Category;
 
             //---- if there are no cells to reuse, create a new one
             if (cell == null)
-            { cell = new UITableViewCell(UITableViewCellStyle.Value1, CellIdentifier); }
+            { cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier); }
 
             cell.TextLabel.Text = tLabel;
             cell.DetailTextLabel.Text = dLabel;
+
+            if (category == "Meeting")
+            {
+                cell.ImageView.Image = UIImage.FromFile("Meeting");
+            }
+
+            else if (category == "Company Event")
+            {
+                cell.ImageView.Image = UIImage.FromFile("Company");
+            }
+
+            else if (category == "Emergency")
+            {
+                cell.ImageView.Image = UIImage.FromFile("Emergency");
+            }
+
+            else if (category == "Machine Maintenance")
+            {
+                cell.ImageView.Image = UIImage.FromFile("MachineMaintenance");
+            }
+
+            else
+            {
+                cell.ImageView.Image = UIImage.FromFile("Meeting");
+            }
 
             return cell;
         }

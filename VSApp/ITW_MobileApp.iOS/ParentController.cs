@@ -22,8 +22,6 @@ namespace ITW_MobileApp.iOS
         private static FlyoutNavigationController navigation;
         private static List<EventItem> eventList = new List<EventItem>();
 
-       
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();

@@ -131,6 +131,14 @@
     <Content Include="Entitlements.plist" />
     <BundleResource Include="Resources\ITWCIPLogo.png" />
     <BundleResource Include="Resources\Menu Filled-20.png" />
+    <BundleResource Include="Resources\Company.png" />
+    <BundleResource Include="Resources\CompanyBig.png" />
+    <BundleResource Include="Resources\Emergency.png" />
+    <BundleResource Include="Resources\EmergencyBig.png" />
+    <BundleResource Include="Resources\MachineMaintenance.png" />
+    <BundleResource Include="Resources\MachineMaintenanceBig.png" />
+    <BundleResource Include="Resources\Meeting.png" />
+    <BundleResource Include="Resources\MeetingBig.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">
