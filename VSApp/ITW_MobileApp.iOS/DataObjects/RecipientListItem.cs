@@ -13,5 +13,3 @@ namespace ITW_MobileApp.iOS
         [JsonProperty(PropertyName = "EventID")]
         public int EventID { get; set; }
     }
-
-}
