@@ -12,8 +12,6 @@ using Android.Support.V4.View;
 using System.Linq;
 using System;
 using Android.Gms.Common;
-using Android.Util;
-using Android.Views;
 
 namespace ITW_MobileApp.Droid
 {
@@ -43,10 +41,10 @@ namespace ITW_MobileApp.Droid
             base.OnCreate(savedInstanceState);
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.RecentEvents);
 
-            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Main);
-            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Main);
+            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents);
+            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents);
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
 
 

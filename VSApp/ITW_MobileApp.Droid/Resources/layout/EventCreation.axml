@@ -7,11 +7,11 @@
     android:background="?attr/colorPrimary"
     android:fitsSystemWindows="true">
     <LinearLayout
-        android:background="#716969"
         android:orientation="vertical"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:layout_width="match_parent"
+        android:background="#FFFFFF"
         android:layout_height="match_parent">
         <android.support.v7.widget.Toolbar
             android:id="@+id/ToolBar"
@@ -28,44 +28,61 @@
             android:scrollbars="vertical">
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:orientation="vertical"
-                android:background="#FFFFFF"
-                android:layout_height="fill_parent">
-                <EditText
-                    android:id="@+id/EditTextEventName"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/eventname"
-                    android:inputType="text"
-                    android:layout_margin="10dp"
-                    android:layout_width="fill_parent" />
-                <EditText
-                    android:id="@+id/EditTextEventRecipients"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/eventrecipients"
-                    android:inputType="text"
-                    android:lines="5"
-                    android:layout_margin="10dp"
-                    android:layout_width="fill_parent" />
-                <EditText
-                    android:id="@+id/EditTextLocation"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/location"
-                    android:inputType="text"
-                    android:layout_margin="10dp"
-                    android:layout_width="fill_parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_eventname"
+                    android:layout_margin="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/EditTextEventName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/eventname"
+                        android:inputType="text"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_eventrecipients"
+                    android:layout_margin="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/EditTextEventRecipients"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/eventrecipients"
+                        android:inputType="text"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_eventlocation"
+                    android:layout_width="match_parent"
+                    android:layout_margin="15dp"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/EditTextLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/location"
+                        android:inputType="text"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
                 <TextView
                     android:text="Date: "
                     android:textSize="15dp"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/EventDate"
-                    android:layout_margin="10dp"
+                    android:layout_margin="15dp"
                     android:textColor="#000000" />
                 <Button
                     android:id="@+id/ButtonPickDate"
                     android:layout_height="wrap_content"
                     android:text="@string/pickdatebutton"
-                    android:layout_margin="10dp"
+                    android:background="@color/accent"
+                    android:layout_margin="15dp"
                     android:layout_width="fill_parent" />
                 <TextView
                     android:text="Time: "
@@ -73,42 +90,48 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/EventTime"
-                    android:layout_margin="10dp"
+                    android:layout_margin="15dp"
                     android:textColor="#000000" />
                 <Button
                     android:id="@+id/ButtonPickTime"
                     android:layout_height="wrap_content"
                     android:text="@string/picktimebutton"
-                    android:layout_margin="10dp"
+                    android:background="@color/accent"
+                    android:layout_margin="15dp"
                     android:layout_width="fill_parent" />
                 <Spinner
                     android:id="@+id/SpinnerCategoryType"
                     android:layout_height="wrap_content"
                     android:prompt="@string/category"
                     android:layout_width="fill_parent"
-                    android:layout_margin="10dp"
+                    android:layout_margin="15dp"
                     android:entries="@array/categorytypelist" />
                 <Spinner
                     android:id="@+id/SpinnerPriority"
                     android:layout_height="wrap_content"
                     android:prompt="@string/priority"
                     android:layout_width="fill_parent"
-                    android:layout_margin="10dp"
+                    android:layout_margin="15dp"
                     android:entries="@array/prioritylist" />
-                <EditText
-                    android:id="@+id/EditTextEventDescription"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/eventdescription"
-                    android:inputType="textMultiLine"
-                    android:lines="5"
-                    android:background="#F2F2F2"
-                    android:layout_margin="10dp"
-                    android:layout_width="fill_parent" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_eventdescription"
+                    android:layout_width="match_parent"
+                    android:layout_margin="15dp"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/EditTextEventDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="5"
+                        android:inputType="textMultiLine"
+                        android:hint="@string/eventdescription" />
+                </android.support.design.widget.TextInputLayout>
                 <Button
                     android:id="@+id/ButtonCreateEvent"
                     android:layout_height="wrap_content"
                     android:text="@string/createeventbutton"
                     android:onClick="createEvent"
+                    android:background="@color/accent"
                     android:layout_margin="10dp"
                     android:layout_width="fill_parent" />
             </LinearLayout>

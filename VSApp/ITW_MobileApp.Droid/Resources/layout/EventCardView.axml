@@ -29,8 +29,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#333333"
+                style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:text="Caption"
                 android:id="@+id/Name"
                 android:layout_gravity="center_horizontal"
@@ -38,8 +37,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#333333"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:text="Caption"
                 android:id="@+id/Date"
                 android:layout_gravity="center_horizontal"
