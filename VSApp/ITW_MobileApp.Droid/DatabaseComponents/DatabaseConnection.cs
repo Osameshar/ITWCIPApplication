@@ -19,8 +19,6 @@ namespace ITW_MobileApp.Droid
         private IMobileServiceSyncTable<EventItem> eventSyncTable;
         private IMobileServiceSyncTable<RecipientListItem> recipientListSyncTable;
 
-
-
         const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";
         const string localDbFilename = "itwlocalstore.db";
 

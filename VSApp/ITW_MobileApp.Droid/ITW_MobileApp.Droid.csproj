@@ -168,12 +168,14 @@
     <Compile Include="AndroidViewSpecific\EventViewHolder.cs" />
     <Compile Include="AndroidViewSpecific\ToolbarCreator.cs" />
     <Compile Include="DatabaseComponents\DatabaseConnection.cs" />
+    <Compile Include="DatabaseComponents\LoginAuthenticator.cs" />
     <Compile Include="DatabaseComponents\UserInfo.cs" />
     <Compile Include="DatabaseComponents\ViewRefresher.cs" />
     <Compile Include="DataObjectAdapters\EmployeeItemAdapter.cs" />
     <Compile Include="DataObjectAdapters\EventItemAdapter.cs" />
     <Compile Include="DataObjectAdapters\RecipientListItemAdapter.cs" />
     <Compile Include="DataObjects\EmployeeItem.cs" />
+    <Compile Include="DataObjects\EmployeeLoginItem.cs" />
     <Compile Include="DataObjects\EventItem.cs" />
     <Compile Include="DataObjects\RecipientListItem.cs" />
     <Compile Include="AndroidViewSpecific\ErrorHandler.cs" />
@@ -199,7 +201,7 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\headerlayout.axml" />
-    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\RecentEvents.axml" />
     <AndroidResource Include="Resources\layout\EventCardView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
