@@ -78,15 +78,7 @@ namespace ITW_MobileApp.iOS
                 }
 
             }
-            catch (Java.Net.MalformedURLException)
-            {
-                System.Diagnostics.Debug.WriteLine("There was an error creating the Mobile Service. Verify the URL");
-            }
             catch (MobileServicePushFailedException)
-            {
-                // Not reporting this exception. Assuming the app is offline for now
-            }
-            catch (Java.Net.UnknownHostException)
             {
                 // Not reporting this exception. Assuming the app is offline for now
             }
@@ -109,15 +101,7 @@ namespace ITW_MobileApp.iOS
                 }
 
             }
-            catch (Java.Net.MalformedURLException)
-            {
-                System.Diagnostics.Debug.WriteLine("There was an error creating the Mobile Service. Verify the URL");
-            }
             catch (MobileServicePushFailedException)
-            {
-                throw;
-            }
-            catch (Java.Net.UnknownHostException)
             {
                 throw;
             }

@@ -39,10 +39,6 @@ namespace ITW_MobileApp.iOS
             {
                 throw;
             }
-            catch (Java.Net.UnknownHostException)
-            {
-                throw;
-            }
             catch (Exception)
             {
                 throw;
