@@ -111,10 +111,7 @@
     </Compile>
     <Compile Include="Controllers\CreateEventController.cs" />
     <Compile Include="Controllers\DeleteEventController.cs" />
-    <Compile Include="SplashController.cs" />
-    <Compile Include="SplashController.designer.cs">
-      <DependentUpon>SplashController.cs</DependentUpon>
-    </Compile>
+    <Compile Include="UIHelpers\LoadingOverlay.cs" />
     <Compile Include="UIHelpers\TableSource.cs" />
     <None Include="app.config" />
     <None Include="GettingStarted.Xamarin" />

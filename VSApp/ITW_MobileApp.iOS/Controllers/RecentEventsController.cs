@@ -2,6 +2,7 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UIKit;
 
 namespace ITW_MobileApp.iOS
@@ -9,7 +10,10 @@ namespace ITW_MobileApp.iOS
     partial class RecentEventsController : UITableViewController
     {
         private UITableView table;
-        private List<EventItem> eventList;
+        private List<EventItem> myEventList;
+
+        EventItemAdapter eventItemAdapter;
+        RecipientListItemAdapter recipientListItemAdapter;
 
         public RecentEventsController (IntPtr handle) : base (handle)
 		{
@@ -18,17 +22,72 @@ namespace ITW_MobileApp.iOS
             {
                 ParentController.getNavigationMenu().ToggleMenu();
             });
-
-            eventList = ParentController.getEventList();
-
+            eventItemAdapter = new EventItemAdapter();
+            recipientListItemAdapter = new RecipientListItemAdapter();
         }
 
-        public override void ViewDidLoad()
+        public override async void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            //if (IsPlayServicesAvailable())
+            //{
+            //    var intentRegistration = new Intent(this, typeof(RegistrationIntentService));
+            //    StartService(intentRegistration);
+            //}
+
+
+            var bounds = UIScreen.MainScreen.Bounds;
+            LoadingOverlay loadingOverlay = new LoadingOverlay(bounds, "Loading events...");
+            View.Add(loadingOverlay);
+
+            await RefreshView();
+
+            loadingOverlay.Hide();
+
+            myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+            sortByDate(myEventList);
+
             table = new UITableView(View.Bounds); // defaults to Plain style
-            table.Source = new TableSource(eventList);
+            table.Source = new TableSource(myEventList);
             Add(table);
+            
         }
+        public void sortByDate(List<EventItem> eventList)
+        {
+            eventList.Sort((x, y) => DateTime.Compare(x.EventDate, y.EventDate));
+        }
+
+        public async Task RefreshView()
+        {
+            await IoC.Dbconnect.SyncAsync(pullData: true);
+            await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
+            await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
+        }
+
+        void OnItemClick(object sender, int position)
+        {
+
+        }
+
+        //public bool IsPlayServicesAvailable()
+        //{
+        //    int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
+        //    if (resultCode != ConnectionResult.Success)
+        //    {
+        //        if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
+        //            error.CreateAndShowDialog(GoogleApiAvailability.Instance.GetErrorString(resultCode), "GoogleAPI");
+        //        else
+        //        {
+        //            error.CreateAndShowDialog("Sorry, this device is not supported", "Unsupported device");
+        //            Finish();
+        //        }
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
     }
 }

@@ -21,7 +21,38 @@ namespace ITW_MobileApp.iOS
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
+            if (IoC.Dbconnect == null)
+            {
+                IoC.Dbconnect = new DatabaseConnection();
+                InitSyncTables();
+            }
+            if (IoC.EventFactory == null)
+            {
+                IoC.EventFactory = new EventFactory();
+            }
+            if (IoC.ViewRefresher == null)
+            {
+                IoC.ViewRefresher = new ViewRefresher();
+            }
+            if (IoC.EmployeeFactory == null)
+            {
+                IoC.EmployeeFactory = new EmployeeFactory();
+            }
+            if (IoC.RecipientListFactory == null)
+            {
+                IoC.RecipientListFactory = new RecipientListFactory();
+            }
+            if (IoC.UserInfo == null)
+            {
+                IoC.UserInfo = new UserInfo();
+            }
+            SQLitePCL.CurrentPlatform.Init();
             return true;
+        }
+
+        private async void InitSyncTables()
+        {
+            await IoC.Dbconnect.InitLocalDBSyncTables();
         }
 
         public override void OnResignActivation(UIApplication application)

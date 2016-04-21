@@ -12,15 +12,11 @@ namespace ITW_MobileApp.iOS
     partial class ParentController : UIViewController
     {
 
-        EventItem testItem = new EventItem { Id = "test", Name = "Test Event", Category = "Meeting", EmployeeID = 0, EventDate = DateTime.Now, Location = "ITWCIP", EventDescription = "", EventID = 0, EventPriority = "Low", EventRecipients = "Curtis Keller", EventTime = "12:00 PM", IsDeleted = false };
-
         public ParentController(IntPtr handle) : base(handle)
         {
-            eventList.Add(testItem);
         }
 
         private static FlyoutNavigationController navigation;
-        private static List<EventItem> eventList = new List<EventItem>();
 
         public override void ViewDidLoad()
         {
@@ -63,11 +59,6 @@ namespace ITW_MobileApp.iOS
         public static FlyoutNavigationController getNavigationMenu()
         {
             return navigation;
-        }
-
-        public static List<EventItem> getEventList()
-        {
-            return eventList;
         }
 
     }
