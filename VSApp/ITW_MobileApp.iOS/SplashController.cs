@@ -14,10 +14,13 @@ namespace ITW_MobileApp.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // code goes here
+            //code goes here
 
-            LoginController controller = Storyboard.InstantiateViewController("LoginController") as LoginController;
-            this.NavigationController.PushViewController(controller, true);
+            LoginController login = this.Storyboard.InstantiateViewController("LoginController") as LoginController;
+            if (login != null)
+            {
+                NavigationController.PushViewController(login, true);
+            }
         }
 
     }

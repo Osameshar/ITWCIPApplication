@@ -1,48 +1,37 @@
-using System;
-using System.Drawing;
-
-using CoreFoundation;
-using UIKit;
 using Foundation;
-using MonoTouch.Dialog;
-using CoreGraphics;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using UIKit;
 
 namespace ITW_MobileApp.iOS
 {
-    public class DeleteEventController : DialogViewController
+    partial class DeleteEventController : UITableViewController
     {
-        public DeleteEventController() : base(new RootElement("Event Deletion"), true)
-        {
+        private UITableView table;
+        private List<EventItem> eventList;
+        UIBarButtonItem edit, done;
 
+        public DeleteEventController(IntPtr handle) : base(handle)
+        {
             UIImage hamburgericon = UIImage.FromFile("Menu Filled-20");
             NavigationItem.LeftBarButtonItem = new UIBarButtonItem(hamburgericon, UIBarButtonItemStyle.Plain, delegate
             {
                 ParentController.getNavigationMenu().ToggleMenu();
             });
 
+            eventList = ParentController.getEventList();
+
         }
 
         public override void ViewDidLoad()
         {
-
             base.ViewDidLoad();
+            table = new UITableView(View.Bounds); // defaults to Plain style
+            table.Source = new DeleteEventTableSource(eventList);
+            Add(table);
+            table.SetEditing(true, true);
 
-            // Perform any additional setup after loading the view
-
-            UIButton myBUtton = UIButton.FromType(UIButtonType.RoundedRect);
-            myBUtton.SetTitle("Delete Events", UIControlState.Normal);
-            myBUtton.Frame = new Rectangle(22, 0, 320, 44);
-            View.AddSubview(myBUtton);
-
-            var page = new RootElement("Event Deletion Page") {
-
-                new Section()
-                {
-
-                }
-            };
-
-            Root.Add(page);
-        } 
+        }
     }
 }

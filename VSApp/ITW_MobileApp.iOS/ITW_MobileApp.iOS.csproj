@@ -102,6 +102,10 @@
     <Compile Include="DataObjects\EmployeeLoginItem.cs" />
     <Compile Include="DataObjects\EventItem.cs" />
     <Compile Include="DataObjects\RecipientListItem.cs" />
+    <Compile Include="Controllers\DeleteEventController.cs" />
+    <Compile Include="Controllers\DeleteEventController.designer.cs">
+      <DependentUpon>DeleteEventController.cs</DependentUpon>
+    </Compile>
     <Compile Include="iOSPushNotifications\PushSender.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
@@ -110,12 +114,12 @@
       <DependentUpon>RecentEventsController.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CreateEventController.cs" />
-    <Compile Include="Controllers\DeleteEventController.cs" />
     <Compile Include="SplashController.cs" />
     <Compile Include="SplashController.designer.cs">
       <DependentUpon>SplashController.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIHelpers\TableSource.cs" />
+    <Compile Include="UIHelpers\DeleteEventTableSource.cs" />
+    <Compile Include="UIHelpers\RecentEventTableSource.cs" />
     <None Include="app.config" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="Info.plist" />

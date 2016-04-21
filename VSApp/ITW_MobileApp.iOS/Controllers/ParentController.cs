@@ -52,7 +52,7 @@ namespace ITW_MobileApp.iOS
             navigation.ViewControllers = new[] {
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                new UINavigationController(new CreateEventController()),
-               new UINavigationController(new DeleteEventController()),
+               new UINavigationController((DeleteEventController)this.Storyboard.InstantiateViewController("DeleteEventController")),
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),

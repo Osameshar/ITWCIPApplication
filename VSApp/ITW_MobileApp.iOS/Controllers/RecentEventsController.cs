@@ -27,7 +27,7 @@ namespace ITW_MobileApp.iOS
         {
             base.ViewDidLoad();
             table = new UITableView(View.Bounds); // defaults to Plain style
-            table.Source = new TableSource(eventList);
+            table.Source = new RecentEventTableSource(eventList);
             Add(table);
         }
     }
