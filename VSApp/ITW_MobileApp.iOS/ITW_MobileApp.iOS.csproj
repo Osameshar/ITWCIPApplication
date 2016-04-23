@@ -106,6 +106,10 @@
     <Compile Include="Controllers\DeleteEventController.designer.cs">
       <DependentUpon>DeleteEventController.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventDetailsController.cs" />
+    <Compile Include="EventDetailsController.designer.cs">
+      <DependentUpon>EventDetailsController.cs</DependentUpon>
+    </Compile>
     <Compile Include="iOSPushNotifications\PushSender.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />

@@ -11,10 +11,12 @@ namespace ITW_MobileApp.iOS
 
         List<EventItem> TableItems;
         string CellIdentifier = "TableCell";
+        UITableViewController owner;
 
-        public RecentEventTableSource(List<EventItem> items)
+        public RecentEventTableSource(List<EventItem> items, UITableViewController owner)
         {
             TableItems = items;
+            this.owner = owner;
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
@@ -63,5 +65,17 @@ namespace ITW_MobileApp.iOS
 
             return cell;
         }
+
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            //UIAlertController okAlertController = UIAlertController.Create("Row Selected", TableItems[indexPath.Row].Name, UIAlertControllerStyle.Alert);
+            //okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+            EventDetailsController eventDetails = owner.Storyboard.InstantiateViewController("EventDetailsController") as EventDetailsController;
+            owner.NavigationController.PushViewController(eventDetails, true);
+
+            tableView.DeselectRow(indexPath, true);
+        }
+
     }
+
 }
