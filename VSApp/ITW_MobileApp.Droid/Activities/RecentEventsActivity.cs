@@ -181,13 +181,13 @@ namespace ITW_MobileApp.Droid
             int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
             if (resultCode != ConnectionResult.Success)
             {
-                if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
-                    error.CreateAndShowDialog(GoogleApiAvailability.Instance.GetErrorString(resultCode),"GoogleAPI");
-                else
-                {
-                    error.CreateAndShowDialog("Sorry, this device is not supported","Unsupported device");
-                    Finish();
-                }
+                //if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
+                //    error.CreateAndShowDialog(GoogleApiAvailability.Instance.GetErrorString(resultCode),"GoogleAPI");
+                //else
+                //{
+                //    error.CreateAndShowDialog("Sorry, this device is not supported","Unsupported device");
+                //    Finish();
+                //}
                 return false;
             }
             else

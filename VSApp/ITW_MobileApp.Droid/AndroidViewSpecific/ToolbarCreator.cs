@@ -123,6 +123,8 @@ namespace ITW_MobileApp.Droid
                 filteredItems.Add(items[index]);
             }
             IoC.ViewRefresher.FilterStringList = filteredItems;
+            var intent = new Intent(ViewContext, typeof(RecentEventsActivity));
+            ViewContext.StartActivity(intent);
         }
 
         private void CancelClicked(object sender, DialogClickEventArgs e)
