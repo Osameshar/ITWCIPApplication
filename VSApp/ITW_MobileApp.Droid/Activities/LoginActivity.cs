@@ -2,13 +2,9 @@ using Android.OS;
 using Android.App;
 using Android.Widget;
 using Android.Content;
-using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
-using System;
 using Android.Support.V7.App;
 using System.Threading;
-using Android.Views;
-using Android.Views.InputMethods;
 
 namespace ITW_MobileApp.Droid
 {
@@ -32,10 +28,6 @@ namespace ITW_MobileApp.Droid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Login);
 
-            // Create an adapter to bind the items with the view
-            employeeItemAdapter = new EmployeeItemAdapter(this, Resource.Layout.Row_List_To_Do);
-            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
-            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
             error = new ErrorHandler(this);
 
             loginButton = FindViewById<Button>(Resource.Id.loginBtn);

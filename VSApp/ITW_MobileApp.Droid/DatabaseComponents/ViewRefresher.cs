@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ITW_MobileApp.Droid
@@ -21,6 +22,7 @@ namespace ITW_MobileApp.Droid
         //    await IoC.Dbconnect.SyncAsync(pullData: true); // get changes from the mobile service
         //    await RefreshItemsFromTableAsync(adapter); // refresh view using local database
         //}
+        public List<string> FilterStringList = new List<string>() { "Meeting", "Company Event", "Machine Maintenance" };
 
         public async Task RefreshItemsFromTableAsync(EventItemAdapter adapter)
         {
@@ -51,7 +53,7 @@ namespace ITW_MobileApp.Droid
             }
         }
 
-        private async Task RefreshItemsFromTableAsync(EmployeeItemAdapter adapter)
+        public async Task RefreshItemsFromTableAsync(EmployeeItemAdapter adapter)
         {
             try
             {

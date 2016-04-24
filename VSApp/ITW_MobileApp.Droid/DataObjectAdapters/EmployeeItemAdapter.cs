@@ -16,7 +16,20 @@ namespace ITW_MobileApp.Droid
             this.activity = activity;
             this.layoutResourceId = layoutResourceId;
         }
-
+        public EmployeeItemAdapter()
+        {
+        }
+        public EmployeeItem findEmployeeByEmployeeID(int employeeID)
+        {
+            foreach (EmployeeItem item in items)
+            {
+                if (item.EmployeeID == employeeID)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
         //Returns the view for a specific item on the list
         //TODO: fix view
         public override View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)

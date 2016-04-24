@@ -193,10 +193,10 @@
     <Compile Include="ObjectFactorys\EventFactory.cs" />
     <Compile Include="ObjectFactorys\RecipientListFactory.cs" />
     <Compile Include="Activities\RecentEventsActivity.cs" />
-    <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\Startup.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -209,15 +209,15 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\headerlayout.axml" />
-    <AndroidResource Include="Resources\layout\RecentEvents.axml" />
+    <AndroidResource Include="Resources\layout\RecentEvents_Admin.axml" />
     <AndroidResource Include="Resources\layout\EventCardView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Splash.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\EventCreation.axml">
-      <SubType>AndroidResource</SubType>
+    <AndroidResource Include="Resources\layout\EventCreation_Admin.axml">
+      <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\date_picker.axml">
       <SubType>AndroidResource</SubType>
@@ -225,12 +225,28 @@
     <AndroidResource Include="Resources\layout\time_picker.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\EventDetails.axml" />
-    <AndroidResource Include="Resources\layout\EventDeletion.axml">
-      <SubType>AndroidResource</SubType>
+    <AndroidResource Include="Resources\layout\EventDetails_Admin.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EventDeletion_Admin.axml">
+      <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\EventListItems.axml">
       <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RecentEvents_Moderator.axml" />
+    <AndroidResource Include="Resources\layout\RecentEvents_User.axml" />
+    <AndroidResource Include="Resources\layout\EventDetails_Moderator.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EventDetails_User.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EventDeletion_Moderator.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EventCreation_Moderator.axml">
+      <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +263,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
-    <AndroidResource Include="Resources\menu\navigationview_menu.xml" />
+    <AndroidResource Include="Resources\menu\navigationview_menu_admin_filter.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ITWCIPLogo.png" />
@@ -402,6 +418,21 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_delete_forever_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\navigationview_menu_admin.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\navigationview_menu_moderator.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\navigationview_menu_moderator_filter.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\navigationview_menu_user.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\navigationview_menu_user_filter.xml" />
   </ItemGroup>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
