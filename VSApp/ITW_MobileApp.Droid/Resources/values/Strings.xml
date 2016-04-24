@@ -26,4 +26,5 @@
     <string name="event_details">Event Details</string>
     <string name="event_deletion">Event Deletion</string>
     <string name="create_event">Event Creation</string>
+    <string name="overtime_schedule">Overtime Schedule</string>
 </resources>

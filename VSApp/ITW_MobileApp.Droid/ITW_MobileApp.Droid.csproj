@@ -167,6 +167,7 @@
     <Compile Include="Activities\EventCreationActivity.cs" />
     <Compile Include="Activities\EventDeletionActivity.cs" />
     <Compile Include="Activities\EventDetailsActivity.cs" />
+    <Compile Include="Activities\OvertimeActivity.cs" />
     <Compile Include="AndroidPushNotifications\GcmListenerService.cs" />
     <Compile Include="AndroidPushNotifications\InstanceIDListenerService.cs" />
     <Compile Include="AndroidPushNotifications\PushSender.cs" />
@@ -247,6 +248,9 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\EventCreation_Moderator.axml">
       <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Overtime_Admin.axml">
+      <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
