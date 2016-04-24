@@ -73,10 +73,9 @@ namespace ITW_MobileApp.Droid
                     case Resource.Id.nav_overtime:
                         {
                             _drawer.CloseDrawer(GravityCompat.Start);
-                            error.CreateAndShowDialog("Overtime not yet implemented.", "Work In Progress");
                             //switch to overtime view
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
+                            var intent = new Intent(context, typeof(OvertimeActivity));
+                            context.StartActivity(intent);
                         }
                         break;
                     case Resource.Id.nav_filter:
