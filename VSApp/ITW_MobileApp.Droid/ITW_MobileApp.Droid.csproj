@@ -164,6 +164,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\CreateEmployeeActivity.cs" />
     <Compile Include="Activities\EventCreationActivity.cs" />
     <Compile Include="Activities\EventDeletionActivity.cs" />
     <Compile Include="Activities\EventDetailsActivity.cs" />
@@ -256,6 +257,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Overtime_User.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CreateEmployee.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -11,10 +11,6 @@ namespace ITW_MobileApp.Droid
     [Activity(Theme = "@style/MyTheme.Login")]
     public class LoginActivity : AppCompatActivity
     {
-        //Adapter to map the items list to the view
-        private EmployeeItemAdapter employeeItemAdapter;
-        private EventItemAdapter eventItemAdapter;
-        private RecipientListItemAdapter recipientListItemAdapter;
         private Button loginButton;
         private Button createUserButton;
         private EditText EditTextEmployeeID;
