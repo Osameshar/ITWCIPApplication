@@ -64,10 +64,9 @@ namespace ITW_MobileApp.Droid
                     case Resource.Id.nav_createEmployee:
                         {
                             _drawer.CloseDrawer(GravityCompat.Start);
-                            error.CreateAndShowDialog("Create Employee not yet implemented.", "Work In Progress");
-                            //switch to calendar view
-                            //var intent = new Intent(context, typeof(EventDeletionActivity));
-                            //context.StartActivity(intent);
+                            //switch to createEmployee view
+                            var intent = new Intent(context, typeof(CreateEmployeeActivity));
+                            context.StartActivity(intent);
                         }
                         break;
                     case Resource.Id.nav_overtime:

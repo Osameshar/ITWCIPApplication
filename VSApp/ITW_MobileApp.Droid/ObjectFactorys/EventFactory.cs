@@ -31,9 +31,7 @@ namespace ITW_MobileApp.Droid
                 foreach (int employeeID in EmpIds)
                 {
                     await pusher.sendPush(employeeID.ToString(), newName);
-                }
-                
-                
+                }  
             }
             catch (MobileServicePushFailedException)
             {
