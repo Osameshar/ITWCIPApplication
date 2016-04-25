@@ -109,7 +109,6 @@ namespace ITW_MobileApp.Droid
                 .SetTitle("Filter Events")
                 .SetMultiChoiceItems(items, new bool[] {true,true,true}, MultiListClicked);
             builder.SetPositiveButton("Ok", OkClicked);
-            builder.SetNegativeButton("Cancel", CancelClicked);
             builder.Create();
             builder.Show();
         }
@@ -123,10 +122,6 @@ namespace ITW_MobileApp.Droid
             IoC.ViewRefresher.FilterStringList = filteredItems;
             var intent = new Intent(ViewContext, typeof(RecentEventsActivity));
             ViewContext.StartActivity(intent);
-        }
-
-        private void CancelClicked(object sender, DialogClickEventArgs e)
-        {
         }
         private void MultiListClicked(object sender, DialogMultiChoiceClickEventArgs e)
         {

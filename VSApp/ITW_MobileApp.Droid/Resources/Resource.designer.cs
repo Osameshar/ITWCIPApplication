@@ -2130,28 +2130,34 @@ namespace ITW_MobileApp
 			public const int ic_delete_forever_black_24dp = 2130837626;
 			
 			// aapt resource value: 0x7f02007b
-			public const int ic_launcher = 2130837627;
+			public const int ic_filter_list_black_24dp = 2130837627;
 			
 			// aapt resource value: 0x7f02007c
-			public const int ic_list_black_24dp = 2130837628;
+			public const int ic_launcher = 2130837628;
 			
 			// aapt resource value: 0x7f02007d
-			public const int ic_menu_white_24dp = 2130837629;
+			public const int ic_list_black_24dp = 2130837629;
 			
 			// aapt resource value: 0x7f02007e
-			public const int ic_power_settings_new_black_24dp = 2130837630;
+			public const int ic_menu_white_24dp = 2130837630;
 			
 			// aapt resource value: 0x7f02007f
-			public const int ic_settings_black_24dp = 2130837631;
+			public const int ic_power_settings_new_black_24dp = 2130837631;
 			
 			// aapt resource value: 0x7f020080
-			public const int Icon = 2130837632;
+			public const int ic_settings_black_24dp = 2130837632;
 			
 			// aapt resource value: 0x7f020081
-			public const int ITWCIPLogo = 2130837633;
+			public const int ic_supervisor_account_black_24dp = 2130837633;
 			
 			// aapt resource value: 0x7f020082
-			public const int notification_template_icon_bg = 2130837634;
+			public const int Icon = 2130837634;
+			
+			// aapt resource value: 0x7f020083
+			public const int ITWCIPLogo = 2130837635;
+			
+			// aapt resource value: 0x7f020084
+			public const int notification_template_icon_bg = 2130837636;
 			
 			static Drawable()
 			{

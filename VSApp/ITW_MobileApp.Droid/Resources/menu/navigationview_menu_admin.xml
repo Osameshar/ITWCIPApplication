@@ -15,7 +15,7 @@
       android:title="Delete Event" />
     <item
       android:id="@+id/nav_createEmployee"
-      android:icon="@drawable/ic_delete_forever_black_24dp"
+      android:icon="@drawable/ic_supervisor_account_black_24dp"
       android:title="Create Employee" />
    <item
       android:id="@+id/nav_calendar"

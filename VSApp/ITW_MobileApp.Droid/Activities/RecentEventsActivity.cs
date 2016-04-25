@@ -117,16 +117,19 @@ namespace ITW_MobileApp.Droid
             List<EventItem> filteredList = new List<EventItem>();
             foreach (EventItem eventitem in myEventList)
             {
-                foreach (string filter in IoC.ViewRefresher.FilterStringList)
+                if (eventitem.EventDate >= DateTime.Now)
                 {
-                    if (eventitem.Category == filter)
+                    foreach (string filter in IoC.ViewRefresher.FilterStringList)
+                    {
+                        if (eventitem.Category == filter)
+                        {
+                            filteredList.Add(eventitem);
+                        }
+                    }
+                    if (eventitem.Category == "Emergency")
                     {
                         filteredList.Add(eventitem);
                     }
-                }
-                if (eventitem.Category == "Emergency")
-                {
-                    filteredList.Add(eventitem);
                 }
             }
             return filteredList;
