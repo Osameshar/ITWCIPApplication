@@ -41,10 +41,35 @@ namespace ITW_MobileApp.Droid
             base.OnCreate(savedInstanceState);
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.RecentEvents);
+            await IoC.UserInfo.setEmployee();
+            switch (IoC.UserInfo.Employee.PrivledgeLevel)
+            {
+                case "Admin":
+                    {
+                        SetContentView(Resource.Layout.RecentEvents_Admin);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents_Admin);
+                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents_Admin);
+                        break;
+                    }                    
+                case "Moderator":
+                    {
+                        SetContentView(Resource.Layout.RecentEvents_Moderator);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents_Moderator);
+                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents_Moderator);
+                        break;
+                    }                    
+                default:
+                    {
+                        SetContentView(Resource.Layout.RecentEvents_User);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents_User);
+                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents_User);
+                        break;
+                    }
+            }
 
-            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents);
-            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents);
+                
+
+
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
 
 
@@ -73,6 +98,8 @@ namespace ITW_MobileApp.Droid
 
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+            myEventList = filterEvents();
+
             sortByDate(myEventList);
             //Plug in the linear layout manager
             mLayoutManager = new LinearLayoutManager(this);
@@ -84,6 +111,27 @@ namespace ITW_MobileApp.Droid
             mRecyclerView.SetAdapter(myEventListAdapter);
 
         }
+
+        private List<EventItem> filterEvents()
+        {
+            List<EventItem> filteredList = new List<EventItem>();
+            foreach (EventItem eventitem in myEventList)
+            {
+                foreach (string filter in IoC.ViewRefresher.FilterStringList)
+                {
+                    if (eventitem.Category == filter)
+                    {
+                        filteredList.Add(eventitem);
+                    }
+                }
+                if (eventitem.Category == "Emergency")
+                {
+                    filteredList.Add(eventitem);
+                }
+            }
+            return filteredList;
+        }
+
         public void sortByDate(List<EventItem> eventList)
         {
             eventList.Sort((x, y) => DateTime.Compare(x.EventDate, y.EventDate));
@@ -133,13 +181,13 @@ namespace ITW_MobileApp.Droid
             int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
             if (resultCode != ConnectionResult.Success)
             {
-                if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
-                    error.CreateAndShowDialog(GoogleApiAvailability.Instance.GetErrorString(resultCode),"GoogleAPI");
-                else
-                {
-                    error.CreateAndShowDialog("Sorry, this device is not supported","Unsupported device");
-                    Finish();
-                }
+                //if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
+                //    error.CreateAndShowDialog(GoogleApiAvailability.Instance.GetErrorString(resultCode),"GoogleAPI");
+                //else
+                //{
+                //    error.CreateAndShowDialog("Sorry, this device is not supported","Unsupported device");
+                //    Finish();
+                //}
                 return false;
             }
             else

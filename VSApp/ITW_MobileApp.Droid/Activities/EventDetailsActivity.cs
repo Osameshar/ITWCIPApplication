@@ -32,10 +32,27 @@ namespace ITW_MobileApp
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.EventDetails);
 
             //setup toolbar
-            
+            switch (IoC.UserInfo.Employee.PrivledgeLevel)
+            {
+                case "Admin":
+                    {
+                        SetContentView(Resource.Layout.EventDetails_Admin);
+                        break;
+                    }
+                case "Moderator":
+                    {
+                        SetContentView(Resource.Layout.EventDetails_Moderator);
+                        break;
+                    }
+                default:
+                    {
+                        SetContentView(Resource.Layout.EventDetails_User);
+                        break;
+                    }
+            }
+
             _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
             _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);

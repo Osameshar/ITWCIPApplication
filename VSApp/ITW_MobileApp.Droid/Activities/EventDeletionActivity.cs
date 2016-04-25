@@ -39,9 +39,24 @@ namespace ITW_MobileApp.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.EventDeletion);
+
+            switch (IoC.UserInfo.Employee.PrivledgeLevel)
+            {
+                case "Admin":
+                    {
+                        SetContentView(Resource.Layout.EventDeletion_Admin);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.EventDeletion_Admin);
+                        break;
+                    }
+                case "Moderator":
+                    {
+                        SetContentView(Resource.Layout.EventDeletion_Moderator);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.EventDeletion_Moderator);
+                        break;
+                    }
+            }
+
             eventDeleter = new EventDeleter();
-            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.EventDeletion);
             deletionListView = FindViewById<ListView>(Resource.Id.listDeletion);
             DeleteEventsBtn = FindViewById<Button>(Resource.Id.DeleteEventsBtn);
 

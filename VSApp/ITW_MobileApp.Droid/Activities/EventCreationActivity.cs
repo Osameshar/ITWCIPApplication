@@ -11,6 +11,8 @@ using Android.Support.V4.View;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using System.Threading.Tasks;
 using System.Threading;
+using Android.Support.V4.Content;
+using Android.Graphics;
 
 namespace ITW_MobileApp.Droid
 {
@@ -51,7 +53,21 @@ namespace ITW_MobileApp.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.EventCreation);
+
+            switch (IoC.UserInfo.Employee.PrivledgeLevel)
+            {
+                case "Admin":
+                    {
+                        SetContentView(Resource.Layout.EventCreation_Admin);
+                        break;
+                    }
+                case "Moderator":
+                    {
+                        SetContentView(Resource.Layout.EventCreation_Moderator);
+                        break;
+                    }
+            }
+
 
             _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
@@ -70,6 +86,9 @@ namespace ITW_MobileApp.Droid
             EventDate = FindViewById<TextView>(Resource.Id.EventDate);
             EventTime = FindViewById<TextView>(Resource.Id.EventTime);
             CreateEventBtn = FindViewById<Button>(Resource.Id.ButtonCreateEvent);
+            Color color = new Color(ContextCompat.GetColor(this, Resource.Color.black));
+            SpinnerCategoryType.Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
+            SpinnerPriorty.Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
 
             EventDate.Text += "No date entered.";
             EventTime.Text += "No time entered";

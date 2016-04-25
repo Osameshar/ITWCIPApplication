@@ -26,4 +26,19 @@
     <string name="event_details">Event Details</string>
     <string name="event_deletion">Event Deletion</string>
     <string name="create_event">Event Creation</string>
+    <string name="overtime_schedule">Overtime Schedule</string>
+    <string name="createemployee">Create Employee</string>
+    <string name="it">IT</string>
+    <string name="hr">HR</string>
+    <string name="plant">Plant</string>
+    <string name="admin">Admin</string>
+    <string name="user">User</string>
+    <string name="moderator">Moderator</string>
+    <string name="privledge_level">Privledge Level</string>
+    <string name="department">Department</string>
+    <string name="email">Email</string>
+    <string name="employeeid">EmployeeID</string>
+    <string name="password">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
 </resources>
