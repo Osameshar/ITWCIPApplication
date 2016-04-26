@@ -136,6 +136,8 @@ namespace ITW_MobileApp.Droid
         }
         async void OnLogoutClicked()
         {
+            IoC.UserInfo.Employee = null;
+            IoC.UserInfo.EmployeeID = -1;
             CookieManager.Instance.RemoveAllCookie();
             await IoC.Dbconnect.getClient().LogoutAsync();
         }

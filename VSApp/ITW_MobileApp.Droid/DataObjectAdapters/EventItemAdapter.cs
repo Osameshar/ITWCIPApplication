@@ -17,6 +17,10 @@ namespace ITW_MobileApp.Droid
             this.layoutResourceId = layoutResourceId;
         }
 
+        public EventItemAdapter()
+        {
+        }
+
         public EventItem getEventByID(int eventID)
         {
             foreach (EventItem eventItem in items)
