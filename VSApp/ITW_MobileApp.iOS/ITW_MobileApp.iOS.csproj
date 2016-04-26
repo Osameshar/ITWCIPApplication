@@ -86,6 +86,7 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controllers\EventDetailsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoginController.designer.cs">
       <DependentUpon>LoginController.cs</DependentUpon>
@@ -102,6 +103,7 @@
     <Compile Include="DataObjects\EmployeeLoginItem.cs" />
     <Compile Include="DataObjects\EventItem.cs" />
     <Compile Include="DataObjects\RecipientListItem.cs" />
+    <Compile Include="UIHelpers\DeleteEventTableSource.cs" />
     <Compile Include="iOSPushNotifications\PushSender.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
@@ -111,8 +113,8 @@
     </Compile>
     <Compile Include="Controllers\CreateEventController.cs" />
     <Compile Include="Controllers\DeleteEventController.cs" />
+    <Compile Include="UIHelpers\RecentEventTableSource.cs" />
     <Compile Include="UIHelpers\LoadingOverlay.cs" />
-    <Compile Include="UIHelpers\TableSource.cs" />
     <None Include="app.config" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="Info.plist" />

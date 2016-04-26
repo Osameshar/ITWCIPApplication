@@ -6,13 +6,13 @@ using UIKit;
 
 namespace ITW_MobileApp.iOS
 {
-    public class TableSource : UITableViewSource
+    public class DeleteEventTableSource : UITableViewSource
     {
 
         List<EventItem> TableItems;
         string CellIdentifier = "TableCell";
 
-        public TableSource(List<EventItem> items)
+        public DeleteEventTableSource(List<EventItem> items)
         {
             TableItems = items;
         }
@@ -25,7 +25,7 @@ namespace ITW_MobileApp.iOS
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
-            string tLabel  = TableItems[indexPath.Row].Name;
+            string tLabel = TableItems[indexPath.Row].Name;
             string dLabel = TableItems[indexPath.Row].EventDate.ToString();
             string category = TableItems[indexPath.Row].Category;
 
@@ -62,6 +62,16 @@ namespace ITW_MobileApp.iOS
             }
 
             return cell;
+        }
+
+        public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
+        {
+
+        }
+
+        public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            return true; // return false if you wish to disable editing for a specific indexPath or for all rows
         }
     }
 }

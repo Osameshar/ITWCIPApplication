@@ -52,7 +52,7 @@ namespace ITW_MobileApp.iOS
 
 
             table = new UITableView(View.Bounds); // defaults to Plain style
-            table.Source = new TableSource(myEventList);
+            table.Source = new RecentEventTableSource(myEventList,this);
             table.ContentInset = new UIEdgeInsets(65, 0, 0, 0);
             Add(table);
             
