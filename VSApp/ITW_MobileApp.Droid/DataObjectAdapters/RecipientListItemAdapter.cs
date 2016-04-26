@@ -17,6 +17,10 @@ namespace ITW_MobileApp.Droid
             this.layoutResourceId = layoutResourceId;
         }
 
+        public RecipientListItemAdapter()
+        {
+        }
+
         public List<EventItem> getEventsByEmployeeID(int employeeID, EventItemAdapter eventAdapter)
         {
             List<EventItem> filteredItems = new List<EventItem>();

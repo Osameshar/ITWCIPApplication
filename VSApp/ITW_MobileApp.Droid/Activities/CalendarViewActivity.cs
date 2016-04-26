@@ -28,9 +28,11 @@ namespace ITW_MobileApp.Droid
         EventItemAdapter eventItemAdapter;
         RecipientListItemAdapter recipientListItemAdapter;
 
+        List<EventItem> myEventList;
+
         Button viewEventsBtn;
         CalendarPickerView calendar;
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -39,22 +41,22 @@ namespace ITW_MobileApp.Droid
                 case "Admin":
                     {
                         SetContentView(Resource.Layout.Calendar_Admin);
-                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Calendar_Admin);
-                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Calendar_Admin);
+                        eventItemAdapter = new EventItemAdapter();
+                        recipientListItemAdapter = new RecipientListItemAdapter();
                         break;
                     }
                 case "Moderator":
                     {
                         SetContentView(Resource.Layout.Calendar_Admin);
-                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Calendar_Admin);
-                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Calendar_Admin);
+                        eventItemAdapter = new EventItemAdapter();
+                        recipientListItemAdapter = new RecipientListItemAdapter();
                         break;
                     }
                 default:
                     {
                         SetContentView(Resource.Layout.Calendar_Admin);
-                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Calendar_Admin);
-                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Calendar_Admin);
+                        eventItemAdapter = new EventItemAdapter();
+                        recipientListItemAdapter = new RecipientListItemAdapter();
                         break;
                     }
             }
@@ -67,19 +69,62 @@ namespace ITW_MobileApp.Droid
 
             viewEventsBtn = FindViewById<Button>(Resource.Id.ViewEventsBtn);
 
+
             var nextYear = DateTime.Now.AddYears(1);
             var lastYear = DateTime.Now.AddYears(-1);
             calendar = FindViewById<CalendarPickerView>(Resource.Id.calendar_view);
             calendar.Init(lastYear, nextYear)
                 .WithSelectedDate(DateTime.Now)
                 .InMode(CalendarPickerView.SelectionMode.Single);
+
+            await RefreshView();
+            myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+            myEventList = filterEvents();
+
+            setHighlightDates(calendar);
+
             calendar.DateSelected += delegate
             {
                 IoC.selectedDate = calendar.SelectedDate;
                 Intent intent = new Intent(this, typeof(CalendarListActivity));
                 StartActivity(intent);
-                    };
+            };
         }
+
+        private void setHighlightDates(CalendarPickerView calendar)
+        {
+            List<DateTime> dates = new List<DateTime>();
+
+            foreach (EventItem item in myEventList)
+            {
+                dates.Add(item.EventDate);
+            }
+            calendar.HighlightDates(dates);
+        }
+
+        private List<EventItem> filterEvents()
+        {
+            List<EventItem> filteredList = new List<EventItem>();
+            foreach (EventItem eventitem in myEventList)
+            {
+                if (eventitem.EventDate >= DateTime.Now)
+                {
+                    foreach (string filter in IoC.ViewRefresher.FilterStringList)
+                    {
+                        if (eventitem.Category == filter)
+                        {
+                            filteredList.Add(eventitem);
+                        }
+                    }
+                    if (eventitem.Category == "Emergency")
+                    {
+                        filteredList.Add(eventitem);
+                    }
+                }
+            }
+            return filteredList;
+        }
+
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
