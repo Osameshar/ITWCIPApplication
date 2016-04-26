@@ -103,6 +103,10 @@
     <Reference Include="SQLitePCL.Ext">
       <HintPath>..\packages\SQLitePCL.3.8.7.2\lib\MonoAndroid\SQLitePCL.Ext.dll</HintPath>
     </Reference>
+    <Reference Include="Square.AndroidTimesSquare, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Square.AndroidTimesSquare.1.6.5.0\lib\MonoAndroid\Square.AndroidTimesSquare.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\monoandroid\System.Net.Http.Extensions.dll</HintPath>
@@ -164,6 +168,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\CalendarListActivity.cs" />
+    <Compile Include="Activities\CalendarViewActivity.cs" />
     <Compile Include="Activities\CreateEmployeeActivity.cs" />
     <Compile Include="Activities\EventCreationActivity.cs" />
     <Compile Include="Activities\EventDeletionActivity.cs" />
@@ -173,6 +179,7 @@
     <Compile Include="AndroidPushNotifications\InstanceIDListenerService.cs" />
     <Compile Include="AndroidPushNotifications\PushSender.cs" />
     <Compile Include="AndroidPushNotifications\RegistrationIntentService.cs" />
+    <Compile Include="AndroidViewSpecific\CalendarAdapter.cs" />
     <Compile Include="AndroidViewSpecific\CheckBoxAdapter.cs" />
     <Compile Include="AndroidViewSpecific\EventListAdapter.cs" />
     <Compile Include="AndroidViewSpecific\EventViewHolder.cs" />
@@ -262,9 +269,20 @@
     <AndroidResource Include="Resources\layout\CreateEmployee.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Calendar_Admin.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CalendarList_Admin.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CalendarListItems.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\Activity_To_Do.axml" />
     <AndroidResource Include="Resources\layout\Row_List_To_Do.axml" />
     <AndroidResource Include="Resources\values\styles.xml">
@@ -447,6 +465,48 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\navigationview_menu_user_filter.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_filter_list_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_filter_list_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_filter_list_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_filter_list_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_filter_list_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_filter_list_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_supervisor_account_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_supervisor_account_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_supervisor_account_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_supervisor_account_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_supervisor_account_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_supervisor_account_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="square.androidtimessquare">
+      <Visible>False</Visible>
+      <Version>1.6.5.0</Version>
+    </XamarinComponentReference>
   </ItemGroup>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

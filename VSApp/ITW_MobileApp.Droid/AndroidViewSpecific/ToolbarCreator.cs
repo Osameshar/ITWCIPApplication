@@ -55,10 +55,9 @@ namespace ITW_MobileApp.Droid
                     case Resource.Id.nav_calendar:
                         {
                             _drawer.CloseDrawer(GravityCompat.Start);
-                            error.CreateAndShowDialog("Calender not yet implemented.", "Work In Progress");
                             //switch to calendar view
-                            //var intent = new Intent(context, typeof(EventDeletionActivity));
-                            //context.StartActivity(intent);
+                            var intent = new Intent(context, typeof(CalendarViewActivity));
+                            context.StartActivity(intent);
                         }
                         break;
                     case Resource.Id.nav_createEmployee:
@@ -81,10 +80,6 @@ namespace ITW_MobileApp.Droid
                         {
                             _drawer.CloseDrawer(GravityCompat.Start);
                             spawnFilterDialog();
-                            //error.CreateAndShowDialog("Settings not yet implemented.", "Work In Progress");
-                            //switch to settings view
-                            //var intent = new Intent(this, typeof(RecentEventsActivity));
-                            //StartActivity(intent);
                         }
                         break;
                     case Resource.Id.logoutitem:
@@ -109,7 +104,6 @@ namespace ITW_MobileApp.Droid
                 .SetTitle("Filter Events")
                 .SetMultiChoiceItems(items, new bool[] {true,true,true}, MultiListClicked);
             builder.SetPositiveButton("Ok", OkClicked);
-            builder.SetNegativeButton("Cancel", CancelClicked);
             builder.Create();
             builder.Show();
         }
@@ -123,10 +117,6 @@ namespace ITW_MobileApp.Droid
             IoC.ViewRefresher.FilterStringList = filteredItems;
             var intent = new Intent(ViewContext, typeof(RecentEventsActivity));
             ViewContext.StartActivity(intent);
-        }
-
-        private void CancelClicked(object sender, DialogClickEventArgs e)
-        {
         }
         private void MultiListClicked(object sender, DialogMultiChoiceClickEventArgs e)
         {

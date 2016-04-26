@@ -23,7 +23,7 @@
       android:title="Overtime Schedule" />
   <item
       android:id="@+id/nav_filter"
-      android:icon="@drawable/ic_settings_black_24dp"
+      android:icon="@drawable/ic_filter_list_black_24dp"
       android:title="Filter" />
   </group>
   <item android:title="">
