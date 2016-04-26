@@ -169,7 +169,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
-                                    <bool key="isElement" value="YES"/>
+                                    <bool key="isElement" value="NO"/>
                                 </accessibility>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute keyPath="accessibilityIdentifier" type="string" value="category"/>

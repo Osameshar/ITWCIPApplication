@@ -70,7 +70,7 @@ namespace ITW_MobileApp.iOS
         {
             //UIAlertController okAlertController = UIAlertController.Create("Row Selected", TableItems[indexPath.Row].Name, UIAlertControllerStyle.Alert);
             //okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-            EventDetailsController eventDetails = owner.Storyboard.InstantiateViewController("EventDetailsController") as EventDetailsController;
+            EventDetailsController eventDetails = new EventDetailsController(TableItems[indexPath.Row]);
             owner.NavigationController.PushViewController(eventDetails, true);
 
             tableView.DeselectRow(indexPath, true);
