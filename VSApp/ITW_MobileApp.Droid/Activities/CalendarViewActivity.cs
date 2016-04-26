@@ -14,6 +14,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V4.View;
 using System.Threading.Tasks;
+using Square.TimesSquare;
 
 namespace ITW_MobileApp.Droid
 {
@@ -27,6 +28,8 @@ namespace ITW_MobileApp.Droid
         EventItemAdapter eventItemAdapter;
         RecipientListItemAdapter recipientListItemAdapter;
 
+        Button viewEventsBtn;
+        CalendarPickerView calendar;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -35,23 +38,23 @@ namespace ITW_MobileApp.Droid
             {
                 case "Admin":
                     {
-                        SetContentView(Resource.Layout.RecentEvents_Admin);
-                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents_Admin);
-                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents_Admin);
+                        SetContentView(Resource.Layout.Calendar_Admin);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Calendar_Admin);
+                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Calendar_Admin);
                         break;
                     }
                 case "Moderator":
                     {
-                        SetContentView(Resource.Layout.RecentEvents_Moderator);
-                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents_Moderator);
-                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents_Moderator);
+                        SetContentView(Resource.Layout.Calendar_Admin);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Calendar_Admin);
+                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Calendar_Admin);
                         break;
                     }
                 default:
                     {
-                        SetContentView(Resource.Layout.RecentEvents_User);
-                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents_User);
-                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents_User);
+                        SetContentView(Resource.Layout.Calendar_Admin);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Calendar_Admin);
+                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Calendar_Admin);
                         break;
                     }
             }
@@ -62,8 +65,21 @@ namespace ITW_MobileApp.Droid
             ToolbarCreator toolbarCreator = new ToolbarCreator();
             toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.create_event, this);
 
-        }
+            viewEventsBtn = FindViewById<Button>(Resource.Id.ViewEventsBtn);
 
+            var nextYear = DateTime.Now.AddYears(1);
+            var lastYear = DateTime.Now.AddYears(-1);
+            calendar = FindViewById<CalendarPickerView>(Resource.Id.calendar_view);
+            calendar.Init(lastYear, nextYear)
+                .WithSelectedDate(DateTime.Now)
+                .InMode(CalendarPickerView.SelectionMode.Single);
+            calendar.DateSelected += delegate
+            {
+                IoC.selectedDate = calendar.SelectedDate;
+                Intent intent = new Intent(this, typeof(CalendarListActivity));
+                StartActivity(intent);
+                    };
+        }
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)

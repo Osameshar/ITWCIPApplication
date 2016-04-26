@@ -30,12 +30,12 @@ namespace ITW_MobileApp.iOS
         {
             base.ViewDidLoad();
 
+            
             //if (IsPlayServicesAvailable())
             //{
             //    var intentRegistration = new Intent(this, typeof(RegistrationIntentService));
             //    StartService(intentRegistration);
             //}
-
 
             var bounds = UIScreen.MainScreen.Bounds;
             LoadingOverlay loadingOverlay = new LoadingOverlay(bounds, "Loading events...");
@@ -48,8 +48,12 @@ namespace ITW_MobileApp.iOS
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
             sortByDate(myEventList);
 
+
+
+
             table = new UITableView(View.Bounds); // defaults to Plain style
             table.Source = new TableSource(myEventList);
+            table.ContentInset = new UIEdgeInsets(65, 0, 0, 0);
             Add(table);
             
         }
