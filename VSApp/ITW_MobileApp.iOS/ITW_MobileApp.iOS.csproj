@@ -103,6 +103,10 @@
     <Compile Include="DataObjects\EmployeeLoginItem.cs" />
     <Compile Include="DataObjects\EventItem.cs" />
     <Compile Include="DataObjects\RecipientListItem.cs" />
+    <Compile Include="Controllers\EventDeleteController.cs" />
+    <Compile Include="Controllers\EventDeleteController.designer.cs">
+      <DependentUpon>EventDeleteController.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIHelpers\DeleteEventTableSource.cs" />
     <Compile Include="iOSPushNotifications\PushSender.cs" />
     <Compile Include="Main.cs" />
@@ -112,7 +116,6 @@
       <DependentUpon>RecentEventsController.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CreateEventController.cs" />
-    <Compile Include="Controllers\DeleteEventController.cs" />
     <Compile Include="UIHelpers\RecentEventTableSource.cs" />
     <Compile Include="UIHelpers\LoadingOverlay.cs" />
     <None Include="app.config" />

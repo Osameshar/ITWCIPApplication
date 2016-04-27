@@ -115,8 +115,7 @@ namespace ITW_MobileApp.iOS
                 _error.Show();
                 valid = false;
             }
-
-            if (password.Length == 0 || password.Length < 4 || password.Length > 10)
+            else if (password.Length == 0 || password.Length < 4 || password.Length > 10)
             {
                 UIAlertView _error = new UIAlertView("Invalid Credentials", "Enter a valid EmployeeID and Password", null, "Ok", null);
                 _error.Show();

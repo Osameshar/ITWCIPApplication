@@ -11,10 +11,14 @@ namespace ITW_MobileApp.iOS
 
         List<EventItem> TableItems;
         string CellIdentifier = "TableCell";
+        EventDeleter eventDeleter;
+        UITableViewController owner;
 
-        public DeleteEventTableSource(List<EventItem> items)
+        public DeleteEventTableSource(List<EventItem> items, UITableViewController own)
         {
             TableItems = items;
+            eventDeleter = new EventDeleter();
+            owner = own;
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
@@ -63,10 +67,23 @@ namespace ITW_MobileApp.iOS
 
             return cell;
         }
+        private async void deleteEvents(int index)
+        {
+            var bounds = UIScreen.MainScreen.Bounds;
+            LoadingOverlay loadingOverlay = new LoadingOverlay(bounds, "Creating event...");
+            owner.View.Add(loadingOverlay);
 
+            await eventDeleter.deleteEvent(TableItems[index].EventID);
+
+            loadingOverlay.Hide();
+            UIAlertView _error = new UIAlertView("Success!", "Event deletion successful!", null, "Ok", null);
+            _error.Show();
+        }
         public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
         {
-
+            deleteEvents(indexPath.Row);
+            TableItems.RemoveAt(indexPath.Row);
+            tableView.DeleteRows(new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Bottom);
         }
 
         public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)

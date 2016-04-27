@@ -3322,6 +3322,9 @@ namespace ITW_MobileApp
 			// aapt resource value: 0x7f050034
 			public const int bottom_sheet_behavior = 2131034164;
 			
+			// aapt resource value: 0x7f050064
+			public const int calendar_view = 2131034212;
+			
 			// aapt resource value: 0x7f05004b
 			public const int category = 2131034187;
 			

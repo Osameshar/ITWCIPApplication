@@ -57,6 +57,25 @@ namespace ITW_MobileApp.iOS
             Add(table);
             
         }
+        public override async void ViewDidAppear(bool animated)
+        {
+            var bounds = UIScreen.MainScreen.Bounds;
+            LoadingOverlay loadingOverlay = new LoadingOverlay(bounds, "Loading events...");
+            View.Add(loadingOverlay);
+
+            await RefreshView();
+
+            loadingOverlay.Hide();
+
+            myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+            sortByDate(myEventList);
+            base.ViewDidAppear(animated);
+            table = new UITableView(View.Bounds); // defaults to Plain style
+            table.Source = new RecentEventTableSource(myEventList, this);
+            table.ContentInset = new UIEdgeInsets(65, 0, 0, 0);
+            Add(table);
+        }
+
         public void sortByDate(List<EventItem> eventList)
         {
             eventList.Sort((x, y) => DateTime.Compare(x.EventDate, y.EventDate));
