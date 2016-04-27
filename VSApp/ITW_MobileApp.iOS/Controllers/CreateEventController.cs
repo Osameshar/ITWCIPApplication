@@ -140,6 +140,9 @@ namespace ITW_MobileApp.iOS
                     await IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
 
                     loadingOverlay.Hide();
+
+                    //this.ParentViewController.ShowViewController(new RecentEventsController(), null);
+
                     UIAlertView _error = new UIAlertView("Success!", "Event creation successful!", null, "Ok", null);
                     _error.Show();
 
