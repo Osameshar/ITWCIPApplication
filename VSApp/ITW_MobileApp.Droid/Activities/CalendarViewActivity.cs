@@ -65,7 +65,7 @@ namespace ITW_MobileApp.Droid
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
             _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
             ToolbarCreator toolbarCreator = new ToolbarCreator();
-            toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.create_event, this);
+            toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.calendar_view, this);
 
             viewEventsBtn = FindViewById<Button>(Resource.Id.ViewEventsBtn);
 
