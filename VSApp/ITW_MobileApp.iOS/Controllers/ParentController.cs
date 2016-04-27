@@ -38,7 +38,7 @@ namespace ITW_MobileApp.iOS
                    new StringElement("Delete Event"),
                    new StringElement("Calendar"),
                    new StringElement("Overtime Schedule"),
-                   new StringElement("Setting"),
+                   new StringElement("Filter Events"),
                    new StringElement("Logout", delegate {DismissModalViewController(true); }),
                 }
             };
@@ -51,7 +51,7 @@ namespace ITW_MobileApp.iOS
                new UINavigationController((EventDeleteController)this.Storyboard.InstantiateViewController("EventDeleteController")),
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
-               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+               new UINavigationController(new FilterEventsController()),
             };
 
         }

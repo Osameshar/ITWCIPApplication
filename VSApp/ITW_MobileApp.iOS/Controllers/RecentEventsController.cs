@@ -46,6 +46,7 @@ namespace ITW_MobileApp.iOS
             loadingOverlay.Hide();
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+            myEventList = filterEvents();
             sortByDate(myEventList);
 
 
@@ -68,6 +69,7 @@ namespace ITW_MobileApp.iOS
             loadingOverlay.Hide();
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+            myEventList = filterEvents();
             sortByDate(myEventList);
             base.ViewDidAppear(animated);
             table = new UITableView(View.Bounds); // defaults to Plain style
@@ -86,6 +88,29 @@ namespace ITW_MobileApp.iOS
             await IoC.Dbconnect.SyncAsync(pullData: true);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
+        }
+
+        private List<EventItem> filterEvents()
+        {
+            List<EventItem> filteredList = new List<EventItem>();
+            foreach (EventItem eventitem in myEventList)
+            {
+                if (eventitem.EventDate.DayOfYear >= DateTime.Now.DayOfYear)
+                {
+                    foreach (string filter in IoC.ViewRefresher.FilterStringList)
+                    {
+                        if (eventitem.Category == filter)
+                        {
+                            filteredList.Add(eventitem);
+                        }
+                    }
+                    if (eventitem.Category == "Emergency")
+                    {
+                        filteredList.Add(eventitem);
+                    }
+                }
+            }
+            return filteredList;
         }
 
         void OnItemClick(object sender, int position)
