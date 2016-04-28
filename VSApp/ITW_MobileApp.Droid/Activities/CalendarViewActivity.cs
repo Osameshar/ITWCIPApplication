@@ -30,7 +30,6 @@ namespace ITW_MobileApp.Droid
 
         List<EventItem> myEventList;
 
-        Button viewEventsBtn;
         CalendarPickerView calendar;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -66,9 +65,6 @@ namespace ITW_MobileApp.Droid
             _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
             ToolbarCreator toolbarCreator = new ToolbarCreator();
             toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.calendar_view, this);
-
-            viewEventsBtn = FindViewById<Button>(Resource.Id.ViewEventsBtn);
-
 
             var nextYear = DateTime.Now.AddYears(1);
             var lastYear = DateTime.Now.AddYears(-1);
