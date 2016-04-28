@@ -9,7 +9,17 @@ namespace ITW_MobileApp.iOS
         public EmployeeItemAdapter()
         {
         }
-
+        public EmployeeItem findEmployeeByEmployeeID(int employeeID)
+        {
+            foreach (EmployeeItem item in items)
+            {
+                if (item.EmployeeID == employeeID)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
         public void Add(EmployeeItem item)
         {
             items.Add(item);

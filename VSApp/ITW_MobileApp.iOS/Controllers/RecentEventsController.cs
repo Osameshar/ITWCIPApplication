@@ -30,7 +30,7 @@ namespace ITW_MobileApp.iOS
         {
             base.ViewDidLoad();
 
-            
+            await IoC.UserInfo.setEmployee();
             //if (IsPlayServicesAvailable())
             //{
             //    var intentRegistration = new Intent(this, typeof(RegistrationIntentService));

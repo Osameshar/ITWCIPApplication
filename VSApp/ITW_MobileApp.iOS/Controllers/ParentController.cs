@@ -31,30 +31,83 @@ namespace ITW_MobileApp.iOS
             this.AddChildViewController(navigation);
 
             // Create the menu:
-            navigation.NavigationRoot = new RootElement("Menu") {
-                new Section ("Menu") {
-                   new StringElement("Recent Events"),
-                   new StringElement("Create Event"),
-                   new StringElement("Delete Event"),
-                   new StringElement("Calendar"),
-                   new StringElement("Overtime Schedule"),
-                   new StringElement("Setting"),
-                   new StringElement("Logout", delegate {DismissModalViewController(true); }),
-                }
-            };
-            // Create an array of UINavigationControllers that correspond to your
-            // menu items:
+            if (IoC.UserInfo.Employee.PrivledgeLevel == "Admin")
+            {
+                navigation.NavigationRoot = new RootElement("Menu") {
+                    new Section ("Menu") {
+                       new StringElement("Recent Events"),
+                       new StringElement("Create Event"),
+                       new StringElement("Delete Event"),
+                       new StringElement("Calendar"),
+                       new StringElement("Overtime Schedule"),
+                       new StringElement("Setting"),
+                       new StringElement("Logout", delegate {DismissModalViewController(true); }),
+                    }
+                };
+                // Create an array of UINavigationControllers that correspond to your
+                // menu items:
 
-            navigation.ViewControllers = new[] {
-               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
-               new UINavigationController(new CreateEventController()),
-               new UINavigationController(new DeleteEventController()),
-               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
-               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
-               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
-            };
+                navigation.ViewControllers = new[] {
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                    new UINavigationController(new CreateEventController()),
+                    new UINavigationController(new DeleteEventController()),
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                };
+
+            }
+
+            else if (IoC.UserInfo.Employee.PrivledgeLevel == "Moderator")
+            {
+                navigation.NavigationRoot = new RootElement("Menu") {
+                    new Section ("Menu") {
+                       new StringElement("Recent Events"),
+                       new StringElement("Create Event"),
+                       new StringElement("Delete Event"),
+                       new StringElement("Calendar"),
+                       new StringElement("Overtime Schedule"),
+                       new StringElement("Setting"),
+                       new StringElement("Logout", delegate {DismissModalViewController(true); }),
+                    }
+                };
+                // Create an array of UINavigationControllers that correspond to your
+                // menu items:
+
+                navigation.ViewControllers = new[] {
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                    new UINavigationController(new CreateEventController()),
+                    new UINavigationController(new DeleteEventController()),
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                };
+            }
+
+            else
+            {
+                navigation.NavigationRoot = new RootElement("Menu") {
+                    new Section ("Menu") {
+                       new StringElement("Recent Events"),
+                       new StringElement("Calendar"),
+                       new StringElement("Overtime Schedule"),
+                       new StringElement("Setting"),
+                       new StringElement("Logout", delegate {DismissModalViewController(true); }),
+                    }
+                };
+                // Create an array of UINavigationControllers that correspond to your
+                // menu items:
+
+                navigation.ViewControllers = new[] {
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+                };
+            }
 
         }
+
 
         public static FlyoutNavigationController getNavigationMenu()
         {
