@@ -46,6 +46,7 @@ namespace ITW_MobileApp.iOS
             loadingOverlay.Hide();
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+            myEventList = filterEvents();
             sortByDate(myEventList);
 
 
@@ -57,6 +58,26 @@ namespace ITW_MobileApp.iOS
             Add(table);
             
         }
+        public override async void ViewDidAppear(bool animated)
+        {
+            var bounds = UIScreen.MainScreen.Bounds;
+            LoadingOverlay loadingOverlay = new LoadingOverlay(bounds, "Loading events...");
+            View.Add(loadingOverlay);
+
+            await RefreshView();
+
+            loadingOverlay.Hide();
+
+            myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+            myEventList = filterEvents();
+            sortByDate(myEventList);
+            base.ViewDidAppear(animated);
+            table = new UITableView(View.Bounds); // defaults to Plain style
+            table.Source = new RecentEventTableSource(myEventList, this);
+            table.ContentInset = new UIEdgeInsets(65, 0, 0, 0);
+            Add(table);
+        }
+
         public void sortByDate(List<EventItem> eventList)
         {
             eventList.Sort((x, y) => DateTime.Compare(x.EventDate, y.EventDate));
@@ -69,9 +90,27 @@ namespace ITW_MobileApp.iOS
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
         }
 
-        void OnItemClick(object sender, int position)
+        private List<EventItem> filterEvents()
         {
-
+            List<EventItem> filteredList = new List<EventItem>();
+            foreach (EventItem eventitem in myEventList)
+            {
+                if (eventitem.EventDate.DayOfYear >= DateTime.Now.DayOfYear)
+                {
+                    foreach (string filter in IoC.ViewRefresher.FilterStringList)
+                    {
+                        if (eventitem.Category == filter)
+                        {
+                            filteredList.Add(eventitem);
+                        }
+                    }
+                    if (eventitem.Category == "Emergency")
+                    {
+                        filteredList.Add(eventitem);
+                    }
+                }
+            }
+            return filteredList;
         }
 
         //public bool IsPlayServicesAvailable()

@@ -41,13 +41,13 @@ namespace ITW_MobileApp.Droid
                 case "Moderator":
                     {
                         SetContentView(Resource.Layout.CalendarList_Admin);
-                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.CalendarList_Admin);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.CalendarList_Moderator);
                         break;
                     }
                 default:
                     {
                         SetContentView(Resource.Layout.CalendarList_Admin);
-                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.CalendarList_Admin);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.CalendarList_User);
                         break;
                     }
             }
@@ -108,7 +108,7 @@ namespace ITW_MobileApp.Droid
                 var intent = new Intent(this, typeof(EventDetailsActivity));
                 intent.PutExtra("Name", myEventList.ElementAt(info.Position).Name);
                 intent.PutExtra("Date", myEventList.ElementAt(info.Position).EventDate.ToString("MMMM dd, yyyy"));
-                intent.PutExtra("Time", myEventList.ElementAt(info.Position).EventTime);
+                intent.PutExtra("Time", myEventList.ElementAt(info.Position).EventDate.ToString("h:mm tt"));
                 intent.PutExtra("Location", myEventList.ElementAt(info.Position).Location);
                 intent.PutExtra("Category", myEventList.ElementAt(info.Position).Category);
                 intent.PutExtra("Description", myEventList.ElementAt(info.Position).EventDescription);
@@ -130,7 +130,6 @@ namespace ITW_MobileApp.Droid
 
         public async Task RefreshView()
         {
-            await IoC.Dbconnect.SyncAsync(pullData: true);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
         }
         public override void OnBackPressed()

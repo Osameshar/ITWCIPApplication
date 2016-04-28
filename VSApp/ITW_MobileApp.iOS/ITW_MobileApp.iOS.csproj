@@ -86,6 +86,9 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CalendarListController.cs" />
+    <Compile Include="Controllers\CalenderController.cs" />
+    <Compile Include="Controllers\FilterEventController.cs" />
     <Compile Include="Controllers\EventDetailsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoginController.designer.cs">
@@ -103,6 +106,11 @@
     <Compile Include="DataObjects\EmployeeLoginItem.cs" />
     <Compile Include="DataObjects\EventItem.cs" />
     <Compile Include="DataObjects\RecipientListItem.cs" />
+    <Compile Include="Controllers\EventDeleteController.cs" />
+    <Compile Include="Controllers\EventDeleteController.designer.cs">
+      <DependentUpon>EventDeleteController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIHelpers\CalendarListTableSource.cs" />
     <Compile Include="UIHelpers\DeleteEventTableSource.cs" />
     <Compile Include="iOSPushNotifications\PushSender.cs" />
     <Compile Include="Main.cs" />
@@ -112,7 +120,6 @@
       <DependentUpon>RecentEventsController.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CreateEventController.cs" />
-    <Compile Include="Controllers\DeleteEventController.cs" />
     <Compile Include="UIHelpers\RecentEventTableSource.cs" />
     <Compile Include="UIHelpers\LoadingOverlay.cs" />
     <None Include="app.config" />
@@ -128,12 +135,16 @@
     <Compile Include="ObjectFactorys\RecipientListFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
+    <InterfaceDefinition Include="Storyboard2.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Factorymind.Components-Unified">
+      <HintPath>..\Components\fmcalendar-1.5.3\lib\ios-unified\Factorymind.Components-Unified.dll</HintPath>
+    </Reference>
     <Reference Include="FlyoutNavigation">
       <HintPath>..\Components\flyoutnavigation-1.5.1\lib\ios-unified\FlyoutNavigation.dll</HintPath>
     </Reference>
@@ -198,6 +209,10 @@
     <XamarinComponentReference Include="flyoutnavigation">
       <Visible>False</Visible>
       <Version>1.5.1</Version>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="fmcalendar">
+      <Visible>False</Visible>
+      <Version>1.5.3</Version>
     </XamarinComponentReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

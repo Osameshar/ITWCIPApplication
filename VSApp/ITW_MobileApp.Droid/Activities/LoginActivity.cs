@@ -5,6 +5,7 @@ using Android.Content;
 using System.Threading.Tasks;
 using Android.Support.V7.App;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace ITW_MobileApp.Droid
 {
@@ -77,6 +78,7 @@ namespace ITW_MobileApp.Droid
                 if (authenticated)
                 {
                     IoC.UserInfo.EmployeeID = int.Parse(EmployeeID);
+                    IoC.ViewRefresher.FilterStringList = new List<string>() { "Meeting", "Company Event", "Machine Maintenance" };
                     var intent = new Intent(this, typeof(RecentEventsActivity));
                     StartActivity(intent);
                 }

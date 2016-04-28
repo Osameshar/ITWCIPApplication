@@ -6,11 +6,25 @@ using UIKit;
 using Foundation;
 using MonoTouch.Dialog;
 using CoreGraphics;
+using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace ITW_MobileApp.iOS
 {
     public class CreateEventController : DialogViewController
     {
+        EntryElement eventname;
+        EntryElement recipients;
+        EntryElement location;
+        DateElement date;
+        TimeElement timeelement;
+        string[] categories = new string[] { "Meeting", "Company Event", "Machine Maintenance", "Emergency" };
+        string[] priorities = new string[] { "Low", "Medium", "High" };
+        RadioGroup category;
+        RadioGroup priority;
+        EntryElement description;
+
         public CreateEventController() : base(new RootElement("Event Creation"), true)
         {
 
@@ -26,28 +40,28 @@ namespace ITW_MobileApp.iOS
         {
 
             base.ViewDidLoad();
-
+            
             // Perform any additional setup after loading the view
             var info = new RootElement("Info") {
                 new Section() {
-                    new EntryElement("Event Name", "Enter the Name", null),
-                    new EntryElement("Recipients' Names", "Enter the Recipients", null),
-                    new EntryElement("Enter Location", "Enter the Location", null)
+                    { eventname = new EntryElement("Event Name", "Enter the Name", null) },
+                    { recipients = new EntryElement("Recipients' Names", "Enter the Recipients", null) },
+                    { location = new EntryElement("Enter Location", "Enter the Location", null) }
                 },
 
                 new Section()
                 {
-                    new DateElement("Pick the Date", DateTime.Now)
+                    { date = new DateElement("Pick the Date", DateTime.Now) }
                 },
 
                 new Section()
                 {
-                    new TimeElement("Pick the Time", DateTime.Now)
+                    { timeelement = new TimeElement("Pick the Time", DateTime.Now) }
                 },
 
                 new Section()
                 {
-                    new RootElement("Type", new RadioGroup("Type of Event", 0)) {
+                    new RootElement("Type", category = new RadioGroup("Type of Event", 0)) {
                         new Section() {
                             new RadioElement ("Meeting", "Type of Event"),
                             new RadioElement ("Company Event", "Type of Event"),
@@ -56,7 +70,7 @@ namespace ITW_MobileApp.iOS
                         }
                     },
                     
-                    new RootElement("Priority", new RadioGroup ("priority", 0))
+                    new RootElement("Priority", priority = new RadioGroup ("priority", 0))
                     {
                         new Section()
                         {
@@ -69,16 +83,81 @@ namespace ITW_MobileApp.iOS
 
                 new Section()
                 {
-                    new EntryElement("Description", "Enter a Description", null)
+                    { description = new EntryElement("Description", "Enter a Description", null) }
                 }
             };
 
             Root.Add(info);
 
-            UIButton myBUtton = UIButton.FromType(UIButtonType.RoundedRect);
-            myBUtton.SetTitle("Add Event", UIControlState.Normal);
-            myBUtton.Frame = new Rectangle(22, 545, 320, 44);
-            View.AddSubview(myBUtton);
+            UIButton createEventBtn = UIButton.FromType(UIButtonType.RoundedRect);
+            createEventBtn.SetTitle("Add Event", UIControlState.Normal);
+            createEventBtn.Frame = new Rectangle(22, 545, 320, 44);
+            View.AddSubview(createEventBtn);
+
+
+            createEventBtn.TouchUpInside += async (object sender, EventArgs e) =>
+            {
+                await createEvent(info);
+            };
+        }
+        private async Task createEvent(RootElement info)
+        {
+            string EventName = eventname.Value;
+            string Recipients = recipients.Value;
+            string Location = location.Value;
+            string Category = categories[category.Selected];
+            string Priority = priorities[priority.Selected];
+            string EventDescription = description.Value;
+            DateTime EventDateTime = date.DateValue;
+            string time = timeelement.Value;
+
+            if (string.IsNullOrEmpty(EventName))
+            {
+                UIAlertView _error = new UIAlertView("Error", "Event name is required", null, "Ok", null);
+                _error.Show();
+                return;
+            }
+            else if (EventDateTime == null || time == null)
+            {
+                UIAlertView _error = new UIAlertView("Error", "Event date and time are required", null, "Ok", null);
+                _error.Show();
+                return;
+            }
+            else if (EventDateTime.Date.CompareTo(DateTime.Now.Date) < 0 ||
+                     (EventDateTime.Date.CompareTo(DateTime.Now.Date) == 0 && EventDateTime.Hour < DateTime.Now.Hour))
+            {
+                UIAlertView _error = new UIAlertView("Error", "Event is set to a past date.", null, "Ok", null);
+                _error.Show();
+                return;
+            }
+            else
+            {
+                try
+                {
+                    var bounds = UIScreen.MainScreen.Bounds;
+                    LoadingOverlay loadingOverlay = new LoadingOverlay(bounds, "Creating event...");
+                    View.Add(loadingOverlay);
+                    await IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
+
+                    loadingOverlay.Hide();
+
+                    //this.ParentViewController.ShowViewController(new RecentEventsController(), null);
+
+                    UIAlertView _error = new UIAlertView("Success!", "Event creation successful!", null, "Ok", null);
+                    _error.Show();
+
+                }
+                catch (MobileServicePushFailedException ex)
+                {
+                    UIAlertView _error = new UIAlertView("Connection Failed", "Internet connection required for Event creation.", null, "Ok", null);
+                    _error.Show();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                }
+            }
+
         }
     }
 }

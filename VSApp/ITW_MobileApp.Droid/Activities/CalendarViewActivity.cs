@@ -30,7 +30,6 @@ namespace ITW_MobileApp.Droid
 
         List<EventItem> myEventList;
 
-        Button viewEventsBtn;
         CalendarPickerView calendar;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -47,14 +46,14 @@ namespace ITW_MobileApp.Droid
                     }
                 case "Moderator":
                     {
-                        SetContentView(Resource.Layout.Calendar_Admin);
+                        SetContentView(Resource.Layout.Calendar_Moderator);
                         eventItemAdapter = new EventItemAdapter();
                         recipientListItemAdapter = new RecipientListItemAdapter();
                         break;
                     }
                 default:
                     {
-                        SetContentView(Resource.Layout.Calendar_Admin);
+                        SetContentView(Resource.Layout.Calendar_User);
                         eventItemAdapter = new EventItemAdapter();
                         recipientListItemAdapter = new RecipientListItemAdapter();
                         break;
@@ -65,10 +64,7 @@ namespace ITW_MobileApp.Droid
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
             _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
             ToolbarCreator toolbarCreator = new ToolbarCreator();
-            toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.create_event, this);
-
-            viewEventsBtn = FindViewById<Button>(Resource.Id.ViewEventsBtn);
-
+            toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.calendar_view, this);
 
             var nextYear = DateTime.Now.AddYears(1);
             var lastYear = DateTime.Now.AddYears(-1);
@@ -149,7 +145,6 @@ namespace ITW_MobileApp.Droid
         }
         public async Task RefreshView()
         {
-            await IoC.Dbconnect.SyncAsync(pullData: true);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
         }

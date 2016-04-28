@@ -31,6 +31,7 @@ namespace ITW_MobileApp.iOS
             this.AddChildViewController(navigation);
 
             // Create the menu:
+<<<<<<< HEAD
             if (IoC.UserInfo.Employee.PrivledgeLevel == "Admin")
             {
                 navigation.NavigationRoot = new RootElement("Menu") {
@@ -108,6 +109,32 @@ namespace ITW_MobileApp.iOS
 
         }
 
+=======
+            navigation.NavigationRoot = new RootElement("Menu") {
+                new Section ("Menu") {
+                   new StringElement("Recent Events"),
+                   new StringElement("Create Event"),
+                   new StringElement("Delete Event"),
+                   new StringElement("Calendar"),
+                   new StringElement("Overtime Schedule"),
+                   new StringElement("Filter Events"),
+                   new StringElement("Logout", delegate {DismissModalViewController(true); }),
+                }
+            };
+            // Create an array of UINavigationControllers that correspond to your
+            // menu items:
+
+            navigation.ViewControllers = new[] {
+               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+               new UINavigationController(new CreateEventController()),
+               new UINavigationController((EventDeleteController)this.Storyboard.InstantiateViewController("EventDeleteController")),
+               new UINavigationController(new CalendarController()),
+               new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
+               new UINavigationController(new FilterEventsController()),
+            };
+
+        }
+>>>>>>> refs/remotes/origin/develop
 
         public static FlyoutNavigationController getNavigationMenu()
         {

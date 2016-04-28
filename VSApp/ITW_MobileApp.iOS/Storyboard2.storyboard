@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="706">
+            <objects>
+                <tableViewController id="707" sceneMemberID="viewController" customClass="RecentEventsController" storyboardIdentifier="RecentEventsController" useStoryboardIdentifierAsRestorationIdentifier="YES" title="Recent Events">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="708">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="711" rowHeight="44">
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="711" id="712">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="707" id="709"/>
+                            <outlet property="delegate" destination="707" id="710"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="713" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="556" y="-49"/>
+        </scene>
+        <scene sceneID="701">
+            <objects>
+                <viewController id="702" sceneMemberID="viewController" customClass="ParentController" storyboardIdentifier="ParentController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="699"/>
+                        <viewControllerLayoutGuide type="bottom" id="700"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="703">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="704" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-176" y="-41"/>
+        </scene>
+        <scene sceneID="3">
+            <objects>
+                <viewController id="4" customModuleProvider="" sceneMemberID="viewController" customClass="LoginController" storyboardIdentifier="LoginController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="14"/>
+                        <viewControllerLayoutGuide type="bottom" id="15"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="12">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.45882352941176469" green="0" blue="0.16470588235294117" alpha="1"/>
+                    </view>
+                    <connections/>
+                    <navigationItem title="Login" id="11" key="navigationItem"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="16" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-918" y="-34"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Company.png" width="43" height="43"/>
+        <image name="CompanyBig.png" width="400" height="400"/>
+        <image name="Emergency.png" width="43" height="43"/>
+        <image name="EmergencyBig.png" width="400" height="400"/>
+        <image name="ITWCIPLogo.png" width="250" height="82"/>
+        <image name="MachineMaintenance.png" width="43" height="43"/>
+        <image name="MachineMaintenanceBig.png" width="400" height="400"/>
+        <image name="Meeting.png" width="43" height="43"/>
+        <image name="MeetingBig.png" width="400" height="400"/>
+        <image name="Menu Filled-20.png" width="20" height="20"/>
+    </resources>
+</document>
