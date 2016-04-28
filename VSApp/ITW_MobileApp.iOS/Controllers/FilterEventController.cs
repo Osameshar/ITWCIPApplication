@@ -75,7 +75,6 @@ namespace ITW_MobileApp.iOS
             {
                 filteredList.Add("Machine Maintenance");
             }
-            filteredList.Add("Emergency");
             IoC.ViewRefresher.FilterStringList = filteredList;
         }
 

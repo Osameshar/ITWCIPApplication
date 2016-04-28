@@ -55,7 +55,6 @@ namespace ITW_MobileApp.iOS
 
         public async Task RefreshView()
         {
-            await IoC.Dbconnect.SyncAsync(pullData: true);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
         }
 

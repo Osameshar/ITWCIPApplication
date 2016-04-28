@@ -30,7 +30,7 @@ namespace ITW_MobileApp.iOS
                 },
                 new Section ("Details"){
                     new StringElement ("Date:  " + MyEvent.EventDate.ToString("MM/dd/yyy")),
-                    new StringElement ("Time:  " + MyEvent.EventTime),
+                    new StringElement ("Time:  " + MyEvent.EventDate.ToString("h:mm tt")),
                     new StringElement ("Location:  " + MyEvent.Location)
                 },
                 new Section ("Description"){
