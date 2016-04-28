@@ -17,6 +17,7 @@ namespace ITW_MobileApp.iOS
             set;
         }
 
+        
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             // Override point for customization after application launch.
@@ -47,6 +48,8 @@ namespace ITW_MobileApp.iOS
                 IoC.UserInfo = new UserInfo();
             }
             SQLitePCL.CurrentPlatform.Init();
+
+
             return true;
         }
 
