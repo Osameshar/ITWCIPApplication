@@ -69,7 +69,15 @@ namespace ITW_MobileApp.Droid
             ToolbarCreator toolbarCreator = new ToolbarCreator();
             toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.event_deletion, this);
 
-            myEventList = eventItemAdapter.getEventsByEmployeeID();
+            if (IoC.UserInfo.Employee.PrivledgeLevel == "Admin")
+            {
+                myEventList = eventItemAdapter.getAllEventsNotDeleted(); 
+            }
+            else
+            {
+                myEventList = eventItemAdapter.getEventsByEmployeeID();
+            }
+
             sortByDate(myEventList);
             //Plug in my adapter
             myCheckBoxAdapter = new CheckBoxAdapter(this,myEventList);
@@ -123,7 +131,7 @@ namespace ITW_MobileApp.Droid
                 var intent = new Intent(this, typeof(EventDetailsActivity));
                 intent.PutExtra("Name", myEventList.ElementAt(info.Position).Name);
                 intent.PutExtra("Date", myEventList.ElementAt(info.Position).EventDate.ToString("MMMM dd, yyyy"));
-                intent.PutExtra("Time", myEventList.ElementAt(info.Position).EventTime);
+                intent.PutExtra("Time", myEventList.ElementAt(info.Position).EventDate.ToString("h:mm tt"));
                 intent.PutExtra("Location", myEventList.ElementAt(info.Position).Location);
                 intent.PutExtra("Category", myEventList.ElementAt(info.Position).Category);
                 intent.PutExtra("Description", myEventList.ElementAt(info.Position).EventDescription);
@@ -145,7 +153,6 @@ namespace ITW_MobileApp.Droid
 
         public async Task RefreshView()
         {
-            await IoC.Dbconnect.SyncAsync(pullData: true);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
         }
         public override void OnBackPressed()

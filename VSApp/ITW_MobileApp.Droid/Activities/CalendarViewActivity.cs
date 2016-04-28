@@ -46,14 +46,14 @@ namespace ITW_MobileApp.Droid
                     }
                 case "Moderator":
                     {
-                        SetContentView(Resource.Layout.Calendar_Admin);
+                        SetContentView(Resource.Layout.Calendar_Moderator);
                         eventItemAdapter = new EventItemAdapter();
                         recipientListItemAdapter = new RecipientListItemAdapter();
                         break;
                     }
                 default:
                     {
-                        SetContentView(Resource.Layout.Calendar_Admin);
+                        SetContentView(Resource.Layout.Calendar_User);
                         eventItemAdapter = new EventItemAdapter();
                         recipientListItemAdapter = new RecipientListItemAdapter();
                         break;
@@ -145,7 +145,6 @@ namespace ITW_MobileApp.Droid
         }
         public async Task RefreshView()
         {
-            await IoC.Dbconnect.SyncAsync(pullData: true);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
         }

@@ -7,11 +7,9 @@
     android:background="?attr/colorPrimary"
     android:fitsSystemWindows="true">
     <LinearLayout
+        android:background="#E0E0E0"
         android:orientation="vertical"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
-        android:background="#FFFFFF"
         android:layout_height="match_parent">
         <android.support.v7.widget.Toolbar
             android:id="@+id/ToolBar"
@@ -21,22 +19,21 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:minHeight="?attr/actionBarSize"
             android:background="?attr/colorPrimary" />
-        <com.squareup.timessquare.CalendarPickerView
-            android:id="@+id/calendar_view"
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="16dp"
-            android:scrollbarStyle="outsideOverlay"
-            android:clipToPadding="false"
-            android:background="#FFFFFF" />
-        <Button
-            android:id="@+id/ViewEventsBtn"
-            android:layout_height="wrap_content"
-            android:text="View Events"
-            android:layout_width="match_parent" />
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </RelativeLayout>
+        <ListView
+            android:id="@+id/listCalendar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
     </LinearLayout>
     <android.support.design.widget.NavigationView
         android:fitsSystemWindows="true"
@@ -45,5 +42,5 @@
         android:layout_gravity="start"
         android:id="@+id/nav_view"
         app:headerLayout="@layout/headerlayout"
-        app:menu="@menu/navigationview_menu_admin_filter" />
+        app:menu="@menu/navigationview_menu_moderator" />
 </android.support.v4.widget.DrawerLayout>
