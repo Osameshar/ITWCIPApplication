@@ -145,7 +145,6 @@ namespace ITW_MobileApp.Droid
         }
         public async Task RefreshView()
         {
-            await IoC.Dbconnect.SyncAsync(pullData: true);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
         }
