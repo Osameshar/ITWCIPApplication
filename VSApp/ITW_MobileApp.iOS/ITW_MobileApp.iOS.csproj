@@ -135,6 +135,7 @@
     <Compile Include="ObjectFactorys\RecipientListFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
+    <InterfaceDefinition Include="Storyboard2.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
