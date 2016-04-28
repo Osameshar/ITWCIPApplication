@@ -58,7 +58,7 @@ namespace ITW_MobileApp.Droid
 
             overtimeBtn.Click += delegate
             {
-                Intent browse = new Intent(Intent.ActionView, Android.Net.Uri.Parse("https://drive.google.com/open?id=0B6E12z1dzeQYNjVhV0VHcko3b2c"));
+                Intent browse = new Intent(Intent.ActionView, Android.Net.Uri.Parse("https://drive.google.com/open?id=0B6E12z1dzeQYclFMcjR0Y1ozVkU"));
                 StartActivity(browse);
             };
 

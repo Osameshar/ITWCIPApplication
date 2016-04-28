@@ -46,14 +46,14 @@ namespace ITW_MobileApp.Droid
                     }
                 case "Moderator":
                     {
-                        SetContentView(Resource.Layout.Calendar_Admin);
+                        SetContentView(Resource.Layout.Calendar_Moderator);
                         eventItemAdapter = new EventItemAdapter();
                         recipientListItemAdapter = new RecipientListItemAdapter();
                         break;
                     }
                 default:
                     {
-                        SetContentView(Resource.Layout.Calendar_Admin);
+                        SetContentView(Resource.Layout.Calendar_User);
                         eventItemAdapter = new EventItemAdapter();
                         recipientListItemAdapter = new RecipientListItemAdapter();
                         break;
