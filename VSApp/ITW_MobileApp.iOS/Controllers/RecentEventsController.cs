@@ -113,11 +113,6 @@ namespace ITW_MobileApp.iOS
             return filteredList;
         }
 
-        void OnItemClick(object sender, int position)
-        {
-
-        }
-
         //public bool IsPlayServicesAvailable()
         //{
         //    int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
