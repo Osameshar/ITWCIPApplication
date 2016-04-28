@@ -21,6 +21,7 @@ namespace ITW_MobileApp.Droid
         {
         }
 
+
         public EventItem getEventByID(int eventID)
         {
             foreach (EventItem eventItem in items)
@@ -43,6 +44,20 @@ namespace ITW_MobileApp.Droid
             }
             return null;
         }
+
+        public List<EventItem> getAllEventsNotDeleted()
+        {
+            List<EventItem> filteredItems = new List<EventItem>();
+            foreach (EventItem eventItem in items)
+            {
+                if (eventItem.IsDeleted == false)
+                {
+                    filteredItems.Add(eventItem);
+                }
+            }
+            return filteredItems;
+        }
+
         public List<EventItem> getEventsByEmployeeID()
         {
             List<EventItem> filteredItems = new List<EventItem>();
