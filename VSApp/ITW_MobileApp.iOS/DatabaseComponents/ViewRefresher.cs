@@ -53,7 +53,7 @@ namespace ITW_MobileApp.iOS
             }
         }
 
-        private async Task RefreshItemsFromTableAsync(EmployeeItemAdapter adapter)
+        public async Task RefreshItemsFromTableAsync(EmployeeItemAdapter adapter)
         {
             try
             {
