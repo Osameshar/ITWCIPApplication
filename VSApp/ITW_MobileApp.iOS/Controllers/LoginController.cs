@@ -82,6 +82,7 @@ namespace ITW_MobileApp.iOS
             if (authenticated)
             {
                 IoC.UserInfo.EmployeeID = int.Parse(EmployeeID);
+                await IoC.UserInfo.setEmployee();
                 loadingOverlay.Hide();
                 ParentController parent = this.Storyboard.InstantiateViewController("ParentController") as ParentController;
                 if (parent != null)

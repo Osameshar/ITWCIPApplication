@@ -98,7 +98,7 @@ namespace ITW_MobileApp.iOS
                 // menu items:
 
                 navigation.ViewControllers = new[] {
-                   new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),,
+                   new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                    new UINavigationController(new CalendarController()),
                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                    new UINavigationController(new FilterEventsController()),
