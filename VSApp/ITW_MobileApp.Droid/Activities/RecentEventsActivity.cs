@@ -39,7 +39,7 @@ namespace ITW_MobileApp.Droid
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            await IoC.UserInfo.setEmployee();
             // Set our view from the "main" layout resource
             await IoC.UserInfo.setEmployee();
             switch (IoC.UserInfo.Employee.PrivledgeLevel)

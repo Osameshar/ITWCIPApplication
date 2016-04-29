@@ -29,5 +29,16 @@ namespace ITW_MobileApp.iOS
         {
             return items.Count;
         }
+        public EmployeeItem findEmployeeByEmployeeID(int employeeID)
+        {
+            foreach (EmployeeItem item in items)
+            {
+                if (item.EmployeeID == employeeID)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 }
