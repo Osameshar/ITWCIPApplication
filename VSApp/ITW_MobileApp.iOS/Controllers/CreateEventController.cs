@@ -91,7 +91,10 @@ namespace ITW_MobileApp.iOS
 
             UIButton createEventBtn = UIButton.FromType(UIButtonType.RoundedRect);
             createEventBtn.SetTitle("Add Event", UIControlState.Normal);
-            createEventBtn.Frame = new Rectangle(22, 545, 320, 44);
+            createEventBtn.Frame = new Rectangle(0, 0, 320, 44);
+            int y = (int)((View.Frame.Size.Height - createEventBtn.Frame.Size.Height)/1.15);
+            int x = ((int)(View.Frame.Size.Width - createEventBtn.Frame.Size.Width)) / 2;
+            createEventBtn.Frame = new Rectangle(x, y, (int)createEventBtn.Frame.Width, (int)createEventBtn.Frame.Height);
             View.AddSubview(createEventBtn);
 
 
@@ -140,8 +143,6 @@ namespace ITW_MobileApp.iOS
                     await IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
 
                     loadingOverlay.Hide();
-
-                    //this.ParentViewController.ShowViewController(new RecentEventsController(), null);
 
                     UIAlertView _error = new UIAlertView("Success!", "Event creation successful!", null, "Ok", null);
                     _error.Show();
