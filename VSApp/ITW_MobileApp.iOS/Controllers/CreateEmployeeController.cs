@@ -34,8 +34,6 @@ namespace ITW_MobileApp.iOS
 
             base.ViewDidLoad();
 
-            UIButton createEmployeeBtn;
-
             // Perform any additional setup after loading the view
             var info = new RootElement("Info") {
                 new Section() {
@@ -66,18 +64,19 @@ namespace ITW_MobileApp.iOS
                         }
                     }                    
                 },
-                new Section()
-                {
-                    { createEmployeeBtn = UIButton.FromType(UIButtonType.System) }        
-                }
             };
 
             Root.Add(info);
-            
+
+            UIButton createEmployeeBtn = UIButton.FromType(UIButtonType.RoundedRect);
             createEmployeeBtn.SetTitle("Add Employee", UIControlState.Normal);
-            createEmployeeBtn.Center = CGPointMake(createEmployeeBtn.Center.x,
-                            createEmployeeBtn.Center.y + 10);
+
+            createEmployeeBtn.Frame = new Rectangle(0,0, 320, 44);
+            int y = (int)((View.Frame.Size.Height - createEmployeeBtn.Frame.Size.Height) / 1.25 );
+            int x = ((int)(View.Frame.Size.Width - createEmployeeBtn.Frame.Size.Width)) / 2;
+            createEmployeeBtn.Frame = new Rectangle(x,y, (int)createEmployeeBtn.Frame.Width, (int)createEmployeeBtn.Frame.Height);
             View.AddSubview(createEmployeeBtn);
+
 
             createEmployeeBtn.TouchUpInside += async (object sender, EventArgs e) =>
             {

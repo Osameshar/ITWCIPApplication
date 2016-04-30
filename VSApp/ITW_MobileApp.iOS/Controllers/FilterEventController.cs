@@ -49,7 +49,10 @@ namespace ITW_MobileApp.iOS
 
             UIButton filterEventsBtn = UIButton.FromType(UIButtonType.RoundedRect);
             filterEventsBtn.SetTitle("Filter Events", UIControlState.Normal);
-            filterEventsBtn.Frame = new Rectangle(22, 545, 320, 44);
+            filterEventsBtn.Frame = new Rectangle(0, 0, 320, 44);
+            int y = (int)((View.Frame.Size.Height - filterEventsBtn.Frame.Size.Height) / 1.25);
+            int x = ((int)(View.Frame.Size.Width - filterEventsBtn.Frame.Size.Width)) / 2;
+            filterEventsBtn.Frame = new Rectangle(x, y, (int)filterEventsBtn.Frame.Width, (int)filterEventsBtn.Frame.Height);
             View.AddSubview(filterEventsBtn);
 
 
