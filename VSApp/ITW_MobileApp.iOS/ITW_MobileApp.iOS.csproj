@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="Controllers\CalendarListController.cs" />
     <Compile Include="Controllers\CalenderController.cs" />
+    <Compile Include="Controllers\CreateEmployeeController.cs" />
     <Compile Include="Controllers\FilterEventController.cs" />
     <Compile Include="Controllers\EventDetailsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />

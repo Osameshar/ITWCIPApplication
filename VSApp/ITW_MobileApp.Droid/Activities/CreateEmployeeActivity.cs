@@ -74,7 +74,7 @@ namespace ITW_MobileApp.Droid
             try
             {
                 int EmployeeID = int.Parse(EditTextEmployeeID.Text);
-                string fullName = EditTextFirstName + " " + EditTextLastName;
+                string fullName = EditTextFirstName.Text + " " + EditTextLastName.Text;
                 string Email = EditTextEmail.Text;
                 string Department = SpinnerDepartment.SelectedItem.ToString();
                 string Privledege = SpinnerPrivledge.SelectedItem.ToString();
