@@ -51,12 +51,9 @@ namespace ITW_MobileApp.iOS
 
                 new Section()
                 {
-                    { date = new DateElement("Pick the Date", DateTime.Now) }
-                },
-
-                new Section()
-                {
-                    { timeelement = new TimeElement("Pick the Time", DateTime.Now) }
+                    { date = new DateElement("Pick the Date", DateTime.Now) },
+                    { timeelement = new TimeElement("Pick the Time", DateTime.Now) },
+                    { description = new EntryElement("Description", "Enter a Description", null) }
                 },
 
                 new Section()
@@ -80,11 +77,6 @@ namespace ITW_MobileApp.iOS
                         }
                     }
                 },
-
-                new Section()
-                {
-                    { description = new EntryElement("Description", "Enter a Description", null) }
-                }
             };
 
             Root.Add(info);
