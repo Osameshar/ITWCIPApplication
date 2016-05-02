@@ -73,10 +73,13 @@ namespace ITW_MobileApp.Droid
                 string trimedEmployee = employee.Trim();
                 foreach (EmployeeItem employeeItem in empItems)
                 {
-                    if (trimedEmployee.Equals(employeeItem.Name))
+                    if (!EmpIds.Contains(employeeItem.EmployeeID))
                     {
-                        EmpIds.Add(employeeItem.EmployeeID);
-                    }
+                        if (trimedEmployee.Equals(employeeItem.Name) || trimedEmployee.Equals(employeeItem.Department))
+                        {
+                            EmpIds.Add(employeeItem.EmployeeID);
+                        }
+                    }   
                 }
             }
         }

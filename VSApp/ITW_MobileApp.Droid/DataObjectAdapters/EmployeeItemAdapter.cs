@@ -32,16 +32,29 @@ namespace ITW_MobileApp.Droid
             }
             return null;
         }
-        public List<string> getEmployeeNameList()
+        public List<string> getAutoCompleteList()
         {
-            List<string> employeeNames = new List<string>();
+            List<string> entries = new List<string>();
             foreach (EmployeeItem item in items)
             {
-                employeeNames.Add(item.Name);
-                Debug.Write("asdlhfbqpvha[pwoerighaierbgaerlvh");
-                Debug.Write(item.Name);
+                if (!entries.Contains(item.Department))
+                {
+                    entries.Add(item.Department);
+                }
+                entries.Add(item.Name);
             }
-            return employeeNames;
+            return entries;
+        }
+
+        public List<string> getDepartmentList()
+        {
+            List<string> departments = new List<string>();
+            foreach (EmployeeItem item in items)
+            {
+                if(departments.Contains(item.Department))
+                departments.Add(item.Department);
+            }
+            return departments;
         }
         //Returns the view for a specific item on the list
         //TODO: fix view

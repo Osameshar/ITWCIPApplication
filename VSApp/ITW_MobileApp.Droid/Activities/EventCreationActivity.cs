@@ -74,7 +74,7 @@ namespace ITW_MobileApp.Droid
 
             EmployeeItemAdapter employeeItemAdapter = new EmployeeItemAdapter();
             await IoC.ViewRefresher.RefreshItemsFromTableAsync(employeeItemAdapter);
-            List<string> autoCompleteOptions = employeeItemAdapter.getEmployeeNameList();
+            List<string> autoCompleteOptions = employeeItemAdapter.getAutoCompleteList();
             ArrayAdapter autoCompleteAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleDropDownItem1Line, autoCompleteOptions);
 
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleDropDownItem1Line, autoCompleteOptions);
