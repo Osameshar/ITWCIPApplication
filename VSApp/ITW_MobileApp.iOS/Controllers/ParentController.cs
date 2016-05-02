@@ -39,7 +39,7 @@ namespace ITW_MobileApp.iOS
                        new StringElement("Calendar"),
                        new StringElement("Filter Events"),
                        new StringElement("Overtime Schedule", delegate { viewOvertimeSchedule(); }),
-                       new StringElement("Logout", delegate {DismissModalViewController(true); }),
+                       new StringElement("Logout", delegate { logout(); }),
                     }
                 };
                 // Create an array of UINavigationControllers that correspond to your
@@ -65,7 +65,7 @@ namespace ITW_MobileApp.iOS
                        new StringElement("Calendar"),
                        new StringElement("Filter Events"),
                        new StringElement("Overtime Schedule", delegate { viewOvertimeSchedule(); }),
-                       new StringElement("Logout", delegate {DismissModalViewController(true); }),
+                       new StringElement("Logout", delegate { logout(); }),
                     }
                 };
                 // Create an array of UINavigationControllers that correspond to your
@@ -88,7 +88,7 @@ namespace ITW_MobileApp.iOS
                        new StringElement("Calendar"),
                        new StringElement("Filter Events"),
                        new StringElement("Overtime Schedule", delegate { viewOvertimeSchedule(); }),
-                       new StringElement("Logout", delegate {DismissModalViewController(true); }),
+                       new StringElement("Logout", delegate { logout(); }),
                     }
                 };
                 // Create an array of UINavigationControllers that correspond to your
@@ -105,6 +105,12 @@ namespace ITW_MobileApp.iOS
         public void viewOvertimeSchedule()
         {
             UIApplication.SharedApplication.OpenUrl(new NSUrl(overtimeURL));
+        }
+        public void logout()
+        {
+            IoC.UserInfo.Employee = null;
+            IoC.UserInfo.EmployeeID = -1;
+            DismissModalViewController(true);
         }
         public static FlyoutNavigationController getNavigationMenu()
         {
