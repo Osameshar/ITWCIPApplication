@@ -1,7 +1,9 @@
 using Android.App;
 using Android.Views;
 using Android.Widget;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ITW_MobileApp.Droid
 {
@@ -29,6 +31,17 @@ namespace ITW_MobileApp.Droid
                 }
             }
             return null;
+        }
+        public List<string> getEmployeeNameList()
+        {
+            List<string> employeeNames = new List<string>();
+            foreach (EmployeeItem item in items)
+            {
+                employeeNames.Add(item.Name);
+                Debug.Write("asdlhfbqpvha[pwoerighaierbgaerlvh");
+                Debug.Write(item.Name);
+            }
+            return employeeNames;
         }
         //Returns the view for a specific item on the list
         //TODO: fix view
