@@ -10,7 +10,6 @@ namespace ITW_MobileApp.iOS
     public class AppDelegate : UIApplicationDelegate
     {
         // class-level declarations
-
         public override UIWindow Window
         {
             get;
@@ -18,7 +17,7 @@ namespace ITW_MobileApp.iOS
         }
 
         
-        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+        public override bool FinishedLaunching(UIApplication application, NSDictionary options)
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
@@ -49,10 +48,44 @@ namespace ITW_MobileApp.iOS
             }
             SQLitePCL.CurrentPlatform.Init();
 
+            var settings = UIUserNotificationSettings.GetSettingsForTypes(
+              UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null);
+            UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+
+            if (options != null)
+            {
+                // check for a local notification
+                if (options.ContainsKey(UIApplication.LaunchOptionsLocalNotificationKey))
+                {
+                    var localNotification = options[UIApplication.LaunchOptionsLocalNotificationKey] as UILocalNotification;
+                    if (localNotification != null)
+                    {
+                        UIAlertController okayAlertController = UIAlertController.Create(localNotification.AlertAction, localNotification.AlertBody, UIAlertControllerStyle.Alert);
+                        okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                        ParentController.getNavigationMenu().ViewControllers[0].PresentViewController(okayAlertController, true, null);
+
+                        // reset our badge
+                        UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+                    }
+                }
+            }
+
+
+
 
             return true;
         }
+        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+        {
+            // show an alert
+            UIAlertController okayAlertController = UIAlertController.Create(notification.AlertAction, notification.AlertBody, UIAlertControllerStyle.Alert);
+            okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+            ParentController.getNavigationMenu().ViewControllers[0].PresentViewController(okayAlertController, true, null);
 
+            // reset our badge
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+
+        }
         private async void InitSyncTables()
         {
             await IoC.Dbconnect.InitLocalDBSyncTables();
