@@ -2,16 +2,13 @@ using FlyoutNavigation;
 using Foundation;
 using MonoTouch.Dialog;
 using System;
-using System.CodeDom.Compiler;
-using System.Linq;
 using UIKit;
-using System.Collections.Generic;
 
 namespace ITW_MobileApp.iOS
 {
     partial class ParentController : UIViewController
     {
-
+        public string overtimeURL = "https://drive.google.com/open?id=0B6E12z1dzeQYclFMcjR0Y1ozVkU";
         public ParentController(IntPtr handle) : base(handle)
         {
         }
@@ -40,8 +37,8 @@ namespace ITW_MobileApp.iOS
                        new StringElement("Delete Event"),
                        new StringElement("Create Employee"),
                        new StringElement("Calendar"),
-                       new StringElement("Overtime Schedule"),
                        new StringElement("Filter Events"),
+                       new StringElement("Overtime Schedule", delegate { viewOvertimeSchedule(); }),
                        new StringElement("Logout", delegate {DismissModalViewController(true); }),
                     }
                 };
@@ -54,7 +51,6 @@ namespace ITW_MobileApp.iOS
                    new UINavigationController((EventDeleteController)this.Storyboard.InstantiateViewController("EventDeleteController")),
                    new UINavigationController(new CreateEmployeeController()),
                    new UINavigationController(new CalendarController()),
-                   new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                    new UINavigationController(new FilterEventsController()),
                 };
             }
@@ -67,8 +63,8 @@ namespace ITW_MobileApp.iOS
                        new StringElement("Create Event"),
                        new StringElement("Delete Event"),
                        new StringElement("Calendar"),
-                       new StringElement("Overtime Schedule"),
                        new StringElement("Filter Events"),
+                       new StringElement("Overtime Schedule", delegate { viewOvertimeSchedule(); }),
                        new StringElement("Logout", delegate {DismissModalViewController(true); }),
                     }
                 };
@@ -80,7 +76,6 @@ namespace ITW_MobileApp.iOS
                    new UINavigationController(new CreateEventController()),
                    new UINavigationController((EventDeleteController)this.Storyboard.InstantiateViewController("EventDeleteController")),
                    new UINavigationController(new CalendarController()),
-                   new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                    new UINavigationController(new FilterEventsController()),
                 };
             }
@@ -91,8 +86,8 @@ namespace ITW_MobileApp.iOS
                     new Section ("Menu") {
                        new StringElement("Recent Events"),
                        new StringElement("Calendar"),
-                       new StringElement("Overtime Schedule"),
                        new StringElement("Filter Events"),
+                       new StringElement("Overtime Schedule", delegate { viewOvertimeSchedule(); }),
                        new StringElement("Logout", delegate {DismissModalViewController(true); }),
                     }
                 };
@@ -102,17 +97,18 @@ namespace ITW_MobileApp.iOS
                 navigation.ViewControllers = new[] {
                    new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                    new UINavigationController(new CalendarController()),
-                   new UINavigationController((RecentEventsController)this.Storyboard.InstantiateViewController("RecentEventsController")),
                    new UINavigationController(new FilterEventsController()),
                 };
             }
 
         }
-
+        public void viewOvertimeSchedule()
+        {
+            UIApplication.SharedApplication.OpenUrl(new NSUrl(overtimeURL));
+        }
         public static FlyoutNavigationController getNavigationMenu()
         {
             return navigation;
         }
-
     }
 }
