@@ -103,8 +103,11 @@ namespace ITW_MobileApp.iOS
             string Category = categories[category.Selected];
             string Priority = priorities[priority.Selected];
             string EventDescription = description.Value;
-            DateTime EventDateTime = date.DateValue;
             string time = timeelement.Value;
+            int hours = parseTime(time);
+
+            DateTime EventDateTime = new DateTime(date.DateValue.Year, date.DateValue.Month, date.DateValue.Day, hours, timeelement.DateValue.Minute, 0);
+            
 
             if (string.IsNullOrEmpty(EventName))
             {
@@ -151,6 +154,13 @@ namespace ITW_MobileApp.iOS
                 }
             }
 
+        }
+
+        private int parseTime(string time)
+        {
+            DateTime dt = DateTime.Parse(time);
+            int hour = int.Parse(dt.ToString("HH"));
+            return hour;
         }
     }
 }
