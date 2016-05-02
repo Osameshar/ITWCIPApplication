@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 using System.Threading;
 using Android.Support.V4.Content;
 using Android.Graphics;
+using System.Collections.Generic;
+
+
 
 namespace ITW_MobileApp.Droid
 {
@@ -28,13 +31,14 @@ namespace ITW_MobileApp.Droid
         Button TimePickerBtn;
         Button TimeSetBtn;
         EditText EditTextEventName;
-        EditText EditTextEventRecipients;
+        MultiAutoCompleteTextView EditTextEventRecipients;
         EditText EditTextLocation;
         Spinner SpinnerCategoryType;
         Spinner SpinnerPriorty;
         EditText EditTextEventDescription;
         TextView EventDate;
         TextView EventTime;
+    
 
         Button CreateEventBtn;
         ErrorHandler error;
@@ -50,7 +54,7 @@ namespace ITW_MobileApp.Droid
         int hour = -1;
         int minute = -1;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -68,6 +72,12 @@ namespace ITW_MobileApp.Droid
                     }
             }
 
+            EmployeeItemAdapter employeeItemAdapter = new EmployeeItemAdapter();
+            await IoC.ViewRefresher.RefreshItemsFromTableAsync(employeeItemAdapter);
+            List<string> autoCompleteOptions = employeeItemAdapter.getAutoCompleteList();
+            ArrayAdapter autoCompleteAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleDropDownItem1Line, autoCompleteOptions);
+
+            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleDropDownItem1Line, autoCompleteOptions);
 
             _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
@@ -78,7 +88,11 @@ namespace ITW_MobileApp.Droid
             DatePickerBtn = FindViewById<Button>(Resource.Id.ButtonPickDate);
             TimePickerBtn = FindViewById<Button>(Resource.Id.ButtonPickTime);
             EditTextEventName = FindViewById<EditText>(Resource.Id.EditTextEventName);
-            EditTextEventRecipients = FindViewById<EditText>(Resource.Id.EditTextEventRecipients);
+            EditTextEventRecipients = FindViewById<MultiAutoCompleteTextView>(Resource.Id.EditTextEventRecipients);
+            EditTextEventRecipients.Adapter = adapter;
+            EditTextEventRecipients.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+
             EditTextLocation = FindViewById<EditText>(Resource.Id.EditTextLocation);
             SpinnerCategoryType = FindViewById<Spinner>(Resource.Id.SpinnerCategoryType);
             SpinnerPriorty = FindViewById<Spinner>(Resource.Id.SpinnerPriority);
