@@ -56,8 +56,6 @@ namespace ITW_MobileApp.Droid
             }
             return departments;
         }
-        //Returns the view for a specific item on the list
-        //TODO: fix view
         public override View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
         {
             var row = convertView;

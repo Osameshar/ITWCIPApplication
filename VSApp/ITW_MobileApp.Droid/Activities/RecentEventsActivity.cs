@@ -90,12 +90,6 @@ namespace ITW_MobileApp.Droid
             await RefreshView();
             FindViewById(Resource.Id.loadingPanel).Visibility = ViewStates.Gone;
 
-            //IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S");
-            //IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Emergency", "High", "PARTY AT MARLEY'S");
-            //IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Meeting", "High", "PARTY AT MARLEY'S");
-            //IoC.EventFactory.createEvent("MyEvent4", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Machine Maintenance", "High", "PARTY AT MARLEY'S");
-
-
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
             myEventList = filterEvents();
@@ -184,13 +178,6 @@ namespace ITW_MobileApp.Droid
             int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
             if (resultCode != ConnectionResult.Success)
             {
-                //if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
-                //    error.CreateAndShowDialog(GoogleApiAvailability.Instance.GetErrorString(resultCode),"GoogleAPI");
-                //else
-                //{
-                //    error.CreateAndShowDialog("Sorry, this device is not supported","Unsupported device");
-                //    Finish();
-                //}
                 return false;
             }
             else

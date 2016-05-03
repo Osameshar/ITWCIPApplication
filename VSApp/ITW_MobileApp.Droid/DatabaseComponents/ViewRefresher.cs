@@ -6,22 +6,7 @@ namespace ITW_MobileApp.Droid
 {
     public class ViewRefresher
     {
-        // Called when the refresh menu option is selected
-        //public async void OnRefreshItemsSelected(EmployeeItemAdapter adapter)
-        //{
-        //    await IoC.Dbconnect.SyncAsync(pullData: true); // get changes from the mobile service
-        //    await RefreshItemsFromTableAsync(adapter); // refresh view using local database
-        //}
-        //public async void OnRefreshItemsSelected(EventItemAdapter adapter)
-        //{
-        //    await IoC.Dbconnect.SyncAsync(pullData: true); // get changes from the mobile service
-        //    await RefreshItemsFromTableAsync(adapter); // refresh view using local database
-        //}
-        //public async void OnRefreshItemsSelected(RecipientListItemAdapter adapter)
-        //{
-        //    await IoC.Dbconnect.SyncAsync(pullData: true); // get changes from the mobile service
-        //    await RefreshItemsFromTableAsync(adapter); // refresh view using local database
-        //}
+
         public List<string> FilterStringList = new List<string>() { "Meeting", "Company Event", "Machine Maintenance" };
 
         public async Task RefreshItemsFromTableAsync(EventItemAdapter adapter)

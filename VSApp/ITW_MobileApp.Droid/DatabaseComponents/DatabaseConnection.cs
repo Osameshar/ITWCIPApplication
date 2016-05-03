@@ -49,10 +49,10 @@ namespace ITW_MobileApp.Droid
             // new code to initialize the SQLite store
             string path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), localDbFilename);
 
-           // if (!File.Exists(path))
-           // {
+            if (!File.Exists(path))
+           {
                 File.Create(path).Dispose();
-           // }
+            }
 
             var store = new MobileServiceSQLiteStore(path);
 
