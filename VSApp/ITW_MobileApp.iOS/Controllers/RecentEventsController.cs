@@ -48,6 +48,8 @@ namespace ITW_MobileApp.iOS
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
             myEventList = filterEvents();
+            notificationEventList = filterNotificationEvents(myEventList);
+            createNotifications();
             sortByDate(myEventList);
 
             table = new UITableView(View.Bounds); // defaults to Plain style
@@ -67,12 +69,11 @@ namespace ITW_MobileApp.iOS
             loadingOverlay.Hide();
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
-            notificationEventList = filterNotificationEvents(myEventList);
-            
+
             //ThreadStart myThreadDelegate = new ThreadStart(createNotifications);
             //Thread setupNotifications = new Thread(myThreadDelegate);
             // setupNotifications.Start();
-            createNotifications();
+
             myEventList = filterEvents();
             sortByDate(myEventList);
             base.ViewDidAppear(animated);
@@ -84,7 +85,7 @@ namespace ITW_MobileApp.iOS
 
         public void createNotifications()
         {
-            if (notificationEventList.Count != UIApplication.SharedApplication.ScheduledLocalNotifications.Length) {
+
                 foreach (EventItem item in notificationEventList)
                 {
 
@@ -92,13 +93,13 @@ namespace ITW_MobileApp.iOS
                     double seconds = (item.EventDate - DateTime.Now).TotalSeconds - 1800;
                     notification.FireDate = NSDate.FromTimeIntervalSinceNow(seconds);
                     notification.SoundName = UILocalNotification.DefaultSoundName;
-                    notification.ApplicationIconBadgeNumber = UIApplication.SharedApplication.ApplicationIconBadgeNumber++;
+                    notification.ApplicationIconBadgeNumber = 1;
                     notification.AlertAction = item.Category;
                     notification.AlertBody = item.Name + ": scheduled within 30 minutes.";
                     UIApplication.SharedApplication.ScheduleLocalNotification(notification);
                    
                 }
-            }
+            
         }
 
         public void sortByDate(List<EventItem> eventList)
