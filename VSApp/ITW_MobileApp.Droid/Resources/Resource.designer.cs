@@ -3253,6 +3253,93 @@ namespace ITW_MobileApp
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f050066
+			public const int AutomatedAssembly = 2131034214;
+			
+			// aapt resource value: 0x7f050067
+			public const int CIPAssembly = 2131034215;
+			
+			// aapt resource value: 0x7f050069
+			public const int CIPTNAdministration = 2131034217;
+			
+			// aapt resource value: 0x7f050080
+			public const int CIPTNHumanResources = 2131034240;
+			
+			// aapt resource value: 0x7f050081
+			public const int CIPTNOffice = 2131034241;
+			
+			// aapt resource value: 0x7f05006c
+			public const int CIPTNPress = 2131034220;
+			
+			// aapt resource value: 0x7f05006d
+			public const int CIPTNPress2 = 2131034221;
+			
+			// aapt resource value: 0x7f05006e
+			public const int CIPTNPress4 = 2131034222;
+			
+			// aapt resource value: 0x7f05006f
+			public const int CIPTNPress5 = 2131034223;
+			
+			// aapt resource value: 0x7f050070
+			public const int CIPTNPress6 = 2131034224;
+			
+			// aapt resource value: 0x7f050072
+			public const int CIPTNToolRoom = 2131034226;
+			
+			// aapt resource value: 0x7f050068
+			public const int CipSort = 2131034216;
+			
+			// aapt resource value: 0x7f05006a
+			public const int CipTnHeatTreat = 2131034218;
+			
+			// aapt resource value: 0x7f05006b
+			public const int CipTnMaintenanc = 2131034219;
+			
+			// aapt resource value: 0x7f050071
+			public const int CipTnQualityAs = 2131034225;
+			
+			// aapt resource value: 0x7f050073
+			public const int CipTnToolroom2 = 2131034227;
+			
+			// aapt resource value: 0x7f050074
+			public const int CipTnToolroom3 = 2131034228;
+			
+			// aapt resource value: 0x7f050075
+			public const int CipTnToolroom4 = 2131034229;
+			
+			// aapt resource value: 0x7f050076
+			public const int CustomerService = 2131034230;
+			
+			// aapt resource value: 0x7f050077
+			public const int DesignEngineerMI = 2131034231;
+			
+			// aapt resource value: 0x7f050078
+			public const int Distribution = 2131034232;
+			
+			// aapt resource value: 0x7f050079
+			public const int MaterialsControl = 2131034233;
+			
+			// aapt resource value: 0x7f05007a
+			public const int Outsourcing = 2131034234;
+			
+			// aapt resource value: 0x7f05007b
+			public const int PlantUtility = 2131034235;
+			
+			// aapt resource value: 0x7f05007c
+			public const int QAAdmin = 2131034236;
+			
+			// aapt resource value: 0x7f05007d
+			public const int QualityAssuranceAuditorDir = 2131034237;
+			
+			// aapt resource value: 0x7f05007e
+			public const int SalariedExempt = 2131034238;
+			
+			// aapt resource value: 0x7f050065
+			public const int StdSwEng = 2131034213;
+			
+			// aapt resource value: 0x7f05007f
+			public const int Supervisors = 2131034239;
+			
 			// aapt resource value: 0x7f05001f
 			public const int abc_action_bar_home_description = 2131034143;
 			

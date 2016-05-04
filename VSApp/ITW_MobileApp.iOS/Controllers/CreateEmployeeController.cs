@@ -7,6 +7,7 @@ using UIKit;
 
 namespace ITW_MobileApp.iOS
 {
+
     class CreateEmployeeController : DialogViewController
     {
         EntryElement EditTextFirstName;
@@ -15,7 +16,39 @@ namespace ITW_MobileApp.iOS
         EntryElement EditTextEmail;
         RadioGroup SpinnerDepartment;
         RadioGroup SpinnerPrivledge;
-        string[] departments = new string[] { "Meeting", "Company Event", "Machine Maintenance", "Emergency" };
+        string[] departments = new string[] {
+            "Std Sw Eng",
+            "Automated Assembly",
+            "CIP Assembly",
+            "Cip Sort",
+            "CIP TN Administration",
+            "Cip Tn Heat Treat",
+            "Cip Tn Maintenanc",
+            "CIP TN Press",
+            "CIP TN Press2",
+            "CIP TN Press4",
+            "CIP TN Press5",
+            "CIP TN Press6",
+            "Cip Tn Quality As",
+            "CIP TN Tool Room",
+            "Cip Tn Toolroom2",
+            "Cip Tn Toolroom3",
+            "Cip Tn Toolroom4",
+            "CIP Tool Room",
+            "Customer Service",
+            "Design Engineer - MI",
+            "Distribution",
+            "Materials Control",
+            "Outsourcing",
+            "Plant Utility",
+            "QA Admin",
+            "Quality Assurance Auditor-Dir",
+            "Salaried Exempt",
+            "Supervisors",
+            "CIP TN Human Resources",
+            "CIP TN Office",
+            "CIP TN Administration"
+        };
         string[] privledges = new string[] { "User", "Moderators", "Admin" };
 
         public CreateEmployeeController() : base(new RootElement("Employee Creation"), true)
@@ -45,12 +78,40 @@ namespace ITW_MobileApp.iOS
 
                 new Section()
                 {
-                    new RootElement("Category", SpinnerDepartment = new RadioGroup("Department", 0)) {
+                    new RootElement("Department", SpinnerDepartment = new RadioGroup("Department", 0)) {
                         new Section() {
-                            new RadioElement ("Meeting", "Type of Event"),
-                            new RadioElement ("Company Event", "Type of Event"),
-                            new RadioElement ("Machine Maintenance", "Type of Event"),
-                            new RadioElement ("Emergency", "Type of Event")
+
+                                                new RadioElement ("Std Sw Eng","Department"),
+                                                new RadioElement ("Automated Assembly","Department"),
+                                                new RadioElement ("CIP Assembly","Department"),
+                                                new RadioElement ("Cip Sort","Department"),
+                                                new RadioElement ("CIP TN Administration","Department"),
+                                                new RadioElement ("Cip Tn Heat Treat","Department"),
+                                                new RadioElement ("Cip Tn Maintenanc","Department"),
+                                                new RadioElement ("CIP TN Press","Department"),
+                                                new RadioElement ("CIP TN Press2","Department"),
+                                                new RadioElement ("CIP TN Press4","Department"),
+                                                new RadioElement ("CIP TN Press5","Department"),
+                                                new RadioElement ("CIP TN Press6","Department"),
+                                                new RadioElement ("Cip Tn Quality As","Department"),
+                                                new RadioElement ("CIP TN Tool Room","Department"),
+                                                new RadioElement ("Cip Tn Toolroom2","Department"),
+                                                new RadioElement ("Cip Tn Toolroom3","Department"),
+                                                new RadioElement ("Cip Tn Toolroom4","Department"),
+                                                new RadioElement ("CIP Tool Room","Department"),
+                                                new RadioElement ("Customer Service","Department"),
+                                                new RadioElement ("Design Engineer - MI","Department"),
+                                                new RadioElement ("Distribution","Department"),
+                                                new RadioElement ("Materials Control","Department"),
+                                                new RadioElement ("Outsourcing","Department"),
+                                                new RadioElement ("Plant Utility","Department"),
+                                                new RadioElement ("QA Admin","Department"),
+                                                new RadioElement ("Quality Assurance Auditor-Dir","Department"),
+                                                new RadioElement ("Salaried Exempt","Department"),
+                                                new RadioElement ("Supervisors","Department"),
+                                                new RadioElement ("CIP TN Human Resources","Department"),
+                                                new RadioElement ("CIP TN Office","Department"),
+                                                new RadioElement ("CIP TN Administration","Department")
                         }
                     },
 

@@ -37,14 +37,17 @@ namespace ITW_MobileApp.iOS
             loginButton = LoginButton;
             EditTextEmployeeID = Username;
             EditTextPassword = Password;
-
+            createUserButton = CreateUser;
 
             loginButton.TouchUpInside += (object sender, EventArgs e) =>
             {
                 Login();
             };
 
-            //add create user button
+            createUserButton.TouchUpInside += (object sender, EventArgs e) =>
+            {
+                ValidateCreateUser();
+            };
         }
         public async void ValidateCreateUser()
         {
@@ -171,6 +174,7 @@ namespace ITW_MobileApp.iOS
             }
             return false;
         }
+
     }
 }
 

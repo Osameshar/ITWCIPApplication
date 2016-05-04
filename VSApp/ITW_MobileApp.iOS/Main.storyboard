@@ -49,6 +49,17 @@
                                     <rect key="frame" x="76" y="406" width="250" height="30"/>
                                 </variation>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1037" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="90" y="481" width="139" height="30"/>
+                                <state key="normal" title="Create User">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="76" y="492" width="250" height="30"/>
+                                </variation>
+                                <connections/>
+                            </button>
                         </subviews>
                         <variation key="default">
                             <mask key="subviews">
@@ -67,6 +78,9 @@
                                 <exclude reference="1000"/>
                                 <exclude reference="1001"/>
                                 <exclude reference="1002"/>
+                                <exclude reference="1056"/>
+                                <exclude reference="1057"/>
+                                <exclude reference="1058"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -87,6 +101,9 @@
                                 <include reference="1000"/>
                                 <include reference="1001"/>
                                 <include reference="1002"/>
+                                <include reference="1056"/>
+                                <include reference="1057"/>
+                                <include reference="1058"/>
                             </mask>
                         </variation>
                         <color key="backgroundColor" colorSpace="calibratedRGB" red="0.45882352941176469" green="0" blue="0.16470588235294117" alpha="1"/>
@@ -102,12 +119,16 @@
                             <constraint id="1000" firstItem="898" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" constant="1"/>
                             <constraint id="1001" firstItem="898" firstAttribute="top" secondItem="27" secondAttribute="bottom" constant="18"/>
                             <constraint id="1002" firstItem="898" firstAttribute="width" secondItem="27" secondAttribute="width"/>
+                            <constraint id="1056" firstItem="1037" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" constant="1"/>
+                            <constraint id="1057" firstItem="1037" firstAttribute="top" secondItem="898" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1058" firstItem="1037" firstAttribute="width" secondItem="898" secondAttribute="width"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="Username" destination="26" id="name-outlet-26"/>
                         <outlet property="Password" destination="27" id="name-outlet-27"/>
                         <outlet property="LoginButton" destination="898" id="name-outlet-898"/>
+                        <outlet property="CreateUser" destination="1037" id="name-outlet-1037"/>
                     </connections>
                     <navigationItem title="Login" id="11" key="navigationItem"/>
                 </viewController>
