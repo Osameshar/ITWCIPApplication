@@ -8,7 +8,7 @@ namespace ITW_MobileApp.iOS
 {
     partial class ParentController : UIViewController
     {
-        public string overtimeURL = "https://drive.google.com/open?id=0B6E12z1dzeQYclFMcjR0Y1ozVkU";
+        public string overtimeURL = "https://drive.google.com/open?id=0B2kq5WLtKIJHRUtsT0x3cWlPQ1k";
         public ParentController(IntPtr handle) : base(handle)
         {
         }
