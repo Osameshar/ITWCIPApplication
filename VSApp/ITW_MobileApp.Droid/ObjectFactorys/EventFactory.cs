@@ -67,19 +67,38 @@ namespace ITW_MobileApp.Droid
         {
             List<EmployeeItem> empItems = await IoC.Dbconnect.getEmployeeSyncTable().ToListAsync();
             string[] parsedRecipients = recipients.Split(',');
+            bool allEmployees = false;
 
             foreach (string employee in parsedRecipients)
             {
-                string trimedEmployee = employee.Trim();
+                if (employee.Equals("All Employees"))
+                {
+                    allEmployees = true;
+                }
+            }
+
+            if (allEmployees)
+            {
                 foreach (EmployeeItem employeeItem in empItems)
                 {
-                    if (!EmpIds.Contains(employeeItem.EmployeeID))
+                    EmpIds.Add(employeeItem.EmployeeID);
+                }
+            }
+            else
+            {
+                foreach (string employee in parsedRecipients)
+                {
+                    string trimedEmployee = employee.Trim();
+                    foreach (EmployeeItem employeeItem in empItems)
                     {
-                        if (trimedEmployee.Equals(employeeItem.Name) || trimedEmployee.Equals(employeeItem.Department))
+                        if (!EmpIds.Contains(employeeItem.EmployeeID))
                         {
-                            EmpIds.Add(employeeItem.EmployeeID);
+                            if (trimedEmployee.Equals(employeeItem.Name) || trimedEmployee.Equals(employeeItem.Department))
+                            {
+                                EmpIds.Add(employeeItem.EmployeeID);
+                            }
                         }
-                    }   
+                    }
                 }
             }
         }

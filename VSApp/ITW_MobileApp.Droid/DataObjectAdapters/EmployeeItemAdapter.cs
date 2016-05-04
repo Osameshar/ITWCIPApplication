@@ -37,25 +37,17 @@ namespace ITW_MobileApp.Droid
             List<string> entries = new List<string>();
             foreach (EmployeeItem item in items)
             {
+                
                 if (!entries.Contains(item.Department))
                 {
                     entries.Add(item.Department);
                 }
                 entries.Add(item.Name);
             }
+            entries.Add("All Employees");
             return entries;
         }
 
-        public List<string> getDepartmentList()
-        {
-            List<string> departments = new List<string>();
-            foreach (EmployeeItem item in items)
-            {
-                if(departments.Contains(item.Department))
-                departments.Add(item.Department);
-            }
-            return departments;
-        }
         public override View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
         {
             var row = convertView;
