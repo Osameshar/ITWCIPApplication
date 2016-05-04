@@ -42,8 +42,8 @@ namespace ITW_MobileApp.Droid
 
             //IoC.EmployeeFactory.createEmployee("Curtis Keller", "testCurtis@gmail.com", 1, "IT", "User");
             //IoC.EmployeeFactory.createEmployee("Corey Keller", "testCorey@gmail.com", 2, "HR", "User");
-            //IoC.EmployeeFactory.createEmployee("Alan Keller", "testAlan@gmail.com", 3, "IT", "User");
-
+            //IoC.EmployeeFactory.createEmployee("Admin", "testAdmin@gmail.com",4, "IT", "Admin");
+            //IoC.EmployeeFactory.createEmployee("Moderator", "testAdmin@gmail.com", 5, "IT", "Moderator");
 
             StartActivity(new Intent(this, typeof(LoginActivity)));
 

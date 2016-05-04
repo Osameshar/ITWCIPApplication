@@ -17,6 +17,10 @@ namespace ITW_MobileApp.Droid
             this.layoutResourceId = layoutResourceId;
         }
 
+        public RecipientListItemAdapter()
+        {
+        }
+
         public List<EventItem> getEventsByEmployeeID(int employeeID, EventItemAdapter eventAdapter)
         {
             List<EventItem> filteredItems = new List<EventItem>();
@@ -34,39 +38,11 @@ namespace ITW_MobileApp.Droid
             return filteredItems;
         }
 
-        //Returns the view for a specific item on the list
-        //TODO: fix view
         public override View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
         {
             var row = convertView;
             var currentItem = this[position];
-            /*     CheckBox checkBox;
-
-                 if (row == null)
-                 {
-                     var inflater = activity.LayoutInflater;
-                     row = inflater.Inflate(layoutResourceId, parent, false);
-
-                     checkBox = row.FindViewById<CheckBox>(Resource.Id.checkToDoItem);
-
-                     checkBox.CheckedChange += async (sender, e) => {
-                         var cbSender = sender as CheckBox;
-                         if (cbSender != null && cbSender.Tag is ToDoItemWrapper && cbSender.Checked)
-                         {
-                             cbSender.Enabled = false;
-                             if (activity is ToDoActivity)
-                                 await ((ToDoActivity)activity).CheckItem((cbSender.Tag as ToDoItemWrapper).ToDoItem);
-                         }
-                     };
-                 }
-                 else
-                     checkBox = row.FindViewById<CheckBox>(Resource.Id.checkToDoItem);
-
-                 checkBox.Text = currentItem.Text;
-                 checkBox.Checked = false;
-                 checkBox.Enabled = true;
-                 checkBox.Tag = new ToDoItemWrapper(currentItem);
-                 */
+            
             return row;
         }
 

@@ -20,11 +20,18 @@ namespace ITW_MobileApp.Droid
 
                 foreach (int employeeID in EmpIds)
                 {
-                    IoC.RecipientListFactory.createRecipientList(employeeID, newEventID);
+                   await IoC.RecipientListFactory.createRecipientList(employeeID, newEventID);
                 }
 
                 await IoC.Dbconnect.getEventSyncTable().InsertAsync(new EventItem { Name = newName, EventRecipients = newEventRecipients, EventDate = newEventDate, EventTime = newEventTime, Location = newLocation, Category = newCategory, EventPriority = newEventPriority, EventDescription = newEventDescription, EventID = newEventID, EmployeeID = IoC.UserInfo.EmployeeID, IsDeleted = false });
                 await IoC.Dbconnect.SyncAsyncConnected(pullData: true);
+                PushSender pusher = new PushSender();
+               
+                //fix for departments
+                foreach (int employeeID in EmpIds)
+                {
+                    await pusher.sendPush(employeeID.ToString(), newName);
+                }  
             }
             catch (MobileServicePushFailedException)
             {
@@ -60,15 +67,37 @@ namespace ITW_MobileApp.Droid
         {
             List<EmployeeItem> empItems = await IoC.Dbconnect.getEmployeeSyncTable().ToListAsync();
             string[] parsedRecipients = recipients.Split(',');
+            bool allEmployees = false;
 
             foreach (string employee in parsedRecipients)
             {
-                string trimedEmployee = employee.Trim();
+                if (employee.Equals("All Employees"))
+                {
+                    allEmployees = true;
+                }
+            }
+
+            if (allEmployees)
+            {
                 foreach (EmployeeItem employeeItem in empItems)
                 {
-                    if (trimedEmployee.Equals(employeeItem.Name))
+                    EmpIds.Add(employeeItem.EmployeeID);
+                }
+            }
+            else
+            {
+                foreach (string employee in parsedRecipients)
+                {
+                    string trimedEmployee = employee.Trim();
+                    foreach (EmployeeItem employeeItem in empItems)
                     {
-                        EmpIds.Add(employeeItem.EmployeeID);
+                        if (!EmpIds.Contains(employeeItem.EmployeeID))
+                        {
+                            if (trimedEmployee.Equals(employeeItem.Name) || trimedEmployee.Equals(employeeItem.Department))
+                            {
+                                EmpIds.Add(employeeItem.EmployeeID);
+                            }
+                        }
                     }
                 }
             }

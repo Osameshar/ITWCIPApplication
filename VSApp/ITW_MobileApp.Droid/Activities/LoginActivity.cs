@@ -2,16 +2,21 @@ using Android.OS;
 using Android.App;
 using Android.Widget;
 using Android.Content;
+using System.Threading.Tasks;
+using Android.Support.V7.App;
+using System.Threading;
+using System.Collections.Generic;
 
 namespace ITW_MobileApp.Droid
 {
-    [Activity(Theme = "@style/MyTheme")]
-    public class LoginActivity : Activity
+    [Activity(Theme = "@style/MyTheme.Login")]
+    public class LoginActivity : AppCompatActivity
     {
-        //Adapter to map the items list to the view
-        private EmployeeItemAdapter employeeItemAdapter;
-        private EventItemAdapter eventItemAdapter;
-        private RecipientListItemAdapter recipientListItemAdapter;
+        private Button loginButton;
+        private Button createUserButton;
+        private EditText EditTextEmployeeID;
+        private EditText EditTextPassword;
+        ErrorHandler error;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -20,96 +25,150 @@ namespace ITW_MobileApp.Droid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Login);
 
-            // Create an adapter to bind the items with the view
-            employeeItemAdapter = new EmployeeItemAdapter(this, Resource.Layout.Row_List_To_Do);
-            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Row_List_To_Do);
-            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Row_List_To_Do);
+            error = new ErrorHandler(this);
 
+            loginButton = FindViewById<Button>(Resource.Id.loginBtn);
+            EditTextEmployeeID = FindViewById<EditText>(Resource.Id.userName);
+            EditTextPassword = FindViewById<EditText>(Resource.Id.password);
+            createUserButton = FindViewById<Button>(Resource.Id.createUserBtn);
 
-            Button loginButton = FindViewById<Button>(Resource.Id.loginBtn);
-
-            //Login Button sends us to the Main View. THIS WILL NEED TO BE CHANGED FOR AUTHENTICATION.
+            createUserButton.Click += (sender, e) =>
+            {
+                ValidateCreateUser();
+            };
             loginButton.Click += (sender, e) =>
             {
-                IoC.UserInfo.EmployeeID = 1;//this is acting as "Curtis Keller" logged in.
-                var intent = new Intent(this, typeof(RecentEventsActivity));
-                StartActivity(intent);
+                Login();
             };
 
         }
+        public async void ValidateCreateUser()
+        {
+            if (!Validate())
+            {
+                return;
+            }
+
+            createUserButton.Enabled = false;
+
+            string EmployeeID = EditTextEmployeeID.Text;
+            string password = EditTextPassword.Text;
+
+            await createUser(EmployeeID, password);
+
+            createUserButton.Enabled = true;
+        }
+        public void Login()
+        {
+            if (!Validate())
+            {
+                return;
+            }            
+
+            loginButton.Enabled = false;
+
+            string EmployeeID = EditTextEmployeeID.Text;
+            string password = EditTextPassword.Text;
 
 
-
-        /*
-                //Initializes the activity menu
-                public override bool OnCreateOptionsMenu(IMenu menu)
+            var progressDialog = ProgressDialog.Show(this, "Please wait...", "Checking account info...", true);
+            new Thread(new ThreadStart(async delegate
+            {
+                bool authenticated = await AuthenticateUser(EmployeeID, password);
+                if (authenticated)
                 {
-                    MenuInflater.Inflate(Resource.Menu.activity_main, menu);
+                    IoC.UserInfo.EmployeeID = int.Parse(EmployeeID);
+                    IoC.ViewRefresher.FilterStringList = new List<string>() { "Meeting", "Company Event", "Machine Maintenance" };
+                    var intent = new Intent(this, typeof(RecentEventsActivity));
+                    StartActivity(intent);
+                }
+                else
+                {
+                    RunOnUiThread(() => Toast.MakeText(this, "Login Unsuccessful.", ToastLength.Long).Show());
+                }
+                RunOnUiThread(() => progressDialog.Hide());
+            })).Start();
+
+            loginButton.Enabled = true;
+        }
+        private async Task<bool> AuthenticateUser(string employeeID, string password)
+        {
+            return await LoginAuthenticator.Authenticate(employeeID, password);
+        }
+        public bool Validate()
+        {
+            bool valid = true;
+
+            string EmployeeID = EditTextEmployeeID.Text;
+            string password = EditTextPassword.Text;
+            int checkID;
+
+            if (EmployeeID.Length == 0 || !(int.TryParse(EmployeeID, out checkID)))
+            {
+                EditTextEmployeeID.Error = "Enter a valid EmployeeID";
+                valid = false;
+            }
+            else {
+                EditTextEmployeeID.Error = null;
+            }
+
+            if (password.Length == 0 || password.Length < 4 || password.Length > 10)
+            {
+                EditTextPassword.Error = "between 4 and 10 alphanumeric characters";
+                valid = false;
+            }
+            else {
+                EditTextPassword.Error = null;
+            }
+
+            return valid;
+        }
+        public async Task createUser(string employeeID, string password)
+        {
+            int empID = int.Parse(employeeID);
+            bool isEmployee = await searchForEmployee(empID);
+            bool isUser = await searchForUser(empID);
+            if (isEmployee && !isUser)
+            {
+                await LoginAuthenticator.GenerateSaltedSHA1(password, empID);
+                RunOnUiThread(() => Toast.MakeText(this, "User Creation Successful.", ToastLength.Long).Show());
+            }
+            else if (isEmployee == false)
+            {
+                error.CreateAndShowDialog("This EmployeeID is not setup as an Employee.", "Incorrect ID");
+            }
+            else
+            {
+                error.CreateAndShowDialog("This EmployeeID is already a user.", "User Already Exists");
+            }
+        }
+        public async Task<bool> searchForEmployee(int employeeID)
+        {
+            var employees = await IoC.Dbconnect.getEmployeeSyncTable().ToListAsync();
+            foreach (EmployeeItem employee in employees)
+            {
+                if (employee.EmployeeID == employeeID)
+                {
                     return true;
                 }
-
-                //Select an option from the menu
-                public override bool OnOptionsItemSelected(IMenuItem item)
+            }
+            return false;
+        }
+        public async Task<bool> searchForUser(int employeeID)
+        {
+            var users = await IoC.Dbconnect.getClient().GetTable<EmployeeLoginItem>().ToListAsync();
+            foreach (EmployeeLoginItem user in users)
+            {
+                if (user.EmployeeID == employeeID)
                 {
-                    if (item.ItemId == Resource.Id.menu_refresh) {
-                        item.SetEnabled(false);
-
-                        OnRefreshItemsSelected();
-
-                        item.SetEnabled(true);
-                    }
                     return true;
-                }*/
-
-        /*
-                public async Task CheckItem(ToDoItem item)
-                {
-                    if (client == null) {
-                        return;
-                    }
-
-                    // Set the item as completed and update it in the table
-                    item.Complete = true;
-                    try {
-                        await toDoTable.UpdateAsync(item); // update the new item in the local database
-                        await SyncAsync(); // send changes to the mobile service
-
-                        if (item.Complete)
-                            adapter.Remove(item);
-
-                    }
-                    catch (Exception e) {
-                        CreateAndShowDialog(e, "Error");
-                    }
                 }
-
-                [Java.Interop.Export()]
-                public async void AddItem(View view)
-                {
-                    if (client == null || string.IsNullOrWhiteSpace(textNewToDo.Text)) {
-                        return;
-                    }
-
-                    // Create a new item
-                    var item = new ToDoItem {
-                        Text = textNewToDo.Text,
-                        Complete = false
-                    };
-
-                    try {
-                        await toDoTable.InsertAsync(item); // insert the new item into the local database
-                        await SyncAsync(); // send changes to the mobile service
-
-                        if (!item.Complete) {
-                            adapter.Add(item);
-                        }
-                    }
-                    catch (Exception e) {
-                        CreateAndShowDialog(e, "Error");
-                    }
-
-                    textNewToDo.Text = "";
-                }
-        */
+            }
+            return false;
+        }
+        public override void OnBackPressed()
+        {
+             MoveTaskToBack(true);
+        }
     }
 }

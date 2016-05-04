@@ -1,7 +1,9 @@
 using Android.App;
 using Android.Views;
 using Android.Widget;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ITW_MobileApp.Droid
 {
@@ -16,9 +18,36 @@ namespace ITW_MobileApp.Droid
             this.activity = activity;
             this.layoutResourceId = layoutResourceId;
         }
+        public EmployeeItemAdapter()
+        {
+        }
+        public EmployeeItem findEmployeeByEmployeeID(int employeeID)
+        {
+            foreach (EmployeeItem item in items)
+            {
+                if (item.EmployeeID == employeeID)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+        public List<string> getAutoCompleteList()
+        {
+            List<string> entries = new List<string>();
+            foreach (EmployeeItem item in items)
+            {
+                
+                if (!entries.Contains(item.Department))
+                {
+                    entries.Add(item.Department);
+                }
+                entries.Add(item.Name);
+            }
+            entries.Add("All Employees");
+            return entries;
+        }
 
-        //Returns the view for a specific item on the list
-        //TODO: fix view
         public override View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
         {
             var row = convertView;

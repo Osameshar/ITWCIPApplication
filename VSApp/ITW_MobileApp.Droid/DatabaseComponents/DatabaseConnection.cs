@@ -19,8 +19,6 @@ namespace ITW_MobileApp.Droid
         private IMobileServiceSyncTable<EventItem> eventSyncTable;
         private IMobileServiceSyncTable<RecipientListItem> recipientListSyncTable;
 
-
-
         const string applicationURL = @"https://itw-mobileapp.azurewebsites.net";
         const string localDbFilename = "itwlocalstore.db";
 
@@ -51,10 +49,10 @@ namespace ITW_MobileApp.Droid
             // new code to initialize the SQLite store
             string path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), localDbFilename);
 
-           // if (!File.Exists(path))
-           // {
+            if (!File.Exists(path))
+           {
                 File.Create(path).Dispose();
-           // }
+            }
 
             var store = new MobileServiceSQLiteStore(path);
 
@@ -139,6 +137,10 @@ namespace ITW_MobileApp.Droid
         public IMobileServiceSyncTable<RecipientListItem> getRecipientListSyncTable()
         {
             return recipientListSyncTable;
+        }
+        public MobileServiceClient getClient()
+        {
+            return client;
         }
     }
 }

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="3">
+            <objects>
+                <viewController id="4" customModuleProvider="" sceneMemberID="viewController" customClass="LoginController" storyboardIdentifier="LoginController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="14"/>
+                        <viewControllerLayoutGuide type="bottom" id="15"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="12">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="13" translatesAutoresizingMaskIntoConstraints="NO" image="ITWCIPLogo.png">
+                                <rect key="frame" x="107" y="48" width="160" height="240"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="77" y="259" width="250" height="82"/>
+                                </variation>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="26" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Username">
+                                <rect key="frame" x="139" y="354" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="75" y="353" width="250" height="30"/>
+                                </variation>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="898" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="137" y="433" width="46" height="30"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="76" y="454" width="250" height="30"/>
+                                </variation>
+                                <connections/>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="27" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Password">
+                                <rect key="frame" x="139" y="354" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="76" y="406" width="250" height="30"/>
+                                </variation>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1037" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="90" y="481" width="139" height="30"/>
+                                <state key="normal" title="Create User">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="76" y="492" width="250" height="30"/>
+                                </variation>
+                                <connections/>
+                            </button>
+                        </subviews>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="26"/>
+                                <exclude reference="27"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="962"/>
+                                <exclude reference="964"/>
+                                <exclude reference="980"/>
+                                <exclude reference="981"/>
+                                <exclude reference="982"/>
+                                <exclude reference="997"/>
+                                <exclude reference="998"/>
+                                <exclude reference="999"/>
+                                <exclude reference="1000"/>
+                                <exclude reference="1001"/>
+                                <exclude reference="1002"/>
+                                <exclude reference="1056"/>
+                                <exclude reference="1057"/>
+                                <exclude reference="1058"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="13"/>
+                                <include reference="26"/>
+                                <include reference="27"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="962"/>
+                                <include reference="964"/>
+                                <include reference="980"/>
+                                <include reference="981"/>
+                                <include reference="982"/>
+                                <include reference="997"/>
+                                <include reference="998"/>
+                                <include reference="999"/>
+                                <include reference="1000"/>
+                                <include reference="1001"/>
+                                <include reference="1002"/>
+                                <include reference="1056"/>
+                                <include reference="1057"/>
+                                <include reference="1058"/>
+                            </mask>
+                        </variation>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.45882352941176469" green="0" blue="0.16470588235294117" alpha="1"/>
+                        <constraints>
+                            <constraint id="962" firstItem="13" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" constant="2"/>
+                            <constraint id="964" firstItem="12" firstAttribute="centerY" secondItem="13" secondAttribute="centerY" constant="100"/>
+                            <constraint id="980" firstItem="26" firstAttribute="width" secondItem="13" secondAttribute="width"/>
+                            <constraint id="981" firstItem="26" firstAttribute="centerX" secondItem="12" secondAttribute="centerX"/>
+                            <constraint id="982" firstItem="26" firstAttribute="top" secondItem="13" secondAttribute="bottom" constant="12"/>
+                            <constraint id="997" firstItem="27" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" constant="1"/>
+                            <constraint id="998" firstItem="27" firstAttribute="top" secondItem="26" secondAttribute="bottom" constant="23"/>
+                            <constraint id="999" firstItem="27" firstAttribute="width" secondItem="26" secondAttribute="width"/>
+                            <constraint id="1000" firstItem="898" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" constant="1"/>
+                            <constraint id="1001" firstItem="898" firstAttribute="top" secondItem="27" secondAttribute="bottom" constant="18"/>
+                            <constraint id="1002" firstItem="898" firstAttribute="width" secondItem="27" secondAttribute="width"/>
+                            <constraint id="1056" firstItem="1037" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" constant="1"/>
+                            <constraint id="1057" firstItem="1037" firstAttribute="top" secondItem="898" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1058" firstItem="1037" firstAttribute="width" secondItem="898" secondAttribute="width"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="Username" destination="26" id="name-outlet-26"/>
+                        <outlet property="Password" destination="27" id="name-outlet-27"/>
+                        <outlet property="LoginButton" destination="898" id="name-outlet-898"/>
+                        <outlet property="CreateUser" destination="1037" id="name-outlet-1037"/>
+                    </connections>
+                    <navigationItem title="Login" id="11" key="navigationItem"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="16" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-653" y="28"/>
+        </scene>
+        <scene sceneID="701">
+            <objects>
+                <viewController id="702" sceneMemberID="viewController" customClass="ParentController" storyboardIdentifier="ParentController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="699"/>
+                        <viewControllerLayoutGuide type="bottom" id="700"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="703">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="704" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-45" y="16"/>
+        </scene>
+        <scene sceneID="706">
+            <objects>
+                <tableViewController id="707" sceneMemberID="viewController" customClass="RecentEventsController" storyboardIdentifier="RecentEventsController" useStoryboardIdentifierAsRestorationIdentifier="YES" title="Recent Events">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="708">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="711" rowHeight="44">
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="711" id="712">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="707" id="709"/>
+                            <outlet property="delegate" destination="707" id="710"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="713" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="478" y="15"/>
+        </scene>
+        <scene sceneID="1018">
+            <objects>
+                <tableViewController id="1019" sceneMemberID="viewController" customClass="EventDeleteController" storyboardIdentifier="EventDeleteController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1020">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1023" rowHeight="44">
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1023" id="1024">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1019" id="1021"/>
+                            <outlet property="delegate" destination="1019" id="1022"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1025" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="878" y="21"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ITWCIPLogo.png" width="250" height="82"/>
+        <image name="hamburger.png" width="512" height="512"/>
+        <image name="Menu Filled-20.png" width="20" height="20"/>
+        <image name="Company.png" width="43" height="43"/>
+        <image name="CompanyBig.png" width="400" height="400"/>
+        <image name="Emergency.png" width="43" height="43"/>
+        <image name="EmergencyBig.png" width="400" height="400"/>
+        <image name="MachineMaintenance.png" width="43" height="43"/>
+        <image name="MachineMaintenanceBig.png" width="400" height="400"/>
+        <image name="Meeting.png" width="43" height="43"/>
+        <image name="MeetingBig.png" width="400" height="400"/>
+    </resources>
+</document>

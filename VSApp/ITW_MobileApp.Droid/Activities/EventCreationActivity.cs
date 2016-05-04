@@ -9,6 +9,13 @@ using System;
 using Android.Content;
 using Android.Support.V4.View;
 using Microsoft.WindowsAzure.MobileServices.Sync;
+using System.Threading.Tasks;
+using System.Threading;
+using Android.Support.V4.Content;
+using Android.Graphics;
+using System.Collections.Generic;
+
+
 
 namespace ITW_MobileApp.Droid
 {
@@ -24,16 +31,17 @@ namespace ITW_MobileApp.Droid
         Button TimePickerBtn;
         Button TimeSetBtn;
         EditText EditTextEventName;
-        EditText EditTextEventRecipients;
+        MultiAutoCompleteTextView EditTextEventRecipients;
         EditText EditTextLocation;
         Spinner SpinnerCategoryType;
         Spinner SpinnerPriorty;
         EditText EditTextEventDescription;
         TextView EventDate;
         TextView EventTime;
+    
 
         Button CreateEventBtn;
-
+        ErrorHandler error;
         View dialogView;
         Android.Support.V7.App.AlertDialog alertDialog;
 
@@ -46,10 +54,30 @@ namespace ITW_MobileApp.Droid
         int hour = -1;
         int minute = -1;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.EventCreation);
+
+            switch (IoC.UserInfo.Employee.PrivledgeLevel)
+            {
+                case "Admin":
+                    {
+                        SetContentView(Resource.Layout.EventCreation_Admin);
+                        break;
+                    }
+                case "Moderator":
+                    {
+                        SetContentView(Resource.Layout.EventCreation_Moderator);
+                        break;
+                    }
+            }
+
+            EmployeeItemAdapter employeeItemAdapter = new EmployeeItemAdapter();
+            await IoC.ViewRefresher.RefreshItemsFromTableAsync(employeeItemAdapter);
+            List<string> autoCompleteOptions = employeeItemAdapter.getAutoCompleteList();
+            ArrayAdapter autoCompleteAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleDropDownItem1Line, autoCompleteOptions);
+
+            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleDropDownItem1Line, autoCompleteOptions);
 
             _supporttoolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ToolBar);
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
@@ -60,7 +88,11 @@ namespace ITW_MobileApp.Droid
             DatePickerBtn = FindViewById<Button>(Resource.Id.ButtonPickDate);
             TimePickerBtn = FindViewById<Button>(Resource.Id.ButtonPickTime);
             EditTextEventName = FindViewById<EditText>(Resource.Id.EditTextEventName);
-            EditTextEventRecipients = FindViewById<EditText>(Resource.Id.EditTextEventRecipients);
+            EditTextEventRecipients = FindViewById<MultiAutoCompleteTextView>(Resource.Id.EditTextEventRecipients);
+            EditTextEventRecipients.Adapter = adapter;
+            EditTextEventRecipients.SetTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+
             EditTextLocation = FindViewById<EditText>(Resource.Id.EditTextLocation);
             SpinnerCategoryType = FindViewById<Spinner>(Resource.Id.SpinnerCategoryType);
             SpinnerPriorty = FindViewById<Spinner>(Resource.Id.SpinnerPriority);
@@ -68,6 +100,9 @@ namespace ITW_MobileApp.Droid
             EventDate = FindViewById<TextView>(Resource.Id.EventDate);
             EventTime = FindViewById<TextView>(Resource.Id.EventTime);
             CreateEventBtn = FindViewById<Button>(Resource.Id.ButtonCreateEvent);
+            Color color = new Color(ContextCompat.GetColor(this, Resource.Color.black));
+            SpinnerCategoryType.Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
+            SpinnerPriorty.Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
 
             EventDate.Text += "No date entered.";
             EventTime.Text += "No time entered";
@@ -84,17 +119,19 @@ namespace ITW_MobileApp.Droid
 
             };
 
-            CreateEventBtn.Click += delegate
+            CreateEventBtn.Click += async delegate
             {
-                createEvent();
+                CreateEventBtn.Enabled = false;
+                await createEvent();
+                CreateEventBtn.Enabled = true;
             };
             
 
         }
 
-        private async void createEvent()
+        private async Task createEvent()
         {
-            ErrorHandler error = new ErrorHandler(this);
+            error = new ErrorHandler(this);
             string EventName;
             string Recipients;
             string Location;
@@ -133,9 +170,15 @@ namespace ITW_MobileApp.Droid
                 time = hour.ToString() + ":" + minute.ToString();
                 try
                 {
-                    await IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
-                    var intent = new Intent(this, typeof(RecentEventsActivity));
-                    StartActivity(intent);
+                    var progressDialog = ProgressDialog.Show(this, "Please wait...", "Creating Event...", true);
+                    new Thread(new ThreadStart(async delegate
+                    {
+                        await IoC.EventFactory.createEvent(EventName, Recipients, EventDateTime, time, Location, Category, Priority, EventDescription);
+                        var intent = new Intent(this, typeof(RecentEventsActivity));
+                        StartActivity(intent);
+                        RunOnUiThread(() => progressDialog.Hide());
+                    })).Start();
+
                 }
                 catch (Java.Net.MalformedURLException)
                 {
@@ -147,6 +190,7 @@ namespace ITW_MobileApp.Droid
                 }
                 catch (Java.Net.UnknownHostException ex)
                 {
+                    
                     error.CreateAndShowDialog("Internet connection required for Event creation.", "Connection Failed");
                 }
                 catch (Exception e)

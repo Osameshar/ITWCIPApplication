@@ -17,6 +17,11 @@ namespace ITW_MobileApp.Droid
             this.layoutResourceId = layoutResourceId;
         }
 
+        public EventItemAdapter()
+        {
+        }
+
+
         public EventItem getEventByID(int eventID)
         {
             foreach (EventItem eventItem in items)
@@ -39,6 +44,20 @@ namespace ITW_MobileApp.Droid
             }
             return null;
         }
+
+        public List<EventItem> getAllEventsNotDeleted()
+        {
+            List<EventItem> filteredItems = new List<EventItem>();
+            foreach (EventItem eventItem in items)
+            {
+                if (eventItem.IsDeleted == false)
+                {
+                    filteredItems.Add(eventItem);
+                }
+            }
+            return filteredItems;
+        }
+
         public List<EventItem> getEventsByEmployeeID()
         {
             List<EventItem> filteredItems = new List<EventItem>();
@@ -51,8 +70,7 @@ namespace ITW_MobileApp.Droid
             }
             return filteredItems;
         }
-        //Returns the view for a specific item on the list
-        //TODO: fix view
+
         public override View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
         {
             var row = convertView;

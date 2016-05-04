@@ -1,3 +1,5 @@
+using System;
+
 namespace ITW_MobileApp.Droid
 {
     public static class IoC
@@ -8,5 +10,6 @@ namespace ITW_MobileApp.Droid
         public static EmployeeFactory EmployeeFactory { get; set; }
         public static RecipientListFactory RecipientListFactory { get; set; }
         public static UserInfo UserInfo { get; set; }
+        public static DateTime selectedDate { get; set; }
     }
 }

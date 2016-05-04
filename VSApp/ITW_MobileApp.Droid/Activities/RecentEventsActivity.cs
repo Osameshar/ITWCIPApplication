@@ -11,6 +11,7 @@ using Android.Content;
 using Android.Support.V4.View;
 using System.Linq;
 using System;
+using Android.Gms.Common;
 
 namespace ITW_MobileApp.Droid
 {
@@ -33,35 +34,66 @@ namespace ITW_MobileApp.Droid
         EventItemAdapter eventItemAdapter;
         RecipientListItemAdapter recipientListItemAdapter;
 
+        ErrorHandler error; 
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            await IoC.UserInfo.setEmployee();
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
+            await IoC.UserInfo.setEmployee();
+            switch (IoC.UserInfo.Employee.PrivledgeLevel)
+            {
+                case "Admin":
+                    {
+                        SetContentView(Resource.Layout.RecentEvents_Admin);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents_Admin);
+                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents_Admin);
+                        break;
+                    }                    
+                case "Moderator":
+                    {
+                        SetContentView(Resource.Layout.RecentEvents_Moderator);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents_Moderator);
+                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents_Moderator);
+                        break;
+                    }                    
+                default:
+                    {
+                        SetContentView(Resource.Layout.RecentEvents_User);
+                        eventItemAdapter = new EventItemAdapter(this, Resource.Layout.RecentEvents_User);
+                        recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.RecentEvents_User);
+                        break;
+                    }
+            }
 
-            eventItemAdapter = new EventItemAdapter(this, Resource.Layout.Main);
-            recipientListItemAdapter = new RecipientListItemAdapter(this, Resource.Layout.Main);
+                
+
+
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
 
-           
+
             _supporttoolbar = FindViewById<Toolbar>(Resource.Id.ToolBar);
             _drawer = FindViewById<DrawerLayout>(Resource.Id.DrawerLayout);
             _navigationview = FindViewById<NavigationView>(Resource.Id.nav_view);
             ToolbarCreator toolbarCreator = new ToolbarCreator();
-            toolbarCreator.setupToolbar(_supporttoolbar,_drawer,_navigationview, Resource.String.recent_events,this);
+            toolbarCreator.setupToolbar(_supporttoolbar, _drawer, _navigationview, Resource.String.recent_events, this);
+
+            error = new ErrorHandler(this);
+
+            if (IsPlayServicesAvailable())
+            {
+                var intentRegistration = new Intent(this, typeof(RegistrationIntentService));
+                StartService(intentRegistration);
+            }
 
             await RefreshView();
+            FindViewById(Resource.Id.loadingPanel).Visibility = ViewStates.Gone;
 
-            
-            //IoC.EventFactory.createEvent("MyEvent", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Company Event", "High", "PARTY AT MARLEY'S");
-            //IoC.EventFactory.createEvent("MyEvent2", "Curtis Keller,Alan Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Emergency", "High", "PARTY AT MARLEY'S");
-            //IoC.EventFactory.createEvent("MyEvent3", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Meeting", "High", "PARTY AT MARLEY'S");
-            //IoC.EventFactory.createEvent("MyEvent4", "Curtis Keller", new DateTime(2016, 3, 3), "Noon", "Nashville", "Machine Maintenance", "High", "PARTY AT MARLEY'S");
-
-           
 
             myEventList = recipientListItemAdapter.getEventsByEmployeeID(IoC.UserInfo.EmployeeID, eventItemAdapter);
+            myEventList = filterEvents();
+
             sortByDate(myEventList);
             //Plug in the linear layout manager
             mLayoutManager = new LinearLayoutManager(this);
@@ -73,6 +105,30 @@ namespace ITW_MobileApp.Droid
             mRecyclerView.SetAdapter(myEventListAdapter);
 
         }
+
+        private List<EventItem> filterEvents()
+        {
+            List<EventItem> filteredList = new List<EventItem>();
+            foreach (EventItem eventitem in myEventList)
+            {
+                if (eventitem.EventDate >= DateTime.Now)
+                {
+                    foreach (string filter in IoC.ViewRefresher.FilterStringList)
+                    {
+                        if (eventitem.Category == filter)
+                        {
+                            filteredList.Add(eventitem);
+                        }
+                    }
+                    if (eventitem.Category == "Emergency")
+                    {
+                        filteredList.Add(eventitem);
+                    }
+                }
+            }
+            return filteredList;
+        }
+
         public void sortByDate(List<EventItem> eventList)
         {
             eventList.Sort((x, y) => DateTime.Compare(x.EventDate, y.EventDate));
@@ -90,9 +146,9 @@ namespace ITW_MobileApp.Droid
 
         public async Task RefreshView()
         {
-             await IoC.Dbconnect.SyncAsync(pullData: true);
-             await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
-             await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
+            await IoC.Dbconnect.SyncAsync(pullData: true);
+            await IoC.ViewRefresher.RefreshItemsFromTableAsync(eventItemAdapter);
+            await IoC.ViewRefresher.RefreshItemsFromTableAsync(recipientListItemAdapter);
         }
         public override void OnBackPressed()
         {
@@ -101,7 +157,7 @@ namespace ITW_MobileApp.Droid
                 _drawer.CloseDrawer(GravityCompat.Start);
             }
             else {
-                base.OnBackPressed();
+                MoveTaskToBack(true);
             }
         }
         void OnItemClick(object sender, int position)
@@ -116,6 +172,18 @@ namespace ITW_MobileApp.Droid
             intent.PutExtra("Category", myEventList.ElementAt(position).Category);
             intent.PutExtra("Description", myEventList.ElementAt(position).EventDescription);
             StartActivity(intent);
+        }
+        public bool IsPlayServicesAvailable()
+        {
+            int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
+            if (resultCode != ConnectionResult.Success)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

@@ -14,4 +14,41 @@
   <string-array name="eventdetailsmenu">
     <item>@string/event_details</item>
   </string-array>
+  <string-array name="privledgelist">
+    <item>@string/user</item>
+    <item>@string/moderator</item>
+    <item>@string/admin</item>
+  </string-array>
+  <string-array name="departmentlist">
+    <item>@string/StdSwEng</item>
+    <item>@string/AutomatedAssembly</item>
+    <item>@string/CIPAssembly</item>
+    <item>@string/CipSort</item>
+    <item>@string/CIPTNAdministration</item>
+    <item>@string/CipTnHeatTreat</item>
+    <item>@string/CipTnMaintenanc</item>
+    <item>@string/CIPTNPress</item>
+    <item>@string/CIPTNPress2</item>
+    <item>@string/CIPTNPress4</item>
+    <item>@string/CIPTNPress5</item>
+    <item>@string/CIPTNPress6</item>
+    <item>@string/CipTnQualityAs</item>
+    <item>@string/CIPTNToolRoom</item>
+    <item>@string/CipTnToolroom2</item>
+    <item>@string/CipTnToolroom3</item>
+    <item>@string/CipTnToolroom4</item>
+    <item>@string/CustomerService</item>
+    <item>@string/DesignEngineerMI</item>
+    <item>@string/Distribution</item>
+    <item>@string/MaterialsControl</item>
+    <item>@string/Outsourcing</item>
+    <item>@string/PlantUtility</item>
+    <item>@string/QAAdmin</item>
+    <item>@string/QualityAssuranceAuditorDir</item>
+    <item>@string/SalariedExempt</item>
+    <item>@string/Supervisors</item>
+    <item>@string/CIPTNHumanResources</item>
+    <item>@string/CIPTNOffice</item>
+    <item>@string/CIPTNAdministration</item>
+  </string-array>
 </resources>
