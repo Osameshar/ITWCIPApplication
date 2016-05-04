@@ -16,6 +16,10 @@ namespace ITW_MobileApp.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton CreateUser { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton LoginButton { get; set; }
 
 		[Outlet]
@@ -28,6 +32,10 @@ namespace ITW_MobileApp.iOS
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (CreateUser != null) {
+				CreateUser.Dispose ();
+				CreateUser = null;
+			}
 			if (LoginButton != null) {
 				LoginButton.Dispose ();
 				LoginButton = null;
